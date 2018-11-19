@@ -19,7 +19,9 @@ class HomePresenter(private val view: HomeView) {
                 { list ->
                     view.getListBencana(list)
                 },
-                {})
+                {er ->
+                    view.onError(er.localizedMessage)
+                })
     }
 
 }

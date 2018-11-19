@@ -29,6 +29,8 @@ android {
             minifyEnabled true
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
             buildConfigField("String", "BASE_URL", "\"http://bnpb.cloud/dibi/api/\"")
+            buildConfigField("String", "BASE_URL_BMKG", "\" http://data.bmkg.go.id/datamkg/\"")
+            buildConfigField("String", "BASE_URL_RELIEFWEB", "\"https://api.reliefweb.int/v1/\"")
         }
     }
 
@@ -61,9 +63,6 @@ dependencies {
     implementation 'com.jakewharton.retrofit:retrofit2-rxjava2-adapter:1.0.0'
     implementation 'com.squareup.okhttp3:logging-interceptor:3.11.0'
     implementation 'com.squareup.retrofit2:converter-simplexml:2.4.0'
-    //butterknife
-    implementation 'com.jakewharton:butterknife:8.8.1'
-    annotationProcessor 'com.jakewharton:butterknife-compiler:8.8.1'
     //rxJava
     implementation 'io.reactivex.rxjava2:rxjava:2.1.17'
     implementation 'io.reactivex.rxjava2:rxandroid:2.0.2'
@@ -78,6 +77,8 @@ dependencies {
     implementation 'com.google.firebase:firebase-core:16.0.5'
     //firebase aunth
     implementation 'com.google.firebase:firebase-auth:16.0.5'
+    //firebase storage
+    implementation 'com.google.firebase:firebase-storage:16.0.5'
     //multidex
     implementation 'com.android.support:multidex:1.0.3'
 }

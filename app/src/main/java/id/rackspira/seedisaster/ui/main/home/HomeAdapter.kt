@@ -1,11 +1,14 @@
 package id.rackspira.seedisaster.ui.main.home
 
+import android.content.Context
+import android.content.Intent
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import id.rackspira.seedisaster.R
 import id.rackspira.seedisaster.data.network.entity.ListBencana
+import id.rackspira.seedisaster.ui.detailbencana.DetailbencanaActivity
 import kotlinx.android.synthetic.main.list_bencana.view.*
 
 class HomeAdapter: RecyclerView.Adapter<HomeAdapter.ViewHolder>() {
@@ -27,6 +30,9 @@ class HomeAdapter: RecyclerView.Adapter<HomeAdapter.ViewHolder>() {
     class ViewHolder(view: View): RecyclerView.ViewHolder(view) {
         fun bind(position: ListBencana) {
             itemView.textviewJudul.text = position.kejadian + " " + position.nprop + " " + position.nkab
+            itemView.setOnClickListener {
+                itemView.context.startActivity(Intent(itemView.context, DetailbencanaActivity::class.java))
+            }
         }
     }
 }

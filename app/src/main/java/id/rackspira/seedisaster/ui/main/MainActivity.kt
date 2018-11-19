@@ -27,6 +27,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         drawerLayout.addDrawerListener(actionbarDrawer)
         actionbarDrawer.syncState()
         navigationMain.setNavigationItemSelectedListener(this)
+        setFragment(homeFragment)
     }
 
     override fun onNavigationItemSelected(p0: MenuItem): Boolean {

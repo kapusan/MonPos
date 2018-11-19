@@ -1,6 +1,8 @@
 package id.rackspira.seedisaster.ui.main.home
 
 
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v7.widget.LinearLayoutManager
@@ -14,6 +16,7 @@ import kotlinx.android.synthetic.main.fragment_home.*
 import android.preference.PreferenceManager
 import android.support.v4.content.ContextCompat
 import android.util.Log
+import android.widget.Toast
 import org.osmdroid.config.Configuration
 import org.osmdroid.tileprovider.tilesource.TileSourceFactory
 import org.osmdroid.util.GeoPoint
@@ -61,6 +64,10 @@ class HomeFragment : Fragment(), HomeView, View.OnClickListener {
         setMap()
     }
 
+    override fun onError(msg: String) {
+        Toast.makeText(context, msg, Toast.LENGTH_LONG).show()
+    }
+
     override fun onClick(v: View?) {
         when (v?.id) {
             R.id.fabHome -> {
@@ -83,7 +90,7 @@ class HomeFragment : Fragment(), HomeView, View.OnClickListener {
         mapView.setBuiltInZoomControls(true)
 
         val mapControler = mapView.controller
-        mapControler.setZoom(7.0)
+        mapControler.setZoom(5.0)
         var startPoint = GeoPoint(-2.28, 117.37)
         mapControler.setCenter(startPoint)
 
@@ -115,6 +122,10 @@ class HomeFragment : Fragment(), HomeView, View.OnClickListener {
             }
 
             override fun onItemSingleTapUp(index: Int, item: OverlayItem?): Boolean {
+                var gmnIntentUri = Uri.parse("geo:"+item?.point?.latitude+","+item?.point?.longitude+"?q=" + list[index].nkab)
+                val mapIntent = Intent(Intent.ACTION_VIEW, gmnIntentUri)
+                mapIntent.setPackage("com.google.android.apps.maps")
+                startActivity(mapIntent)
                 return true
             }
 

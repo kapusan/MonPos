@@ -6,4 +6,8 @@
     <string name="close">close</string>
     <string name="overview">Overview</string>
     <string name="posko">Posko</string>
+    <string name="nama_posko">Nama posko</string>
+    <string name="simpan">Simpan</string>
+    <string name="belum_ada_posko">Belum ada posko</string>
+    <string name="silahkan_tambah_posko">Silahkan tambah posko</string>
 </resources>

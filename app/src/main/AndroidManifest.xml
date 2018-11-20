@@ -16,7 +16,7 @@
             android:supportsRtl="true"
             android:theme="@style/AppTheme">
         <activity
-                android:name=".ui.login.LoginActivity"
+                android:name=".ui.main.MainActivity"
                 android:theme="@style/AppTheme.NoActionbar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
@@ -30,12 +30,15 @@
         </activity>
         <activity android:name=".ui.detailPosko.DetailPoskoActivity">
         </activity>
-        <activity android:name=".ui.main.MainActivity"
-                  android:theme="@style/AppTheme.NoActionbar">
+        <activity
+                android:name=".ui.login.LoginActivity"
+                android:theme="@style/AppTheme.NoActionbar">
         </activity>
         <activity android:name=".ui.login.verifikasikode.VerifikasiActivity">
         </activity>
         <activity android:name=".ui.main.infoglobal.InfoGlobalActivity">
+        </activity>
+        <activity android:name=".ui.buatposko.BuatPoskoActivity">
         </activity>
     </application>
 

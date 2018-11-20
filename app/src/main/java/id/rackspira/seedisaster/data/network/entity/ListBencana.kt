@@ -1,7 +1,10 @@
 package id.rackspira.seedisaster.data.network.entity
 
+import android.os.Parcelable
 import com.google.gson.annotations.SerializedName
+import kotlinx.android.parcel.Parcelize
 
+@Parcelize
 data class ListBencana(
 
     @SerializedName("hilang")
@@ -25,12 +28,12 @@ data class ListBencana(
     @SerializedName("nprop")
     var nprop: String? = null,
     @SerializedName("rumah_rusak_berat")
-    var rumahRusakBerat: Any? = null,
+    var rumahRusakBerat: String? = null,
     @SerializedName("rumah_rusak_ringan")
-    var rumahRusakRingan: Any? = null,
+    var rumahRusakRingan: String? = null,
     @SerializedName("rumah_rusak_sedang")
-    var rumahRusakSedang: Any? = null,
+    var rumahRusakSedang: String? = null,
     @SerializedName("terluka")
     var terluka: String? = null
 
-)
+) : Parcelable

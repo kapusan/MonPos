@@ -8,24 +8,10 @@ class PoskoPresenter(private val view: PoskoView) {
 
     private val dataRef = FirebaseDatabase.getInstance().reference
 
-    fun tambahPosko(uidUsr: String, namaPngJwb: String,
-                    namaPosko: String, lat: String,
-                    long: String, telp: String, ketTelp: String, urlProfil: String) {
-        val ref = dataRef.child("Posko")
-        val key = ref.push().key
-        val dataPosko = DataPosko(key, uidUsr, namaPngJwb, namaPosko, lat, long, telp, ketTelp, urlProfil)
-        ref.child(key!!).setValue(dataPosko)
-            .addOnSuccessListener {
-                view.onSuccess("Berhasil membuat posko")
-            }
-            .addOnFailureListener {
-                view.onFailed("Gagal mebuat posko")
-            }
-    }
-
-    fun getDataPosko(uid: String) {
+    fun getDataPosko() {
         var dataPosko: DataPosko
-        dataRef.addValueEventListener(object : ValueEventListener {
+        val ref = dataRef.child("Posko")
+        ref.addValueEventListener(object : ValueEventListener {
             override fun onCancelled(p0: DatabaseError) {}
 
             override fun onDataChange(p0: DataSnapshot) {

@@ -20,7 +20,7 @@ class DetailbencanaActivity : AppCompatActivity() {
     private fun setUp() {
         setSupportActionBar(toolbarDet)
         pagerAdapter = DetailPagerAdapter(supportFragmentManager)
-        pagerAdapter.count = 3
+        pagerAdapter.count = 2
         viewPagerDetail.adapter = pagerAdapter
         tabLayoutDet.addTab(tabLayoutDet.newTab().setText(R.string.overview))
         tabLayoutDet.addTab(tabLayoutDet.newTab().setText(R.string.posko))

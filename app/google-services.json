@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "617901949493",
+    "firebase_url": "https://seedisaster-11912.firebaseio.com",
+    "project_id": "seedisaster-11912",
+    "storage_bucket": "seedisaster-11912.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:617901949493:android:5509d0c957c30eb9",
+        "android_client_info": {
+          "package_name": "id.rackspira.seedisaster"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "617901949493-rg6m6oes3dajhh5m8321klg4emofq3ih.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "id.rackspira.seedisaster",
+            "certificate_hash": "3e26d1e067a4520b85ac12a5d18e68d1c5ef0b52"
+          }
+        },
+        {
+          "client_id": "617901949493-efvtlegfmgvvh2skm7jqlj5ocejbj8c1.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBdKf5TGLgX2Rw_28aoYb0N_x4v97PbNI4"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "617901949493-efvtlegfmgvvh2skm7jqlj5ocejbj8c1.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

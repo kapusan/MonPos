@@ -22,14 +22,12 @@ android {
     buildTypes {
         debug {
             buildConfigField("String", "BASE_URL", "\"http://bnpb.cloud/dibi/api/\"")
-            buildConfigField("String", "BASE_URL_BMKG", "\" http://data.bmkg.go.id/datamkg/\"")
             buildConfigField("String", "BASE_URL_RELIEFWEB", "\"https://api.reliefweb.int/v1/\"")
         }
         release {
             minifyEnabled true
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
             buildConfigField("String", "BASE_URL", "\"http://bnpb.cloud/dibi/api/\"")
-            buildConfigField("String", "BASE_URL_BMKG", "\" http://data.bmkg.go.id/datamkg/\"")
             buildConfigField("String", "BASE_URL_RELIEFWEB", "\"https://api.reliefweb.int/v1/\"")
         }
     }
@@ -71,6 +69,7 @@ dependencies {
     implementation 'androidx.core:core-ktx:0.3'
     //map
     implementation 'org.osmdroid:osmdroid-android:6.0.2'
+    implementation 'com.github.MKergall:osmbonuspack:6.5.2'
 
     //firebase database
     implementation 'com.google.firebase:firebase-database:16.0.5'

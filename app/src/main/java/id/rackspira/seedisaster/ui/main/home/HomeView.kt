@@ -8,7 +8,7 @@ interface HomeView {
 
     fun setMap()
 
-    fun onError(msg: String)
+    fun onError(msg: String?)
 
     fun addMapMarker()
 

@@ -3,9 +3,8 @@ package id.rackspira.seedisaster.ui.detailbencana
 import android.support.v4.app.Fragment
 import android.support.v4.app.FragmentManager
 import android.support.v4.app.FragmentStatePagerAdapter
-import id.rackspira.seedisaster.ui.detailbencana.overview.OverviewFragment
+import id.rackspira.seedisaster.ui.detailbencana.info.InfoFragment
 import id.rackspira.seedisaster.ui.detailbencana.posko.PoskoFragment
-import id.rackspira.seedisaster.ui.detailbencana.relawan.RelawanFragment
 
 class DetailPagerAdapter(fragment: FragmentManager): FragmentStatePagerAdapter(fragment) {
 
@@ -17,9 +16,8 @@ class DetailPagerAdapter(fragment: FragmentManager): FragmentStatePagerAdapter(f
 
     override fun getItem(p0: Int): Fragment? {
         return when (p0) {
-            0 -> OverviewFragment()
+            0 -> InfoFragment()
             1 -> PoskoFragment()
-            2 -> RelawanFragment()
             else -> null
         }
     }

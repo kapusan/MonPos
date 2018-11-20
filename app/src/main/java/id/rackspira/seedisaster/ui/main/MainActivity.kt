@@ -7,9 +7,13 @@ import android.support.v4.app.Fragment
 import android.support.v7.app.ActionBarDrawerToggle
 import android.view.Gravity
 import android.view.MenuItem
+import com.google.firebase.database.DatabaseReference
+import com.google.firebase.database.FirebaseDatabase
 import id.rackspira.seedisaster.R
+import id.rackspira.seedisaster.data.network.entity.DataPosko
 import id.rackspira.seedisaster.ui.main.home.HomeFragment
 import kotlinx.android.synthetic.main.activity_main.*
+
 
 class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
 

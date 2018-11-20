@@ -1,4 +1,4 @@
-package id.rackspira.seedisaster.ui.detailbencana.overview
+package id.rackspira.seedisaster.ui.detailbencana.info
 
 
 import android.os.Bundle
@@ -9,10 +9,10 @@ import android.view.ViewGroup
 
 import id.rackspira.seedisaster.R
 
-class OverviewFragment : Fragment() {
+class InfoFragment : Fragment() {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        return inflater.inflate(R.layout.fragment_overview, container, false)
+        return inflater.inflate(R.layout.fragment_info, container, false)
     }
 
 }

@@ -2,12 +2,8 @@ package id.rackspira.seedisaster.data.network
 
 import com.jakewharton.retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import id.rackspira.seedisaster.BuildConfig
-import okhttp3.OkHttpClient
-import org.simpleframework.xml.convert.AnnotationStrategy
-import org.simpleframework.xml.core.Persister
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
-import retrofit2.converter.simplexml.SimpleXmlConverterFactory
 
 class ApiServiceImpl {
     private var retrofit: Retrofit? = null
@@ -23,18 +19,6 @@ class ApiServiceImpl {
                 .build()
         }
         return retrofit
-    }
-
-    fun getRetrofitBmkgInstace(): Retrofit? {
-        if (retrofitbmkg == null) {
-            retrofitbmkg = retrofit2.Retrofit.Builder()
-                .baseUrl(BuildConfig.BASE_URL_BMKG)
-                .client(OkHttpClient())
-                .addConverterFactory(SimpleXmlConverterFactory.create())
-                .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
-                .build()
-        }
-        return retrofitbmkg
     }
 
     fun getRetrofitReliefInstance(): Retrofit? {

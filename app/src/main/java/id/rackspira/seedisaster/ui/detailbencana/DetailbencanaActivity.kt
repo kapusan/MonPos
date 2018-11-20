@@ -9,7 +9,7 @@ import kotlinx.android.synthetic.main.activity_detail_bencana.*
 @Suppress("SpellCheckingInspection")
 class DetailbencanaActivity : AppCompatActivity() {
 
-    internal lateinit var pagerAdapter: DetailPagerAdapter
+    private lateinit var pagerAdapter: DetailPagerAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -24,7 +24,6 @@ class DetailbencanaActivity : AppCompatActivity() {
         viewPagerDetail.adapter = pagerAdapter
         tabLayoutDet.addTab(tabLayoutDet.newTab().setText(R.string.overview))
         tabLayoutDet.addTab(tabLayoutDet.newTab().setText(R.string.posko))
-        tabLayoutDet.addTab(tabLayoutDet.newTab().setText(R.string.relawan))
         viewPagerDetail.offscreenPageLimit = tabLayoutDet.tabCount
         viewPagerDetail.addOnPageChangeListener(TabLayout.TabLayoutOnPageChangeListener(tabLayoutDet))
         tabLayoutDet.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {

@@ -3,6 +3,7 @@ package id.rackspira.seedisaster.ui.main.home
 
 import android.content.Intent
 import android.net.Uri
+import android.os.AsyncTask
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v7.widget.LinearLayoutManager
@@ -17,20 +18,18 @@ import android.preference.PreferenceManager
 import android.support.v4.content.ContextCompat
 import android.util.Log
 import android.widget.Toast
+import id.rackspira.seedisaster.R.id.mapView
+import org.osmdroid.bonuspack.kml.KmlDocument
 import org.osmdroid.config.Configuration
 import org.osmdroid.tileprovider.tilesource.TileSourceFactory
 import org.osmdroid.util.GeoPoint
+import org.osmdroid.views.MapView
+import org.osmdroid.views.overlay.*
 import org.osmdroid.views.overlay.mylocation.GpsMyLocationProvider
 import org.osmdroid.views.overlay.mylocation.MyLocationNewOverlay
 import org.osmdroid.views.overlay.compass.InternalCompassOrientationProvider
 import org.osmdroid.views.overlay.compass.CompassOverlay
 import org.osmdroid.views.overlay.gridlines.LatLonGridlineOverlay2
-import org.osmdroid.views.overlay.OverlayItem
-import org.osmdroid.views.overlay.ItemizedIconOverlay
-import org.osmdroid.views.overlay.ItemizedOverlayWithFocus
-import org.osmdroid.views.overlay.Marker
-
-
 
 
 class HomeFragment : Fragment(), HomeView, View.OnClickListener {
@@ -64,7 +63,7 @@ class HomeFragment : Fragment(), HomeView, View.OnClickListener {
         setMap()
     }
 
-    override fun onError(msg: String) {
+    override fun onError(msg: String?) {
         Toast.makeText(context, msg, Toast.LENGTH_LONG).show()
     }
 
@@ -94,17 +93,10 @@ class HomeFragment : Fragment(), HomeView, View.OnClickListener {
         var startPoint = GeoPoint(-2.28, 117.37)
         mapControler.setCenter(startPoint)
 
-        //myLocation Overlay
-        val mLocationOverlay = MyLocationNewOverlay(GpsMyLocationProvider(context), mapView)
-        mLocationOverlay.enableMyLocation()
-        mapView.overlays.add(mLocationOverlay)
-
         //compas overlay
         val mCompassOverlay = CompassOverlay(context, InternalCompassOrientationProvider(context), mapView)
         mCompassOverlay.enableCompass()
         mapView.overlays.add(mCompassOverlay)
-
-        Log.d("SIZE", list.size.toString())
 
         addMapMarker()
     }
@@ -112,29 +104,38 @@ class HomeFragment : Fragment(), HomeView, View.OnClickListener {
     override fun addMapMarker() {
         val items = ArrayList<OverlayItem>()
 
-        for (listtempat in list){
-            items.add(OverlayItem(listtempat.kejadian, listtempat.keterangan, GeoPoint(listtempat.latitude, listtempat.longitude)))
+        for (listtempat in list) {
+            items.add(
+                OverlayItem(
+                    listtempat.kejadian,
+                    listtempat.keterangan,
+                    GeoPoint(listtempat.latitude!!, listtempat.longitude!!)
+                )
+            )
         }
 
-        val mOverlay = ItemizedOverlayWithFocus(context, items, object: ItemizedIconOverlay.OnItemGestureListener<OverlayItem>{
-            override fun onItemLongPress(index: Int, item: OverlayItem?): Boolean {
-                return false
-            }
+        val mOverlay =
+            ItemizedOverlayWithFocus(context, items, object : ItemizedIconOverlay.OnItemGestureListener<OverlayItem> {
+                override fun onItemLongPress(index: Int, item: OverlayItem?): Boolean {
+                    return false
+                }
 
-            override fun onItemSingleTapUp(index: Int, item: OverlayItem?): Boolean {
-                var gmnIntentUri = Uri.parse("geo:"+item?.point?.latitude+","+item?.point?.longitude+"?q=" + list[index].nkab)
-                val mapIntent = Intent(Intent.ACTION_VIEW, gmnIntentUri)
-                mapIntent.setPackage("com.google.android.apps.maps")
-                startActivity(mapIntent)
-                return true
-            }
+                override fun onItemSingleTapUp(index: Int, item: OverlayItem?): Boolean {
+                    var gmnIntentUri =
+                        Uri.parse("geo:" + item?.point?.latitude + "," + item?.point?.longitude + "?q=" + list[index].nkab)
+                    val mapIntent = Intent(Intent.ACTION_VIEW, gmnIntentUri)
+                    mapIntent.setPackage("com.google.android.apps.maps")
+                    startActivity(mapIntent)
+                    return true
+                }
 
-        })
+            })
 
         mOverlay.setFocusItemsOnTap(true)
 
         mapView.overlays.add(mOverlay)
     }
+
 
     override fun onPause() {
         super.onPause()
@@ -145,4 +146,5 @@ class HomeFragment : Fragment(), HomeView, View.OnClickListener {
         super.onResume()
         mapView.onResume()
     }
+
 }

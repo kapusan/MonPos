@@ -28,27 +28,19 @@ class PoskoFragment : Fragment(), PoskoView {
             context?.startActivity(Intent(context, BuatPoskoActivity::class.java))
         }
         presenter = PoskoPresenter(this)
-        presenter.getDataPosko()
+        presenter.getDataPosko("1")
         poskoAdapter = PoskoAdapter()
         recyclerviewPosko.layoutManager = LinearLayoutManager(context)
         recyclerviewPosko.adapter = poskoAdapter
     }
 
-    override fun onSuccess(msg: String?) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-    }
+    override fun onSuccess(msg: String?) {}
 
-    override fun onFailed(ms: String?) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-    }
+    override fun onFailed(ms: String?) {}
 
-    override fun onSuccessUpdate(msg: String?) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-    }
+    override fun onSuccessUpdate(msg: String?) {}
 
-    override fun onFailedUpdate(msg: String?) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-    }
+    override fun onFailedUpdate(msg: String?) {}
 
     override fun getDataPosko(dataPosko: List<DataPosko>) {
         poskoAdapter.addListPosko(dataPosko)

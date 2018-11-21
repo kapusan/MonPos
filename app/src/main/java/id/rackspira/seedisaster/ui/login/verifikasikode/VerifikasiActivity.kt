@@ -3,8 +3,6 @@ package id.rackspira.seedisaster.ui.login.verifikasikode
 import android.content.Intent
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
-import android.widget.Toast
 import com.google.firebase.FirebaseException
 import com.google.firebase.FirebaseTooManyRequestsException
 import com.google.firebase.auth.*
@@ -12,17 +10,28 @@ import id.rackspira.seedisaster.R
 import id.rackspira.seedisaster.ui.main.MainActivity
 import kotlinx.android.synthetic.main.activity_verifikasi.*
 import java.util.concurrent.TimeUnit
+import com.google.firebase.auth.FirebaseAuth
+import id.rackspira.seedisaster.ui.isiprofil.IsiProfilActivity
+
 
 class VerifikasiActivity : AppCompatActivity() {
 
-    private var mAuth: FirebaseAuth? = null
+    private val mAuth: FirebaseAuth = FirebaseAuth.getInstance()
     private var mResendToken: PhoneAuthProvider.ForceResendingToken? = null
     private var mVerificationId: String? = null
+    private var telp: String? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_verifikasi)
-        mAuth = FirebaseAuth.getInstance()
+
+        telp = intent.getStringExtra("no")
+        if (mAuth.currentUser != null) {
+            val intent = Intent(this, IsiProfilActivity::class.java)
+            intent.putExtra("no", telp)
+            startActivity(intent)
+        }
+
         val mCallbacks = object : PhoneAuthProvider.OnVerificationStateChangedCallbacks() {
 
             override fun onVerificationCompleted(credential: PhoneAuthCredential) {
@@ -46,10 +55,8 @@ class VerifikasiActivity : AppCompatActivity() {
             }
         }
 
-        val telp = intent.getStringExtra("no")
-
         PhoneAuthProvider.getInstance().verifyPhoneNumber(
-            telp,
+            telp!!,
             60,
             TimeUnit.SECONDS,
             this,
@@ -62,10 +69,11 @@ class VerifikasiActivity : AppCompatActivity() {
     }
 
     fun signInWithPhoneAuthCredential(credential: PhoneAuthCredential) {
-        mAuth?.signInWithCredential(credential)?.addOnCompleteListener(this) { task ->
+        mAuth.signInWithCredential(credential).addOnCompleteListener(this) { task ->
             if (task.isSuccessful) {
-                val user = task.result?.user
-                startActivity(Intent(this, MainActivity::class.java))
+                val intent = Intent(this, IsiProfilActivity::class.java)
+                intent.putExtra("no", telp)
+                startActivity(intent)
             } else {
                 if (task.exception is FirebaseAuthInvalidCredentialsException) {
 

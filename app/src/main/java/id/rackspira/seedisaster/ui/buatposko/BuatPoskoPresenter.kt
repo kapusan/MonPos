@@ -7,10 +7,10 @@ class BuatPoskoPresenter(private val view: BuatPoskoView) {
 
     private val dataRef = FirebaseDatabase.getInstance().reference
 
-    fun tambahPosko(uidUsr: String, namaPngJwb: String,
+    fun tambahPosko(idBencana: String,uidUsr: String, namaPngJwb: String,
                     namaPosko: String, lat: String,
                     long: String, telp: String, ketTelp: String, urlProfil: String) {
-        val ref = dataRef.child("Posko")
+        val ref = dataRef.child("Posko").child(idBencana)
         val key = ref.push().key
         val dataPosko = DataPosko(key, uidUsr, namaPngJwb, namaPosko, lat, long, telp, ketTelp, urlProfil)
         ref.child(key!!).setValue(dataPosko)

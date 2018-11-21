@@ -8,9 +8,9 @@ class PoskoPresenter(private val view: PoskoView) {
 
     private val dataRef = FirebaseDatabase.getInstance().reference
 
-    fun getDataPosko() {
+    fun getDataPosko(idBencana: String) {
         var dataPosko: DataPosko
-        val ref = dataRef.child("Posko")
+        val ref = dataRef.child("Posko").child(idBencana)
         ref.addValueEventListener(object : ValueEventListener {
             override fun onCancelled(p0: DatabaseError) {}
 
@@ -26,8 +26,8 @@ class PoskoPresenter(private val view: PoskoView) {
 
     }
 
-    fun updateDataPosko(id: String, dataPosko: DataPosko) {
-        val ref = dataRef.child("Posko").child(id)
+    fun updateDataPosko(idBencana: String, idPosko: String, dataPosko: DataPosko) {
+        val ref = dataRef.child("Posko").child(idBencana).child(idPosko)
         ref.setValue(dataPosko).addOnSuccessListener {
             view.onSuccessUpdate("Berhasil update data")
         }.addOnFailureListener {
@@ -35,8 +35,8 @@ class PoskoPresenter(private val view: PoskoView) {
         }
     }
 
-    fun deleteDataPosko(id: String) {
-        val ref = dataRef.child("Posko").child(id)
+    fun deleteDataPosko(idBencana: String, idPosko: String) {
+        val ref = dataRef.child("Posko").child(idBencana).child(idPosko)
         ref.removeValue()
     }
 

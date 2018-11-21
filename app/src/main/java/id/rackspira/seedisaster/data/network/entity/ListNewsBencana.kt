@@ -9,6 +9,8 @@ data class ListNewsBencana(
     @SerializedName("id")
     var id: String? = null,
     @SerializedName("score")
-    var score: Long? = null
+    var score: Long? = null,
+    @SerializedName("fields")
+    var fields: Fields? = null
 
 )

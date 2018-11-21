@@ -12,7 +12,7 @@ class BuatPoskoActivity : AppCompatActivity(), BuatPoskoView {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_buat_posko)
         presenter = BuatPoskoPresenter(this)
-        presenter.tambahPosko("123456", "Tri wikentot", "Posko Kentot",
+        presenter.tambahPosko("1" ,"123456", "Tri wikentot", "Posko Kentot",
             "321.0", "2133124", "129381298", "lajang","kentot")
     }
 

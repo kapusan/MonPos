@@ -7,7 +7,6 @@ import retrofit2.converter.gson.GsonConverterFactory
 
 class ApiServiceImpl {
     private var retrofit: Retrofit? = null
-    private var retrofitbmkg: Retrofit? = null
     private var retrofitreliefweb: Retrofit? = null
 
     fun getRetrofitInstance(): Retrofit? {

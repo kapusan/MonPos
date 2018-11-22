@@ -18,7 +18,11 @@
         <activity
                 android:name=".ui.login.LoginActivity"
                 android:theme="@style/AppTheme.NoActionbar">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN"/>
 
+                <category android:name="android.intent.category.LAUNCHER"/>
+            </intent-filter>
         </activity>
         <activity
                 android:name=".ui.detailbencana.DetailbencanaActivity"
@@ -30,24 +34,23 @@
         <activity
                 android:name=".ui.main.MainActivity"
                 android:theme="@style/AppTheme.NoActionbar">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN"/>
 
-                <category android:name="android.intent.category.LAUNCHER"/>
-            </intent-filter>
         </activity>
-        <activity android:name=".ui.login.verifikasikode.VerifikasiActivity">
+        <activity android:name=".ui.login.verifikasikode.VerifikasiActivity"
+                  android:theme="@style/AppTheme.NoActionbar">
         </activity>
         <activity android:name=".ui.main.infoglobal.InfoGlobalActivity">
         </activity>
         <activity android:name=".ui.buatposko.BuatPoskoActivity"
                   android:theme="@style/AppTheme.NoActionbar">
         </activity>
-        <activity android:name=".ui.isiprofil.IsiProfilActivity">
+        <activity android:name=".ui.isiprofil.IsiProfilActivity"
+                  android:theme="@style/AppTheme.NoActionbar">
         </activity>
         <activity android:name=".ui.global.GlobalActivity">
         </activity>
-        <activity android:name=".ui.detailglobal.DetailGlobalActivity">
+        <activity android:name=".ui.detailglobal.DetailGlobalActivity"
+                  android:theme="@style/AppTheme.NoActionbar">
         </activity>
     </application>
 

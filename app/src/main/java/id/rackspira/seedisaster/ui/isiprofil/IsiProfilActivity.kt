@@ -36,13 +36,13 @@ class IsiProfilActivity : AppCompatActivity(), IsiProfilView {
 
         val telp = intent.getStringExtra("no")
 
-        btnPilihGambar.setOnClickListener {
-            chooseImage()
-        }
-
-        btnUpload.setOnClickListener {
-            uploadImage()
-        }
+//        btnPilihGambar.setOnClickListener {
+//            chooseImage()
+//        }
+//
+//        btnUpload.setOnClickListener {
+//            uploadImage()
+//        }
 
         btnSimpan.setOnClickListener {
             presenter.createProfil(edtNama.text.toString(), edtJenisKel.text.toString(), telp,edtTglLahir.text.toString(), urlPP!!)
@@ -63,7 +63,7 @@ class IsiProfilActivity : AppCompatActivity(), IsiProfilView {
             filepath = data.data
             try {
                 val bitmap = MediaStore.Images.Media.getBitmap(contentResolver, filepath)
-                imageViewPrev.setImageBitmap(bitmap)
+//                imageViewPrev.setImageBitmap(bitmap)
             } catch (e: IOException) {
                 e.printStackTrace()
             }

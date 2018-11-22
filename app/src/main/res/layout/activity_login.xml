@@ -5,19 +5,76 @@
         xmlns:app="http://schemas.android.com/apk/res-auto"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:background="@drawable/bg_blue_full2"
         tools:context=".ui.login.LoginActivity">
+
+    <ImageView
+            android:layout_width="120dp"
+            android:layout_height="120dp"
+            android:src="@drawable/ic_group_509"
+            android:layout_marginBottom="50dp"
+            app:layout_constraintBottom_toTopOf="@+id/edittextTelp"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginEnd="8dp"
+            android:layout_marginRight="8dp"
+            app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginLeft="8dp"
+            android:layout_marginStart="8dp"/>
 
     <EditText
             android:id="@+id/edittextTelp"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_width="300dp"
+            android:layout_height="50dp"
             android:maxLength="15"
-            android:inputType="phone"/>
+            android:inputType="phone"
+            android:hint="+628XXXXXXXX"
+            android:paddingStart="20dp"
+            android:textColorHint="#CEF5E6"
+            android:textColor="@color/white"
+            android:paddingEnd="20dp"
+            android:background="@drawable/bg_line_white"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="100dp"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginEnd="8dp"
+            android:layout_marginRight="8dp"
+            app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginLeft="8dp"
+            android:layout_marginStart="8dp"
+            android:paddingLeft="20dp"/>
+
+    <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Masukkan nomor telefon untuk verifikasi akun"
+            app:layout_constraintTop_toBottomOf="@+id/edittextTelp"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginEnd="8dp"
+            android:layout_marginRight="8dp"
+            app:layout_constraintStart_toStartOf="parent"
+            android:textColor="@color/white"
+            android:textSize="12dp"
+            android:layout_marginLeft="8dp"
+            android:layout_marginStart="8dp" android:id="@+id/textView4"/>
 
     <Button
             android:id="@+id/buttonLogin"
-            app:layout_constraintTop_toBottomOf="@id/edittextTelp"
+            android:layout_width="300dp"
+            android:layout_height="50dp"
+            android:layout_marginTop="30dp"
+            android:text="KIRIM KODE"
+            android:textColor="@color/hijau"
+            android:background="@drawable/bg_line_grey"
+            app:layout_constraintEnd_toEndOf="@+id/edittextTelp"
+            app:layout_constraintStart_toStartOf="@+id/edittextTelp"
+            app:layout_constraintTop_toTopOf="@+id/textView4"/>
+
+    <ImageView
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
+            android:layout_height="wrap_content"
+            android:src="@drawable/bg_login" android:layout_marginBottom="8dp"
+            app:layout_constraintBottom_toBottomOf="parent"/>
 
 </android.support.constraint.ConstraintLayout>

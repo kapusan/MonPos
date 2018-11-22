@@ -48,6 +48,10 @@ class PoskoFragment : Fragment(), PoskoView {
             imageviewPoskoKosong.visibility = View.GONE
             textviewBlmAda.visibility = View.GONE
             textviewBlmAda2.visibility = View.GONE
+        } else {
+            imageviewPoskoKosong.visibility = View.VISIBLE
+            textviewBlmAda.visibility = View.VISIBLE
+            textviewBlmAda2.visibility = View.VISIBLE
         }
     }
 }

@@ -121,18 +121,17 @@ class HomeFragment : Fragment(), HomeView, View.OnClickListener {
                 }
 
                 override fun onItemSingleTapUp(index: Int, item: OverlayItem?): Boolean {
-                    var gmnIntentUri =
-                        Uri.parse("geo:" + item?.point?.latitude + "," + item?.point?.longitude + "?q=" + list[index].nkab)
-                    val mapIntent = Intent(Intent.ACTION_VIEW, gmnIntentUri)
-                    mapIntent.setPackage("com.google.android.apps.maps")
-                    startActivity(mapIntent)
+//                    var gmnIntentUri =
+//                        Uri.parse("geo:" + item?.point?.latitude + "," + item?.point?.longitude + "?q=" + list[index].nkab)
+//                    val mapIntent = Intent(Intent.ACTION_VIEW, gmnIntentUri)
+//                    mapIntent.setPackage("com.google.android.apps.maps")
+//                    startActivity(mapIntent)
                     return true
                 }
 
             })
 
         mOverlay.setFocusItemsOnTap(true)
-
         mapView.overlays.add(mOverlay)
     }
 

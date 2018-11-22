@@ -9,5 +9,5 @@ data class DataPosko(
     var long: String? = null,
     var telp: String? = null,
     var ketTelp: String? = null,
-    var urlProfil: String? = null
+    var urlPhoto: String? = null
 )

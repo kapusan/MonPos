@@ -27,8 +27,6 @@
             android:textColor="@color/black"
             android:textSize="16sp"
             tools:text="Tanah Longsor"
-            android:inputType="textCapWords"
-            android:capitalize="words"
             app:layout_constraintTop_toTopOf="@+id/imageView"
             app:layout_constraintStart_toEndOf="@+id/imageView"
             android:layout_marginLeft="15dp"/>

@@ -54,7 +54,6 @@ class HomeAdapter: RecyclerView.Adapter<HomeAdapter.ViewHolder>() {
                     capMatcher.group(1).toUpperCase() + capMatcher.group(2).toLowerCase()
                 )
             }
-
             return capMatcher.appendTail(capBuffer).toString()
         }
     }

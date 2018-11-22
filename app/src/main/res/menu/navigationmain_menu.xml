@@ -10,10 +10,7 @@
                 android:id="@+id/cuaca"
                 android:title="Cuaca"
                 android:icon="@drawable/ic_nav_cuaca"/>
-        <item
-                android:id="@+id/iklim"
-                android:title="Lklim"
-                android:icon="@drawable/ic_nav_iklim"/>
+     
         <item
                 android:id="@+id/global"
                 android:title="Global"

@@ -12,12 +12,14 @@ import com.google.firebase.database.FirebaseDatabase
 import id.rackspira.seedisaster.R
 import id.rackspira.seedisaster.data.network.entity.DataPosko
 import id.rackspira.seedisaster.ui.main.home.HomeFragment
+import id.rackspira.seedisaster.ui.main.infoglobal.GlobalFragment
 import kotlinx.android.synthetic.main.activity_main.*
 
 
 class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
 
     private val homeFragment = HomeFragment()
+    private val globalFragment = GlobalFragment()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -39,6 +41,16 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
             R.id.beranda -> {
                 setFragment(homeFragment)
                 drawerLayout.closeDrawer(Gravity.START)
+            }
+            R.id.cuaca -> {
+
+            }
+            R.id.global -> {
+                setFragment(globalFragment)
+                drawerLayout.closeDrawer(Gravity.START)
+            }
+            R.id.tentang -> {
+
             }
         }
         return true

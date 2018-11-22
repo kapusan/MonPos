@@ -27,7 +27,7 @@ class VerifikasiActivity : AppCompatActivity() {
 
         telp = intent.getStringExtra("no")
         if (mAuth.currentUser != null) {
-            val intent = Intent(this, IsiProfilActivity::class.java)
+            val intent = Intent(this, MainActivity::class.java)
             intent.putExtra("no", telp)
             startActivity(intent)
         }

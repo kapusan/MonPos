@@ -36,7 +36,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 
     override fun onNavigationItemSelected(p0: MenuItem): Boolean {
         when (p0.itemId) {
-            R.id.navigationHome -> {
+            R.id.beranda -> {
                 setFragment(homeFragment)
                 drawerLayout.closeDrawer(Gravity.START)
             }

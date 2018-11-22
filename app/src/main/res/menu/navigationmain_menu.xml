@@ -3,9 +3,25 @@
 
     <group android:checkableBehavior="single">
         <item
-                android:id="@+id/navigationHome"
+                android:id="@+id/beranda"
                 android:title="@string/home"
-                android:icon="@drawable/ic_menu_compass"/>
+                android:icon="@drawable/ic_nav_beranda"/>
+        <item
+                android:id="@+id/cuaca"
+                android:title="Cuaca"
+                android:icon="@drawable/ic_nav_cuaca"/>
+        <item
+                android:id="@+id/iklim"
+                android:title="Lklim"
+                android:icon="@drawable/ic_nav_iklim"/>
+        <item
+                android:id="@+id/global"
+                android:title="Global"
+                android:icon="@drawable/ic_nav_global"/>
+        <item
+                android:id="@+id/tentang"
+                android:title="Tentang"
+                android:icon="@drawable/ic_nav_tentang"/>
 
     </group>
 

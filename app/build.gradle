@@ -74,6 +74,7 @@ dependencies {
     //map
     implementation 'org.osmdroid:osmdroid-android:6.0.2'
     implementation 'com.github.MKergall:osmbonuspack:6.5.2'
+    implementation 'com.google.android.gms:play-services-location:16.0.0'
 
     //firebase database
     implementation 'com.google.firebase:firebase-database:16.0.5'

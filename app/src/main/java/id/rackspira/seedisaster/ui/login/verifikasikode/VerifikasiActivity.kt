@@ -26,11 +26,6 @@ class VerifikasiActivity : AppCompatActivity() {
         setContentView(R.layout.activity_verifikasi)
 
         telp = intent.getStringExtra("no")
-        if (mAuth.currentUser != null) {
-            val intent = Intent(this, MainActivity::class.java)
-            intent.putExtra("no", telp)
-            startActivity(intent)
-        }
 
         val mCallbacks = object : PhoneAuthProvider.OnVerificationStateChangedCallbacks() {
 
@@ -62,7 +57,7 @@ class VerifikasiActivity : AppCompatActivity() {
             this,
             mCallbacks)
 
-        buttonOke.setOnClickListener {
+       buttonLogin.setOnClickListener {
             verifyPhoneNumberWithCode(mVerificationId!!, edittextKode.text.toString())
         }
 

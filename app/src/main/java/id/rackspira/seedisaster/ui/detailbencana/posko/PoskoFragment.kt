@@ -10,6 +10,7 @@ import android.view.ViewGroup
 
 import id.rackspira.seedisaster.R
 import id.rackspira.seedisaster.data.network.entity.DataPosko
+import id.rackspira.seedisaster.data.network.entity.ListBencana
 import id.rackspira.seedisaster.ui.buatposko.BuatPoskoActivity
 import kotlinx.android.synthetic.main.fragment_posko.*
 
@@ -24,11 +25,16 @@ class PoskoFragment : Fragment(), PoskoView {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        val list = arguments!!.getParcelable("posisi") as ListBencana
         fabTambahPosko.setOnClickListener {
-            context?.startActivity(Intent(context, BuatPoskoActivity::class.java))
+            val intent = Intent(context, BuatPoskoActivity::class.java)
+            intent.putExtra("data", list)
+            context!!.startActivity(intent)
         }
+
         presenter = PoskoPresenter(this)
-        presenter.getDataPosko("1")
+        presenter.getDataPosko(list.kib!!)
         poskoAdapter = PoskoAdapter()
         recyclerviewPosko.layoutManager = LinearLayoutManager(context)
         recyclerviewPosko.adapter = poskoAdapter

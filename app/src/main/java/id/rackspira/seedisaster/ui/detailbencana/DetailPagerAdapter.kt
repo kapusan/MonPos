@@ -8,7 +8,8 @@ import id.rackspira.seedisaster.data.network.entity.ListBencana
 import id.rackspira.seedisaster.ui.detailbencana.info.InfoFragment
 import id.rackspira.seedisaster.ui.detailbencana.posko.PoskoFragment
 
-class DetailPagerAdapter(private val list: ListBencana,fragment: FragmentManager): FragmentStatePagerAdapter(fragment) {
+class DetailPagerAdapter(private val list: ListBencana, fragment: FragmentManager) :
+    FragmentStatePagerAdapter(fragment) {
 
     private var tabCount = 0
 
@@ -22,7 +23,7 @@ class DetailPagerAdapter(private val list: ListBencana,fragment: FragmentManager
                 newInstance(list)
             }
             1 -> {
-                PoskoFragment()
+                newInstance2(list)
             }
             else -> null
         }
@@ -38,6 +39,11 @@ class DetailPagerAdapter(private val list: ListBencana,fragment: FragmentManager
                 putParcelable("posisi", list)
             }
         }
-    }
 
+        fun newInstance2(list: ListBencana) = PoskoFragment().apply {
+            arguments = Bundle().apply {
+                putParcelable("posisi", list)
+            }
+        }
+    }
 }

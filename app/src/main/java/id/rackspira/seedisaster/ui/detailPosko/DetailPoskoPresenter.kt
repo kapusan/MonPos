@@ -10,13 +10,13 @@ class DetailPoskoPresenter(private val view: DetailPoskoView) {
 
     private val dataRef = FirebaseDatabase.getInstance().reference
 
-    fun tambahKebutuhan(idPosko: String, namaKeb: String, jumlahKeb: String,
+    fun tambahKebutuhan(idBencana: String,idPosko: String, namaKeb: String, jumlahKeb: String,
                         satuanKeb: String, kategori: String) {
         val kebutuhan: KebPosko
         val ref = dataRef.child("Kebutuhan")
         val id = ref.push().key
         kebutuhan = KebPosko(id, namaKeb, jumlahKeb, satuanKeb)
-        dataRef.child(idPosko).child(kategori).child(id!!).setValue(kebutuhan)
+        dataRef.child(idBencana).child(idPosko).child(kategori).child(id!!).setValue(kebutuhan)
             .addOnSuccessListener {
                 view.onSuccess("Berhasil menambah kebutuhan")
             }
@@ -25,9 +25,9 @@ class DetailPoskoPresenter(private val view: DetailPoskoView) {
             }
     }
 
-    fun getDataKebutuhan(idPosko: String, kategori: String) {
+    fun getDataKebutuhan(idBencana: String, idPosko: String, kategori: String) {
         var kebutuhan: KebPosko
-        val ref = dataRef.child("Kebutuhan").child(idPosko).child(kategori)
+        val ref = dataRef.child("Kebutuhan").child(idBencana).child(idPosko).child(kategori)
         ref.addValueEventListener(object : ValueEventListener {
             override fun onCancelled(p0: DatabaseError) {}
 
@@ -42,8 +42,8 @@ class DetailPoskoPresenter(private val view: DetailPoskoView) {
         })
     }
 
-    fun updateKebutuhan(idPosko: String, kategori: String, idKeb: String, kebPosko: KebPosko) {
-        val ref = dataRef.child("Kebutuhan").child(idPosko).child(kategori).child(idKeb)
+    fun updateKebutuhan(idBencana: String, idPosko: String, kategori: String, idKeb: String, kebPosko: KebPosko) {
+        val ref = dataRef.child("Kebutuhan").child(idBencana).child(idPosko).child(kategori).child(idKeb)
         ref.setValue(kebPosko).addOnSuccessListener {
             view.onSuccessUpdate("Berhasil update kebutuhan")
         }.addOnFailureListener {
@@ -51,8 +51,8 @@ class DetailPoskoPresenter(private val view: DetailPoskoView) {
         }
     }
 
-    fun deleteKebutuhan(idPosko: String, kategori: String, idKeb: String) {
-        val ref = dataRef.child("Kebutuhan").child(idPosko).child(kategori).child(idKeb)
+    fun deleteKebutuhan(idBencana: String, idPosko: String, kategori: String, idKeb: String) {
+        val ref = dataRef.child("Kebutuhan").child(idBencana).child(idPosko).child(kategori).child(idKeb)
         ref.removeValue()
     }
 

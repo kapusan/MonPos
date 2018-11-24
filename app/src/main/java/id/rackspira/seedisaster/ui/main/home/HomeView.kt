@@ -6,8 +6,6 @@ interface HomeView {
 
     fun getListBencana(listBencana: List<ListBencana>)
 
-    fun setMap()
-
     fun onError(msg: String?)
 
     fun addMapMarker()

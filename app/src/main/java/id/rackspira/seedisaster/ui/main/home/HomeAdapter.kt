@@ -12,12 +12,14 @@ import id.rackspira.seedisaster.ui.detailbencana.DetailbencanaActivity
 import kotlinx.android.synthetic.main.list_bencana.view.*
 import java.util.regex.Pattern
 
-class HomeAdapter: RecyclerView.Adapter<HomeAdapter.ViewHolder>() {
+class HomeAdapter : RecyclerView.Adapter<HomeAdapter.ViewHolder>() {
 
     private val list = mutableListOf<ListBencana>()
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) = ViewHolder(LayoutInflater.from(parent.context)
-        .inflate(R.layout.list_bencana, parent, false))
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) = ViewHolder(
+        LayoutInflater.from(parent.context)
+            .inflate(R.layout.list_bencana, parent, false)
+    )
 
     override fun getItemCount() = list.size
 
@@ -28,16 +30,15 @@ class HomeAdapter: RecyclerView.Adapter<HomeAdapter.ViewHolder>() {
         notifyDataSetChanged()
     }
 
-    class ViewHolder(view: View): RecyclerView.ViewHolder(view) {
+    class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         fun bind(position: ListBencana) {
             val kejadian = capitalize(position.kejadian!!)
             val nprop = capitalize(position.nprop!!)
             val nkab = capitalize(position.nkab!!)
 
             itemView.textviewJudul.text = kejadian
-            itemView.textViewLokasi.text = nprop +", "+nkab
+            itemView.textViewLokasi.text = nprop + ", " + nkab
             itemView.setOnClickListener {
-//                itemView.context.startActivity(Intent(itemView.context, DetailbencanaActivity::class.java))
                 val intent = Intent(itemView.context, DetailbencanaActivity::class.java)
                 intent.putExtra("posisi", position)
                 itemView.context.startActivity(intent)

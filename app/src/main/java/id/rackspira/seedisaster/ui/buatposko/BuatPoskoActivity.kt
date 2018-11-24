@@ -34,7 +34,7 @@ class BuatPoskoActivity : AppCompatActivity(), BuatPoskoView {
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(this)
 
         val dataPosko = intent.getParcelableExtra<ListBencana>("data")
-        val manager =  getSystemService( LOCATION_SERVICE ) as LocationManager
+        val manager = getSystemService(LOCATION_SERVICE) as LocationManager
         val permissions = arrayOf(android.Manifest.permission.ACCESS_FINE_LOCATION)
         ActivityCompat.requestPermissions(this, permissions, 0)
 
@@ -51,9 +51,9 @@ class BuatPoskoActivity : AppCompatActivity(), BuatPoskoView {
         }
 
         buttonSimpan.setOnClickListener {
-            if ( !manager.isProviderEnabled( LocationManager.GPS_PROVIDER ) ) {
+            if (!manager.isProviderEnabled(LocationManager.GPS_PROVIDER)) {
                 Toast.makeText(this, "KENTOT KAMU YA", Toast.LENGTH_SHORT).show()
-            }else if (ContextCompat.checkSelfPermission(
+            } else if (ContextCompat.checkSelfPermission(
                     this,
                     Manifest.permission.ACCESS_FINE_LOCATION
                 ) == PackageManager.PERMISSION_GRANTED
@@ -62,12 +62,11 @@ class BuatPoskoActivity : AppCompatActivity(), BuatPoskoView {
                     .addOnSuccessListener { location: Location? ->
                         latitude = location?.latitude
                         longitude = location?.longitude
+                        presenter.tambahPosko(
+                            dataPosko.kib.toString(), "kosong", edittextNamaPosko.text.toString(),
+                            latitude.toString(), longitude.toString(), "2786878", "887686"
+                        )
                     }
-
-                presenter.tambahPosko(
-                    dataPosko.kib.toString(), mAuth.currentUser!!.uid, edittextNamaPosko.text.toString(),
-                    latitude.toString(), longitude.toString(), "2786878", "887686"
-                )
             } else {
                 ActivityCompat.requestPermissions(this, permissions, 0)
             }

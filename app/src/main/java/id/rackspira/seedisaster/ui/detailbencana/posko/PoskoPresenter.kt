@@ -10,10 +10,9 @@ class PoskoPresenter(private val view: PoskoView) {
 
     fun getDataPosko(idBencana: String) {
         var dataPosko: DataPosko
-        val ref = dataRef.child("Posko").child(idBencana)
-        ref.addValueEventListener(object : ValueEventListener {
+        val ref = dataRef.child("Posko").orderByChild("idBencana").equalTo(idBencana)
+        ref.addListenerForSingleValueEvent(object : ValueEventListener {
             override fun onCancelled(p0: DatabaseError) {}
-
             override fun onDataChange(p0: DataSnapshot) {
                 val list = mutableListOf<DataPosko>()
                 for (snapshot in p0.children) {
@@ -23,11 +22,10 @@ class PoskoPresenter(private val view: PoskoView) {
                 view.getDataPosko(list)
             }
         })
-
     }
 
     fun updateDataPosko(idBencana: String, idPosko: String, dataPosko: DataPosko) {
-        val ref = dataRef.child("Posko").child(idBencana).child(idPosko)
+        val ref = dataRef.child("Posko").child(idPosko)
         ref.setValue(dataPosko).addOnSuccessListener {
             view.onSuccessUpdate("Berhasil update data")
         }.addOnFailureListener {
@@ -35,8 +33,8 @@ class PoskoPresenter(private val view: PoskoView) {
         }
     }
 
-    fun deleteDataPosko(idBencana: String, idPosko: String) {
-        val ref = dataRef.child("Posko").child(idBencana).child(idPosko)
+    fun deleteDataPosko(idPosko: String) {
+        val ref = dataRef.child("Posko").child(idPosko)
         ref.removeValue()
     }
 

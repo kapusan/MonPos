@@ -10,9 +10,9 @@ class BuatPoskoPresenter(private val view: BuatPoskoView) {
     fun tambahPosko(idBencana: String,uidUsr: String,
                     namaPosko: String, lat: String,
                     long: String, telp: String, urlProfil: String) {
-        val ref = dataRef.child("Posko").child(idBencana)
+        val ref = dataRef.child("Posko")
         val key = ref.push().key
-        val dataPosko = DataPosko(key, uidUsr, namaPosko, lat, long, telp, urlProfil)
+        val dataPosko = DataPosko(key,idBencana, uidUsr, namaPosko, lat, long, telp, urlProfil)
         ref.child(key!!).setValue(dataPosko)
             .addOnSuccessListener {
                 view.onSuccess("Berhasil membuat posko")

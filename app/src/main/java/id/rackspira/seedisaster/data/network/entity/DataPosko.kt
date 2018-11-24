@@ -2,6 +2,7 @@ package id.rackspira.seedisaster.data.network.entity
 
 data class DataPosko(
     var idPosko: String? = null,
+    var idBencana: String? = null,
     var uidUsr: String? = null,
     var namaPosko: String? = null,
     var lat: String? = null,

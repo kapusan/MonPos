@@ -1,9 +1,8 @@
 package id.rackspira.seedisaster.ui.main.home
 
 
+import android.app.Dialog
 import android.content.Intent
-import android.net.Uri
-import android.os.AsyncTask
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v7.widget.LinearLayoutManager
@@ -15,21 +14,19 @@ import id.rackspira.seedisaster.R
 import id.rackspira.seedisaster.data.network.entity.ListBencana
 import kotlinx.android.synthetic.main.fragment_home.*
 import android.preference.PreferenceManager
-import android.support.v4.content.ContextCompat
-import android.util.Log
 import android.widget.Toast
-import id.rackspira.seedisaster.R.id.mapView
-import org.osmdroid.bonuspack.kml.KmlDocument
 import org.osmdroid.config.Configuration
 import org.osmdroid.tileprovider.tilesource.TileSourceFactory
 import org.osmdroid.util.GeoPoint
-import org.osmdroid.views.MapView
 import org.osmdroid.views.overlay.*
-import org.osmdroid.views.overlay.mylocation.GpsMyLocationProvider
-import org.osmdroid.views.overlay.mylocation.MyLocationNewOverlay
 import org.osmdroid.views.overlay.compass.InternalCompassOrientationProvider
 import org.osmdroid.views.overlay.compass.CompassOverlay
-import org.osmdroid.views.overlay.gridlines.LatLonGridlineOverlay2
+import android.graphics.drawable.ColorDrawable
+import android.net.Uri
+import android.view.Window
+import kotlinx.android.synthetic.main.popup_map.*
+import id.rackspira.seedisaster.ui.detailbencana.DetailbencanaActivity
+import kotlinx.android.synthetic.main.fragment_posko.*
 
 
 class HomeFragment : Fragment(), HomeView, View.OnClickListener {
@@ -55,6 +52,10 @@ class HomeFragment : Fragment(), HomeView, View.OnClickListener {
         adapter = HomeAdapter()
         recyclerHome.layoutManager = LinearLayoutManager(context)
         recyclerHome.adapter = adapter
+
+        mapView.setTileSource(TileSourceFactory.MAPNIK)
+        mapView.setMultiTouchControls(true)
+        mapView.setBuiltInZoomControls(true)
     }
 
     override fun getListBencana(listBencana: List<ListBencana>) {
@@ -83,13 +84,9 @@ class HomeFragment : Fragment(), HomeView, View.OnClickListener {
         }
     }
 
-    override fun setMap() {
-        mapView.setTileSource(TileSourceFactory.MAPNIK)
-        mapView.setMultiTouchControls(true)
-        mapView.setBuiltInZoomControls(true)
-
+    fun setMap() {
         val mapControler = mapView.controller
-        mapControler.setZoom(5.0)
+        mapControler.setZoom(6.0)
         var startPoint = GeoPoint(-2.28, 117.37)
         mapControler.setCenter(startPoint)
 
@@ -121,11 +118,7 @@ class HomeFragment : Fragment(), HomeView, View.OnClickListener {
                 }
 
                 override fun onItemSingleTapUp(index: Int, item: OverlayItem?): Boolean {
-//                    var gmnIntentUri =
-//                        Uri.parse("geo:" + item?.point?.latitude + "," + item?.point?.longitude + "?q=" + list[index].nkab)
-//                    val mapIntent = Intent(Intent.ACTION_VIEW, gmnIntentUri)
-//                    mapIntent.setPackage("com.google.android.apps.maps")
-//                    startActivity(mapIntent)
+                    showDialog(item?.title, item?.snippet, item, index)
                     return true
                 }
 
@@ -135,7 +128,6 @@ class HomeFragment : Fragment(), HomeView, View.OnClickListener {
         mapView.overlays.add(mOverlay)
     }
 
-
     override fun onPause() {
         super.onPause()
         mapView.onPause()
@@ -144,6 +136,41 @@ class HomeFragment : Fragment(), HomeView, View.OnClickListener {
     override fun onResume() {
         super.onResume()
         mapView.onResume()
+    }
+
+    override fun onDetach() {
+        super.onDetach()
+        mapView.onDetach()
+    }
+
+    fun showDialog(title: String?, body: String?, item: OverlayItem?, index: Int) {
+        val dialog = Dialog(context!!)
+        val data = list[index]
+        dialog.window?.requestFeature(Window.FEATURE_NO_TITLE)
+        dialog.window?.setBackgroundDrawable(ColorDrawable(android.graphics.Color.TRANSPARENT))
+        dialog.setContentView(R.layout.popup_map)
+        dialog.setCancelable(true)
+
+        dialog.map_popup_header.text = title
+        dialog.map_popup_body.text = body
+
+        dialog.textview_detail.setOnClickListener {
+            val intent = Intent(context, DetailbencanaActivity::class.java)
+            intent.putExtra("posisi", data)
+            context?.startActivity(intent)
+        }
+
+        dialog.textview_navigasi.setOnClickListener {
+            var gmnIntentUri =
+                Uri.parse("geo:" + item?.point?.latitude + "," + item?.point?.longitude + "?q=" + list[index].nkab)
+            val mapIntent = Intent(Intent.ACTION_VIEW, gmnIntentUri)
+            mapIntent.setPackage("com.google.android.apps.maps")
+            context?.startActivity(mapIntent)
+
+        }
+
+        dialog.show()
+
     }
 
 }

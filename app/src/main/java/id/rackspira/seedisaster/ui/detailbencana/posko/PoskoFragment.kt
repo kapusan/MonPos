@@ -3,6 +3,7 @@ package id.rackspira.seedisaster.ui.detailbencana.posko
 import android.content.Intent
 import android.os.Bundle
 import android.support.v4.app.Fragment
+import android.support.v4.content.ContextCompat
 import android.support.v7.widget.LinearLayoutManager
 import android.view.LayoutInflater
 import android.view.View
@@ -13,11 +14,22 @@ import id.rackspira.seedisaster.data.network.entity.DataPosko
 import id.rackspira.seedisaster.data.network.entity.ListBencana
 import id.rackspira.seedisaster.ui.buatposko.BuatPoskoActivity
 import kotlinx.android.synthetic.main.fragment_posko.*
+import org.osmdroid.tileprovider.tilesource.TileSourceFactory
+import org.osmdroid.util.GeoPoint
+import org.osmdroid.views.overlay.ItemizedIconOverlay
+import org.osmdroid.views.overlay.ItemizedOverlayWithFocus
+import org.osmdroid.views.overlay.Marker
+import org.osmdroid.views.overlay.OverlayItem
+import org.osmdroid.views.overlay.compass.CompassOverlay
+import org.osmdroid.views.overlay.compass.InternalCompassOrientationProvider
 
 class PoskoFragment : Fragment(), PoskoView {
 
     private lateinit var poskoAdapter: PoskoAdapter
     private lateinit var presenter: PoskoPresenter
+    private val list: MutableList<DataPosko> = mutableListOf()
+    private var isMapOpen: Boolean = false
+    private lateinit var listBencana: ListBencana
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return inflater.inflate(R.layout.fragment_posko, container, false)
@@ -25,16 +37,30 @@ class PoskoFragment : Fragment(), PoskoView {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
-        val list = arguments!!.getParcelable("posisi") as ListBencana
+        mapViewPosko.setTileSource(TileSourceFactory.MAPNIK)
+        mapViewPosko.setMultiTouchControls(true)
+        mapViewPosko.setBuiltInZoomControls(true)
+        listBencana = arguments!!.getParcelable("posisi") as ListBencana
         fabTambahPosko.setOnClickListener {
             val intent = Intent(context, BuatPoskoActivity::class.java)
-            intent.putExtra("data", list)
+            intent.putExtra("data", listBencana)
             context!!.startActivity(intent)
         }
 
+        fabMaps.setOnClickListener {
+            if (isMapOpen) {
+                recyclerviewPosko.visibility = View.VISIBLE
+                mapViewPosko.visibility = View.GONE
+                isMapOpen = false
+            } else {
+                recyclerviewPosko.visibility = View.GONE
+                mapViewPosko.visibility = View.VISIBLE
+                isMapOpen = true
+            }
+        }
+
         presenter = PoskoPresenter(this)
-        presenter.getDataPosko(list.kib!!)
+        presenter.getDataPosko(listBencana.kib!!)
         poskoAdapter = PoskoAdapter()
         recyclerviewPosko.layoutManager = LinearLayoutManager(context)
         recyclerviewPosko.adapter = poskoAdapter
@@ -54,10 +80,76 @@ class PoskoFragment : Fragment(), PoskoView {
             imageviewPoskoKosong.visibility = View.GONE
             textviewBlmAda.visibility = View.GONE
             textviewBlmAda2.visibility = View.GONE
+            fabMaps.visibility = View.VISIBLE
         } else {
             imageviewPoskoKosong.visibility = View.VISIBLE
             textviewBlmAda.visibility = View.VISIBLE
             textviewBlmAda2.visibility = View.VISIBLE
+            fabMaps.visibility = View.GONE
         }
+        list.addAll(dataPosko)
+        setMapPosko()
     }
+
+    fun setMapPosko() {
+        val mapControler = mapViewPosko.controller
+        mapControler.setZoom(15.0)
+        var startPoint = GeoPoint(listBencana.latitude!!.toDouble(), listBencana.longitude!!.toDouble())
+        mapControler.setCenter(startPoint)
+
+        val mCompassOverlay = CompassOverlay(context, InternalCompassOrientationProvider(context), mapViewPosko)
+        mCompassOverlay.enableCompass()
+        mapViewPosko.overlays.add(mCompassOverlay)
+
+        val startMarker = Marker(mapViewPosko)
+        startMarker.position = startPoint
+        startMarker.setAnchor(Marker.ANCHOR_CENTER, Marker.ANCHOR_BOTTOM)
+        mapViewPosko.overlays.add(startMarker)
+
+        mapViewPosko.invalidate()
+
+        startMarker.icon = ContextCompat.getDrawable(context!!, R.drawable.ic_lokasi_detail)
+        startMarker.title = listBencana.kejadian
+        addMapMarker()
+    }
+
+    private fun addMapMarker() {
+        val items = ArrayList<OverlayItem>()
+
+        for (listtempat in list) {
+            items.add(
+                OverlayItem(
+                    listtempat.namaPosko,
+                    listtempat.telp,
+                    GeoPoint(listtempat.lat!!.toDouble(), listtempat.long!!.toDouble())
+                )
+            )
+        }
+
+        val mOverlay =
+            ItemizedOverlayWithFocus(context, items, object : ItemizedIconOverlay.OnItemGestureListener<OverlayItem> {
+                override fun onItemLongPress(index: Int, item: OverlayItem?): Boolean {
+                    return false
+                }
+
+                override fun onItemSingleTapUp(index: Int, item: OverlayItem?): Boolean {
+                    return true
+                }
+
+            })
+
+        mOverlay.setFocusItemsOnTap(true)
+        mapViewPosko.overlays.add(mOverlay)
+    }
+
+    override fun onPause() {
+        super.onPause()
+        mapViewPosko.onPause()
+    }
+
+    override fun onResume() {
+        super.onResume()
+        mapViewPosko.onResume()
+    }
+
 }

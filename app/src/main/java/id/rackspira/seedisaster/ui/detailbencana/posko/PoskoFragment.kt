@@ -1,6 +1,9 @@
 package id.rackspira.seedisaster.ui.detailbencana.posko
 
+import android.app.Dialog
 import android.content.Intent
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v4.content.ContextCompat
@@ -8,17 +11,20 @@ import android.support.v7.widget.LinearLayoutManager
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.Window
 
 import id.rackspira.seedisaster.R
 import id.rackspira.seedisaster.data.network.entity.DataPosko
 import id.rackspira.seedisaster.data.network.entity.ListBencana
 import id.rackspira.seedisaster.ui.buatposko.BuatPoskoActivity
 import kotlinx.android.synthetic.main.fragment_posko.*
+import kotlinx.android.synthetic.main.popup_map.*
 import org.osmdroid.tileprovider.tilesource.TileSourceFactory
 import org.osmdroid.util.GeoPoint
 import org.osmdroid.views.overlay.ItemizedIconOverlay
 import org.osmdroid.views.overlay.ItemizedOverlayWithFocus
 import org.osmdroid.views.overlay.Marker
+import id.rackspira.seedisaster.ui.detailPosko.DetailPoskoActivity
 import org.osmdroid.views.overlay.OverlayItem
 import org.osmdroid.views.overlay.compass.CompassOverlay
 import org.osmdroid.views.overlay.compass.InternalCompassOrientationProvider
@@ -133,6 +139,7 @@ class PoskoFragment : Fragment(), PoskoView {
                 }
 
                 override fun onItemSingleTapUp(index: Int, item: OverlayItem?): Boolean {
+                    showDialog(item?.title, item?.snippet, item, index)
                     return true
                 }
 
@@ -150,6 +157,36 @@ class PoskoFragment : Fragment(), PoskoView {
     override fun onResume() {
         super.onResume()
         mapViewPosko.onResume()
+    }
+
+    fun showDialog(title: String?, body: String?, item: OverlayItem?, index: Int) {
+        val dialog = Dialog(context!!)
+        val data = list[index]
+        dialog.window?.requestFeature(Window.FEATURE_NO_TITLE)
+        dialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+        dialog.setContentView(R.layout.popup_map)
+        dialog.setCancelable(true)
+
+        dialog.map_popup_header.text = title
+        dialog.map_popup_body.text = body
+
+        dialog.textview_detail.setOnClickListener {
+            val intent = Intent(context, DetailPoskoActivity::class.java)
+            intent.putExtra("posisi", data)
+            context?.startActivity(intent)
+        }
+
+        dialog.textview_navigasi.setOnClickListener {
+//            var gmnIntentUri =
+//                Uri.parse("geo:" + item?.point?.latitude + "," + item?.point?.longitude + "?q=" + list[index].nkab)
+//            val mapIntent = Intent(Intent.ACTION_VIEW, gmnIntentUri)
+//            mapIntent.setPackage("com.google.android.apps.maps")
+//            context?.startActivity(mapIntent)
+
+        }
+
+        dialog.show()
+
     }
 
 }

@@ -47,7 +47,7 @@ class HomeFragment : Fragment(), HomeView, View.OnClickListener {
         fabHome.setOnClickListener(this)
 
         presenter = HomePresenter(this)
-        presenter.getListBencana("ALL", "10")
+        presenter.getListBencana("ALL", "15")
 
         adapter = HomeAdapter()
         recyclerHome.layoutManager = LinearLayoutManager(context)
@@ -136,11 +136,6 @@ class HomeFragment : Fragment(), HomeView, View.OnClickListener {
     override fun onResume() {
         super.onResume()
         mapView.onResume()
-    }
-
-    override fun onDetach() {
-        super.onDetach()
-        mapView.onDetach()
     }
 
     fun showDialog(title: String?, body: String?, item: OverlayItem?, index: Int) {

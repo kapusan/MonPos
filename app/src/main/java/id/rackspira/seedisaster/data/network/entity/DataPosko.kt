@@ -1,5 +1,9 @@
 package id.rackspira.seedisaster.data.network.entity
 
+import android.os.Parcelable
+import kotlinx.android.parcel.Parcelize
+
+@Parcelize
 data class DataPosko(
     var idPosko: String? = null,
     var idBencana: String? = null,
@@ -9,4 +13,4 @@ data class DataPosko(
     var long: String? = null,
     var telp: String? = null,
     var urlPhoto: String? = null
-)
+) : Parcelable

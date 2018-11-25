@@ -12,8 +12,7 @@ class InfoGlobalPresenter(private val view: InfoGlobalView) {
 
     @SuppressLint("CheckResult")
     fun getListGlobal(limit: String) {
-        apiService.getBencanaTerbaru("disasters", "country",
-            "Indonesia", limit, "latest")
+        apiService.getBencanaTerbaru("disasters",  limit, "latest")
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe({hasil ->

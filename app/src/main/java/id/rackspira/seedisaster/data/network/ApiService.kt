@@ -35,8 +35,8 @@ interface ApiService {
 
     @GET("disasters")
     fun getBencanaTerbaru(@Query("appname") appname: String,
-                          @Query("filter[field]") country: String,
-                          @Query("filter[value]") negara: String,
+//                          @Query("filter[field]") country: String,
+//                          @Query("filter[value]") negara: String,
                           @Query("limit") limit: String,
                           @Query("preset") preset: String): Observable<BaseNewsBencana>
 

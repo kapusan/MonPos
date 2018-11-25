@@ -8,7 +8,7 @@
                 android:icon="@drawable/ic_nav_beranda"/>
         <item
                 android:id="@+id/cuaca"
-                android:title="Cuaca"
+                android:title="Peta Bencana"
                 android:icon="@drawable/ic_nav_cuaca"/>
      
         <item

@@ -52,7 +52,7 @@ class BuatPoskoActivity : AppCompatActivity(), BuatPoskoView {
 
         buttonSimpan.setOnClickListener {
             if (!manager.isProviderEnabled(LocationManager.GPS_PROVIDER)) {
-                Toast.makeText(this, "KENTOT KAMU YA", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, "Mohon Hidupkan Lokasi Anda", Toast.LENGTH_LONG).show()
             } else if (ContextCompat.checkSelfPermission(
                     this,
                     Manifest.permission.ACCESS_FINE_LOCATION

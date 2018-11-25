@@ -70,7 +70,7 @@
             android:layout_width="330dp"
             android:layout_height="50dp"
             android:maxLength="15"
-            android:hint="Jenis elamin (L/P)"
+            android:hint="Jenis kelamin (L/P)"
             android:paddingStart="20dp"
             android:textColorHint="#CEF5E6"
             android:textColor="@color/white"

@@ -18,12 +18,12 @@ class DetailbencanaActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_detail_bencana)
         list = intent.getParcelableExtra("posisi")
+//        titleBencana.text = list.kejadian
         setUp()
 
     }
 
     private fun setUp() {
-        setSupportActionBar(toolbarDet)
         pagerAdapter = DetailPagerAdapter(list,supportFragmentManager)
         pagerAdapter.count = 2
         viewPagerDetail.adapter = pagerAdapter

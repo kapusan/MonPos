@@ -34,6 +34,7 @@ class BuatPoskoActivity : AppCompatActivity(), BuatPoskoView {
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(this)
 
         val dataPosko = intent.getParcelableExtra<ListBencana>("data")
+        Log.d("idbencana", dataPosko.kib)
         val manager = getSystemService(LOCATION_SERVICE) as LocationManager
         val permissions = arrayOf(android.Manifest.permission.ACCESS_FINE_LOCATION)
         ActivityCompat.requestPermissions(this, permissions, 0)

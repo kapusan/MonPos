@@ -10,6 +10,7 @@ data class DataPosko(
     var uidUsr: String? = null,
     var namaPosko: String? = null,
     var lat: String? = null,
+    var namaPenangungJawab: String? = null,
     var long: String? = null,
     var telp: String? = null,
     var urlPhoto: String? = null

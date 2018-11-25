@@ -1,5 +1,6 @@
 package id.rackspira.seedisaster.ui.detailPosko
 
+import android.util.Log
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
@@ -16,11 +17,13 @@ class DetailPoskoPresenter(private val view: DetailPoskoView) {
         val ref = dataRef.child("Kebutuhan")
         val id = ref.push().key
         kebutuhan = KebPosko(id, namaKeb, jumlahKeb, satuanKeb)
-        dataRef.child(idBencana).child(idPosko).child(kategori).child(id!!).setValue(kebutuhan)
+        ref.child(idBencana).child(idPosko).child(kategori).child(id!!).setValue(kebutuhan)
             .addOnSuccessListener {
+                Log.d("anangkentot", "Tambah sukses")
                 view.onSuccess("Berhasil menambah kebutuhan")
             }
             .addOnFailureListener {
+                Log.d("anangkentot", "Tambah Gagal")
                 view.onFailed("Gagal menambah kebutuhan")
             }
     }
@@ -30,7 +33,6 @@ class DetailPoskoPresenter(private val view: DetailPoskoView) {
         val ref = dataRef.child("Kebutuhan").child(idBencana).child(idPosko).child(kategori)
         ref.addValueEventListener(object : ValueEventListener {
             override fun onCancelled(p0: DatabaseError) {}
-
             override fun onDataChange(p0: DataSnapshot) {
                 val list = mutableListOf<KebPosko>()
                 for (snap in p0.children) {

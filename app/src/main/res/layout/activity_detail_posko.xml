@@ -31,11 +31,9 @@
 
     </android.support.v7.widget.Toolbar>
 
-    <ScrollView
+    <android.support.v4.widget.NestedScrollView
             android:layout_width="match_parent"
             android:layout_height="match_parent">
-
-
 
         <android.support.v7.widget.CardView
                 android:layout_width="match_parent"
@@ -47,98 +45,107 @@
             <android.support.constraint.ConstraintLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:paddingBottom="40dp">
+                    android:paddingBottom="20dp">
+
+                <ImageView
+                        android:id="@+id/imagePosko"
+                        android:layout_width="match_parent"
+                        android:layout_height="200dp"
+                        android:layout_marginTop="18dp"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        android:layout_marginEnd="20dp"
+                        android:layout_marginRight="20dp"
+                        android:background="@color/black"
+                        android:src="@drawable/contoh_bencana"
+                        app:layout_constraintStart_toStartOf="parent"
+                        android:layout_marginLeft="20dp"
+                        android:layout_marginStart="20dp"/>
 
                 <TextView
                         android:id="@+id/textViewLokasiInfo"
-                        android:layout_width="wrap_content"
-                        android:layout_height="22dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="28dp"
+                        android:gravity="center"
                         android:text="Penangung Jawab"
                         android:textSize="14sp"
+                        android:background="#efefef"
                         android:textColor="@color/black"
                         app:layout_constraintEnd_toEndOf="parent"
-                        android:layout_marginEnd="8dp"
-                        android:layout_marginRight="8dp"
-                        android:layout_marginTop="12dp"
-                        app:layout_constraintStart_toStartOf="parent"
-                        android:layout_marginLeft="8dp"
-                        android:layout_marginStart="8dp"
-                        app:layout_constraintTop_toTopOf="parent"/>
-
-                <View
-                        android:id="@+id/view_bencana1"
-                        android:layout_width="match_parent"
-                        android:layout_height="1dp"
-                        android:background="#E0E0E0"
-                        android:layout_marginTop="8dp"
-                        android:layout_marginBottom="20dp"
-                        android:layout_marginStart="20dp"
                         android:layout_marginEnd="20dp"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/textViewLokasiInfo"
-                        android:layout_marginLeft="20dp"/>
+                        android:layout_marginRight="20dp"
+                        android:layout_marginTop="12dp"
 
-                <de.hdodenhof.circleimageview.CircleImageView
-                        android:id="@+id/ciProfil"
-                        android:layout_width="100dp"
-                        android:layout_height="100dp"
-                        android:layout_marginTop="20dp"
-                        android:src="@drawable/ic_profil"
                         app:layout_constraintStart_toStartOf="parent"
-                        android:layout_marginLeft="8dp" android:layout_marginStart="8dp"
-                        app:layout_constraintEnd_toEndOf="parent" android:layout_marginEnd="8dp"
-                        android:layout_marginRight="8dp"
-                        app:layout_constraintTop_toBottomOf="@+id/view_bencana1"/>
+                        android:layout_marginLeft="20dp"
+                        android:layout_marginStart="20dp"
+                        app:layout_constraintTop_toBottomOf="@+id/imagePosko"/>
+
+
+                <ImageView
+                        android:id="@+id/ciProfil"
+                        android:layout_width="43dp"
+                        android:layout_height="43dp"
+                        android:layout_marginStart="8dp"
+                        android:src="@drawable/ic_contact"
+                        app:layout_constraintStart_toStartOf="@+id/textViewLokasiInfo"
+                        tools:ignore="MissingConstraints"
+                        android:layout_marginLeft="8dp"
+                        android:layout_marginTop="18dp"
+                        app:layout_constraintTop_toBottomOf="@+id/textViewLokasiInfo"/>
 
                 <TextView
+
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Hidayati Fatimah"
-                        android:textSize="14sp"
-                        android:textColor="#4B4B4B"
-                        android:id="@+id/namaUser" app:layout_constraintTop_toBottomOf="@+id/ciProfil"
-                        app:layout_constraintStart_toStartOf="@+id/ciProfil"
-                        app:layout_constraintEnd_toEndOf="@+id/ciProfil"/>
+                        android:textSize="12sp"
+                        android:textColor="#B1B1B1"
+                        android:id="@+id/namaUser"
+                        android:layout_marginStart="18dp"
+                        android:layout_marginLeft="8dp"
+                        app:layout_constraintStart_toEndOf="@+id/ciProfil"
+                        app:layout_constraintTop_toBottomOf="@+id/nomorHpUser"/>
 
                 <TextView
                         android:id="@+id/nomorHpUser"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="08533194448"
-                        android:textSize="12sp"
-                        android:textColor="#B1B1B1"
-                        app:layout_constraintTop_toBottomOf="@+id/namaUser"
+                        tools:text="+628533194448"
+                        android:textSize="18sp"
+                        android:textColor="#515151"
                         app:layout_constraintStart_toStartOf="@+id/namaUser"
-                        app:layout_constraintEnd_toEndOf="@+id/namaUser"/>
+                        app:layout_constraintTop_toTopOf="@+id/ciProfil"/>
 
                 <TextView
                         android:id="@+id/tvPengungsi"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                        android:layout_width="match_parent"
+                        android:layout_height="28dp"
                         android:text="Pengungsi"
                         android:textColor="#515151"
+                        android:background="#efefef"
                         android:textSize="14sp"
+                        android:gravity="center"
                         app:layout_constraintTop_toBottomOf="@+id/nomorHpUser"
                         app:layout_constraintEnd_toEndOf="parent"
-                        android:layout_marginEnd="8dp"
-                        android:layout_marginTop="30dp"
-                        android:layout_marginRight="8dp"
-                        app:layout_constraintStart_toStartOf="parent"
-                        android:layout_marginLeft="8dp"
-                        android:layout_marginStart="8dp"/>
-
-                <View
-                        android:id="@+id/view_bencana2"
-                        android:layout_width="match_parent"
-                        android:layout_height="1dp"
-                        android:background="#E0E0E0"
-                        android:layout_marginTop="8dp"
-                        android:layout_marginBottom="20dp"
-                        android:layout_marginStart="20dp"
                         android:layout_marginEnd="20dp"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/tvPengungsi"
-                        android:layout_marginLeft="20dp"/>
+                        android:layout_marginTop="40dp"
+                        android:layout_marginRight="20dp"
+                        app:layout_constraintStart_toStartOf="parent"
+                        android:layout_marginLeft="20dp"
+                        android:layout_marginStart="20dp"/>
+
+                <ImageView
+                        android:id="@+id/tambahPengungsi"
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
+                        app:layout_constraintEnd_toEndOf="@+id/view_bencana4"
+                        android:layout_marginEnd="8dp"
+                        android:layout_marginRight="8dp"
+                        android:src="@drawable/ic_tambah"
+                        app:layout_constraintTop_toTopOf="@+id/tvPengungsi"
+                        app:layout_constraintBottom_toBottomOf="@+id/tvPengungsi"/>
+
 
                 <HorizontalScrollView
                         android:id="@+id/svJumlahOrang"
@@ -151,7 +158,8 @@
                         android:fillViewport="true"
                         android:measureAllChildren="false"
                         android:scrollbars="none"
-                        app:layout_constraintTop_toBottomOf="@+id/view_bencana2" app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/tvPengungsi"
+                        app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent">
 
                     <LinearLayout
@@ -344,19 +352,34 @@
 
                 <TextView
                         android:id="@+id/tvKebutuhan"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                        android:layout_width="match_parent"
+                        android:layout_height="28dp"
                         android:text="Kebutuhan"
                         android:textColor="#515151"
                         android:textSize="14sp"
+                        android:gravity="center"
+                        android:background="#efefef"
                         app:layout_constraintEnd_toEndOf="parent"
-                        android:layout_marginEnd="8dp"
-                        android:layout_marginRight="8dp"
+                        android:layout_marginEnd="20dp"
+                        android:layout_marginRight="20dp"
                         app:layout_constraintStart_toStartOf="parent"
-                        android:layout_marginLeft="8dp"
-                        android:layout_marginStart="8dp"
+                        android:layout_marginLeft="20dp"
+                        android:layout_marginStart="20dp"
                         android:layout_marginTop="20dp"
                         app:layout_constraintTop_toBottomOf="@+id/svJumlahOrang"/>
+
+                <ImageView
+                        android:id="@+id/tambahKebutuhan"
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
+                        app:layout_constraintEnd_toEndOf="@+id/view_bencana4"
+                        android:layout_marginEnd="8dp"
+                        android:layout_marginRight="8dp"
+                        android:src="@drawable/ic_tambah"
+                        android:layout_marginBottom="8dp"
+                        android:layout_marginTop="8dp"
+                        app:layout_constraintTop_toTopOf="@+id/tvKebutuhan"
+                        app:layout_constraintBottom_toBottomOf="@+id/tvKebutuhan"/>
 
                 <View
                         android:id="@+id/view_bencana4"
@@ -455,7 +478,7 @@
                         android:id="@+id/textViewKesehatan"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Pelayanan Kesehatan"
+                        android:text="Kesehatan"
                         android:textSize="8sp"
                         android:textColor="@color/white"
                         android:background="@drawable/bg_hijau"
@@ -570,6 +593,6 @@
 
         </android.support.v7.widget.CardView>
 
-    </ScrollView>
+    </android.support.v4.widget.NestedScrollView>
 
 </LinearLayout>

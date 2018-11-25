@@ -13,6 +13,8 @@ import id.rackspira.seedisaster.R
 import id.rackspira.seedisaster.data.network.entity.DataPosko
 import id.rackspira.seedisaster.ui.main.home.HomeFragment
 import id.rackspira.seedisaster.ui.main.infoglobal.GlobalFragment
+import id.rackspira.seedisaster.ui.main.petabencana.PetaBencanaFragment
+import id.rackspira.seedisaster.ui.main.posko.PoskoSayaFragment
 import kotlinx.android.synthetic.main.activity_main.*
 
 
@@ -20,6 +22,8 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 
     private val homeFragment = HomeFragment()
     private val globalFragment = GlobalFragment()
+    private val petaFragment = PetaBencanaFragment()
+    private val poskoSaya = PoskoSayaFragment()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -43,14 +47,16 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
                 drawerLayout.closeDrawer(Gravity.START)
             }
             R.id.cuaca -> {
-
+                setFragment(petaFragment)
+                drawerLayout.closeDrawer(Gravity.START)
             }
             R.id.global -> {
                 setFragment(globalFragment)
                 drawerLayout.closeDrawer(Gravity.START)
             }
-            R.id.tentang -> {
-
+            R.id.posko -> {
+                setFragment(poskoSaya)
+                drawerLayout.closeDrawer(Gravity.START)
             }
         }
         return true

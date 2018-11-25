@@ -13,6 +13,7 @@ import androidx.core.view.isGone
 import androidx.core.view.isInvisible
 import com.squareup.picasso.Picasso
 import id.rackspira.seedisaster.R
+import id.rackspira.seedisaster.data.network.entity.DataJumlahPengungsi
 import id.rackspira.seedisaster.data.network.entity.DataPosko
 import id.rackspira.seedisaster.data.network.entity.KebPosko
 import id.rackspira.seedisaster.ui.detailbencana.posko.PoskoAdapter
@@ -280,4 +281,7 @@ class DetailPoskoActivity : AppCompatActivity(), DetailPoskoView {
 
     }
 
+    override fun getJumlahPengungsu(dataJumlahPengungsi: DataJumlahPengungsi) {
+        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    }
 }

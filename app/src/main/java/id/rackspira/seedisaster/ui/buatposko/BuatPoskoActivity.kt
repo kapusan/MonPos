@@ -64,7 +64,7 @@ class BuatPoskoActivity : AppCompatActivity(), BuatPoskoView {
                         latitude = location?.latitude
                         longitude = location?.longitude
                         presenter.tambahPosko(
-                            dataPosko.kib.toString(), "kosong", edittextNamaPosko.text.toString(),
+                            dataPosko.kib.toString(), mAuth.currentUser!!.uid, edittextNamaPosko.text.toString(),
                             latitude.toString(), longitude.toString(), "2786878", "887686"
                         )
                     }

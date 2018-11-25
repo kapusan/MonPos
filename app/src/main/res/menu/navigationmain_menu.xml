@@ -6,15 +6,22 @@
                 android:id="@+id/beranda"
                 android:title="@string/home"
                 android:icon="@drawable/ic_nav_beranda"/>
-        <item
-                android:id="@+id/cuaca"
-                android:title="Peta Bencana"
-                android:icon="@drawable/ic_nav_cuaca"/>
-     
+
         <item
                 android:id="@+id/global"
                 android:title="Global"
                 android:icon="@drawable/ic_nav_global"/>
+
+        <item
+            android:id="@+id/posko"
+            android:icon="@drawable/icoon_tenda_buat_posko"
+            android:title="Posko Saya"/>
+
+        <item
+                android:id="@+id/cuaca"
+                android:title="Peta Gunung Api"
+                android:icon="@drawable/ic_nav_cuaca"/>
+
         <item
                 android:id="@+id/tentang"
                 android:title="Tentang"

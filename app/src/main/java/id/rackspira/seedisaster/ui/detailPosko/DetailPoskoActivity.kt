@@ -194,7 +194,7 @@ class DetailPoskoActivity : AppCompatActivity(), DetailPoskoView {
                 val clickBatal = dialog.findViewById(R.id.textViewBatal) as TextView
                 val clickTambah = dialog.findViewById(R.id.textViewTambah) as TextView
                 val listUpdateKebutuhan = dialog.findViewById(R.id.recycleUpdateKebutuhan) as RecyclerView
-                updateKebutuhanAdapter = UpdateKebutuhanAdapter()
+                updateKebutuhanAdapter = UpdateKebutuhanAdapter("Sandang")
                 listUpdateKebutuhan.layoutManager = LinearLayoutManager(this)
                 listUpdateKebutuhan.adapter = updateKebutuhanAdapter
                 namaKebutuhan.text = "Sandang"
@@ -248,7 +248,7 @@ class DetailPoskoActivity : AppCompatActivity(), DetailPoskoView {
                 val clickBatal = dialog.findViewById(R.id.textViewBatal) as TextView
                 val clickTambah = dialog.findViewById(R.id.textViewTambah) as TextView
                 val listUpdateKebutuhan = dialog.findViewById(R.id.recycleUpdateKebutuhan) as RecyclerView
-                updateKebutuhanAdapter = UpdateKebutuhanAdapter()
+                updateKebutuhanAdapter = UpdateKebutuhanAdapter("Pangan")
                 listUpdateKebutuhan.layoutManager = LinearLayoutManager(this)
                 listUpdateKebutuhan.adapter = updateKebutuhanAdapter
                 namaKebutuhan.text = "Pangan"
@@ -303,7 +303,7 @@ class DetailPoskoActivity : AppCompatActivity(), DetailPoskoView {
                 val clickBatal = dialog.findViewById(R.id.textViewBatal) as TextView
                 val clickTambah = dialog.findViewById(R.id.textViewTambah) as TextView
                 val listUpdateKebutuhan = dialog.findViewById(R.id.recycleUpdateKebutuhan) as RecyclerView
-                updateKebutuhanAdapter = UpdateKebutuhanAdapter()
+                updateKebutuhanAdapter = UpdateKebutuhanAdapter("Kesehatan")
                 listUpdateKebutuhan.layoutManager = LinearLayoutManager(this)
                 listUpdateKebutuhan.adapter = updateKebutuhanAdapter
                 namaKebutuhan.text = "Kesehatan"
@@ -357,7 +357,7 @@ class DetailPoskoActivity : AppCompatActivity(), DetailPoskoView {
                 val clickBatal = dialog.findViewById(R.id.textViewBatal) as TextView
                 val clickTambah = dialog.findViewById(R.id.textViewTambah) as TextView
                 val listUpdateKebutuhan = dialog.findViewById(R.id.recycleUpdateKebutuhan) as RecyclerView
-                updateKebutuhanAdapter = UpdateKebutuhanAdapter()
+                updateKebutuhanAdapter = UpdateKebutuhanAdapter("Sanitasi")
                 listUpdateKebutuhan.layoutManager = LinearLayoutManager(this)
                 listUpdateKebutuhan.adapter = updateKebutuhanAdapter
                 namaKebutuhan.text = "Sanitasi"
@@ -410,7 +410,7 @@ class DetailPoskoActivity : AppCompatActivity(), DetailPoskoView {
                 val clickBatal = dialog.findViewById(R.id.textViewBatal) as TextView
                 val clickTambah = dialog.findViewById(R.id.textViewTambah) as TextView
                 val listUpdateKebutuhan = dialog.findViewById(R.id.recycleUpdateKebutuhan) as RecyclerView
-                updateKebutuhanAdapter = UpdateKebutuhanAdapter()
+                updateKebutuhanAdapter = UpdateKebutuhanAdapter("Tempat Huni")
                 listUpdateKebutuhan.layoutManager = LinearLayoutManager(this)
                 listUpdateKebutuhan.adapter = updateKebutuhanAdapter
                 namaKebutuhan.text = "Tempat Huni"
@@ -463,7 +463,7 @@ class DetailPoskoActivity : AppCompatActivity(), DetailPoskoView {
                 val clickBatal = dialog.findViewById(R.id.textViewBatal) as TextView
                 val clickTambah = dialog.findViewById(R.id.textViewTambah) as TextView
                 val listUpdateKebutuhan = dialog.findViewById(R.id.recycleUpdateKebutuhan) as RecyclerView
-                updateKebutuhanAdapter = UpdateKebutuhanAdapter()
+                updateKebutuhanAdapter = UpdateKebutuhanAdapter("Relawan")
                 listUpdateKebutuhan.layoutManager = LinearLayoutManager(this)
                 listUpdateKebutuhan.adapter = updateKebutuhanAdapter
                 namaKebutuhan.text = "Relawan"

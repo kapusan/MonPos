@@ -29,7 +29,7 @@ class BuatPoskoPresenter(private val view: BuatPoskoView) {
             }
     }
 
-    fun getUser(noTelp: String) {
+    fun getUser() {
         var dataUser = DataUser()
         val ref = dataRef.child("Users").orderByChild("uid").equalTo(mAuth.currentUser?.uid)
         ref.addListenerForSingleValueEvent(object : ValueEventListener {

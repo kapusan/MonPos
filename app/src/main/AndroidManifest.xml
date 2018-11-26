@@ -19,7 +19,7 @@
             android:theme="@style/AppTheme"
             tools:ignore="GoogleAppIndexingWarning">
         <activity
-                android:name=".ui.login.LoginActivity"
+                android:name=".ui.isiprofil.IsiProfilActivity"
                 android:theme="@style/AppTheme.NoActionbar">
 
         </activity>
@@ -45,7 +45,7 @@
                 android:theme="@style/AppTheme.NoActionbar">
         </activity>
         <activity
-                android:name=".ui.isiprofil.IsiProfilActivity"
+                android:name=".ui.login.LoginActivity"
                 android:theme="@style/AppTheme.NoActionbar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>

@@ -26,7 +26,7 @@ class PoskoAdapter: RecyclerView.Adapter<PoskoAdapter.ViewHolder>() {
     internal fun addListPosko(
         posko: List<DataPosko>
     ) {
-//        this.list.clear()
+        this.list.clear()
         this.list.addAll(posko)
         notifyDataSetChanged()
     }

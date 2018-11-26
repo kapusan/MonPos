@@ -24,7 +24,7 @@ class LoginActivity : AppCompatActivity() {
 
         buttonLogin.setOnClickListener {
             val intent = Intent(this, VerifikasiActivity::class.java)
-            intent.putExtra("no", "+62" +edittextTelp.text.toString())
+            intent.putExtra("no", edittextTelp.text.toString())
             startActivity(intent)
             finish()
         }

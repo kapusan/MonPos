@@ -16,6 +16,8 @@ interface DetailPoskoView {
 
     fun getDataKebutuhan(dataKebutuhan: List<KebPosko>)
 
+    fun getUpdateDataKebutuhan(dataKebutuhan: List<KebPosko>)
+
     fun getJumlahPengungsu(dataJumlahPengungsi: DataJumlahPengungsi)
 
 }

@@ -32,9 +32,9 @@ class IsiProfilActivity : AppCompatActivity(), IsiProfilView {
         presenter = IsiProfilPresenter(this)
 
         val telp = intent.getStringExtra("no")
-        if (telp.isNotEmpty()) {
-            edtNoTelefon.setText(telp)
-        }
+//        if (telp.isNotEmpty()) {
+//            edtNoTelefon.setText(telp)
+//        }
 
         btnSimpan.setOnClickListener {
             presenter.createProfil(edtNama.text.toString(), edtJenisKel.text.toString(), edtNoTelefon.text.toString(),edtTglLahir.text.toString())

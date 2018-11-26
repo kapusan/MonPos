@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.v7.widget.CardView
+<android.support.constraint.ConstraintLayout
         xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
-        android:layout_width="350dp"
+        android:layout_width="wrap_content"
         android:layout_height="380dp"
-        android:layout_gravity="center">
+        android:layout_gravity="center"
+        android:background="@color/white">
 
     <android.support.constraint.ConstraintLayout
             android:layout_width="match_parent"
@@ -19,25 +20,30 @@
                 android:layout_marginTop="18dp"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                android:layout_marginLeft="25dp"
-                android:layout_marginStart="25dp"
-                android:id="@+id/textView3"/>
+                android:layout_marginLeft="50dp"
+                android:layout_marginStart="50dp"
+                android:id="@+id/textView3"
+                android:layout_marginEnd="50dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:layout_marginRight="50dp"/>
 
         <EditText
                 android:layout_width="match_parent"
                 android:layout_height="45dp"
+                android:maxLines="1"
+                android:maxLength="30"
                 android:layout_marginTop="18dp"
                 android:background="@drawable/bg_line_green"
                 app:layout_constraintTop_toBottomOf="@+id/textView3"
                 app:layout_constraintEnd_toEndOf="parent"
-                android:layout_marginEnd="41dp"
+                android:layout_marginEnd="20dp"
                 android:hint="Nama kebutuhan"
                 android:paddingStart="20dp"
                 android:textSize="16sp"
                 android:layout_marginRight="318dp"
                 app:layout_constraintStart_toStartOf="parent"
-                android:layout_marginLeft="41dp"
-                android:layout_marginStart="41dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginStart="20dp"
                 android:paddingLeft="10dp"
                 android:id="@+id/editTextNamaKebutuhan"/>
 
@@ -45,35 +51,39 @@
                 android:id="@+id/imgKategori"
                 android:layout_width="match_parent"
                 android:layout_height="45dp"
-                android:layout_marginTop="15dp"
+                android:layout_marginTop="12dp"
                 android:background="@drawable/bg_line_green"
                 app:layout_constraintTop_toBottomOf="@+id/editTextNamaKebutuhan"
                 app:layout_constraintEnd_toEndOf="parent"
-                android:layout_marginEnd="41dp"
+                android:layout_marginEnd="20dp"
+                android:layout_marginRight="20dp"
                 android:paddingStart="20dp"
+                android:paddingEnd="10dp"
                 android:textSize="16sp"
                 app:layout_constraintStart_toStartOf="parent"
-                android:layout_marginLeft="41dp"
-                android:layout_marginStart="41dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginStart="20dp"
                 android:paddingLeft="10dp"
-                app:elevation="0dp"/>
+                app:elevation="0dp" app:layout_constraintHorizontal_bias="0.0" android:paddingRight="10dp"/>
 
         <Spinner
                 android:id="@+id/spinnerKategori"
-                android:layout_width="match_parent"
+                android:layout_width="0dp"
                 android:layout_height="45dp"
                 android:layout_marginTop="15dp"
                 app:layout_constraintTop_toBottomOf="@+id/editTextNamaKebutuhan"
                 app:layout_constraintEnd_toEndOf="parent"
-                android:layout_marginEnd="46dp"
-                android:paddingStart="20dp"
+                android:paddingStart="10dp"
                 android:textSize="16sp"
                 app:layout_constraintStart_toStartOf="parent"
-                android:layout_marginLeft="41dp"
-                android:layout_marginStart="41dp"
                 android:paddingLeft="10dp"
+                android:paddingEnd="10dp"
                 app:elevation="1dp"
-                android:layout_marginRight="46dp"/>
+                android:layout_marginEnd="30dp"
+                android:layout_marginRight="30dp"
+                android:layout_marginStart="20dp"
+                android:layout_marginLeft="20dp"
+                android:paddingRight="10dp"/>
 
 
         <ImageView
@@ -84,48 +94,53 @@
                 android:background="@drawable/bg_line_green"
                 app:layout_constraintTop_toBottomOf="@+id/spinnerKategori"
                 app:layout_constraintEnd_toEndOf="parent"
-                android:layout_marginEnd="41dp"
+                android:layout_marginEnd="20dp"
                 android:paddingStart="20dp"
+                android:paddingEnd="10dp"
                 android:textSize="16sp"
                 app:layout_constraintStart_toStartOf="parent"
-                android:layout_marginLeft="41dp"
-                android:layout_marginStart="41dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginStart="20dp"
+                android:layout_marginRight="20dp"
                 android:paddingLeft="10dp"
-                app:elevation="0dp"/>
+                app:elevation="0dp"
+                android:paddingRight="10dp"/>
 
         <Spinner
                 android:id="@+id/spinnerPaket"
-                android:layout_width="match_parent"
+                android:layout_width="0dp"
                 android:layout_height="45dp"
                 android:layout_marginTop="15dp"
                 app:layout_constraintTop_toBottomOf="@+id/spinnerKategori"
-                app:layout_constraintEnd_toEndOf="parent"
-                android:layout_marginEnd="46dp"
-                android:paddingStart="20dp"
-                android:layout_marginRight="318dp"
-                app:layout_constraintStart_toStartOf="parent"
-                android:layout_marginLeft="41dp"
-                android:layout_marginStart="41dp"
+                app:layout_constraintEnd_toEndOf="@+id/imgPaket"
+                android:paddingStart="10dp"
+                android:paddingEnd="10dp"
+                android:layout_marginEnd="10dp"
+                app:layout_constraintStart_toStartOf="@+id/imgPaket"
                 android:textSize="16sp"
-                android:paddingLeft="10dp"/>
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp"
+                android:layout_marginRight="10dp"/>
 
         <EditText
                 android:id="@+id/editTextJumlah"
                 android:layout_width="match_parent"
                 android:layout_height="45dp"
+                android:maxLines="1"
+                android:maxLength="10"
                 android:layout_marginTop="15dp"
                 android:background="@drawable/bg_line_green"
                 app:layout_constraintTop_toBottomOf="@+id/spinnerPaket"
                 app:layout_constraintEnd_toEndOf="parent"
-                android:layout_marginEnd="41dp"
+                android:layout_marginEnd="20dp"
                 android:paddingStart="20dp"
                 android:hint="Jumlah"
                 android:inputType="number"
                 android:textSize="16sp"
-                android:layout_marginRight="318dp"
+                android:layout_marginRight="20dp"
                 app:layout_constraintStart_toStartOf="parent"
-                android:layout_marginLeft="41dp"
-                android:layout_marginStart="41dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginStart="20dp"
                 android:paddingLeft="10dp"/>
 
         <TextView
@@ -133,11 +148,12 @@
                 android:layout_height="wrap_content"
                 android:text="Tambah"
                 android:textSize="16dp"
+                android:padding="10dp"
                 android:textColor="@color/hijau"
                 app:layout_constraintEnd_toEndOf="parent"
-                android:layout_marginEnd="28dp"
+                android:layout_marginEnd="18dp"
                 android:layout_marginRight="18dp"
-                android:layout_marginBottom="22dp"
+                android:layout_marginBottom="12dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 android:id="@+id/textViewTambah"/>
 
@@ -147,12 +163,13 @@
                 android:layout_height="wrap_content"
                 android:text="Batal"
                 android:textSize="16dp"
-                android:layout_marginEnd="38dp"
+                android:padding="10dp"
+                android:layout_marginEnd="18dp"
                 android:layout_marginRight="8dp"
-                android:layout_marginBottom="22dp"
+                android:layout_marginBottom="12dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@+id/textViewTambah"/>
 
     </android.support.constraint.ConstraintLayout>
 
-</android.support.v7.widget.CardView>
+</android.support.constraint.ConstraintLayout>

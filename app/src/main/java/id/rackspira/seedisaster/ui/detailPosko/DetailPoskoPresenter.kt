@@ -47,6 +47,22 @@ class DetailPoskoPresenter(private val view: DetailPoskoView) {
         })
     }
 
+    fun getUpdateKebutuhan(idBencana: String, idPosko: String, kategori: String) {
+        var kebutuhan: KebPosko
+        val ref = dataRef.child("Kebutuhan").child(idBencana).child(idPosko).child(kategori)
+        ref.addValueEventListener(object : ValueEventListener {
+            override fun onCancelled(p0: DatabaseError) {}
+            override fun onDataChange(p0: DataSnapshot) {
+                val list = mutableListOf<KebPosko>()
+                for (snap in p0.children) {
+                    kebutuhan = snap.getValue(KebPosko::class.java)!!
+                    list.add(kebutuhan)
+                }
+                view.getUpdateDataKebutuhan(list)
+            }
+        })
+    }
+
     fun updateKebutuhan(idBencana: String, idPosko: String, kategori: String, idKeb: String, kebPosko: KebPosko) {
         val ref = dataRef.child("Kebutuhan").child(idBencana).child(idPosko).child(kategori).child(idKeb)
         ref.setValue(kebPosko).addOnSuccessListener {

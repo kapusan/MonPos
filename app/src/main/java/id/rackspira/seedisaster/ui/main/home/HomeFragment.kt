@@ -65,7 +65,7 @@ class HomeFragment : Fragment(), HomeView, View.OnClickListener {
     }
 
     override fun onError(msg: String?) {
-        Toast.makeText(context, msg, Toast.LENGTH_LONG).show()
+//        Toast.makeText(context, msg, Toast.LENGTH_LONG).show()
     }
 
     override fun onClick(v: View?) {

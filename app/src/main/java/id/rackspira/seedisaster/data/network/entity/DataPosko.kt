@@ -13,5 +13,8 @@ data class DataPosko(
     var namaPenangungJawab: String? = null,
     var long: String? = null,
     var telp: String? = null,
-    var urlPhoto: String? = null
+    var desa: String? = null,
+    var kec: String? = null,
+    var kab: String? = null,
+    var prov: String? = null
 ) : Parcelable

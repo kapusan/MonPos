@@ -4,6 +4,7 @@ import android.app.Dialog
 import android.content.Intent
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
+import android.net.Uri
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v4.content.ContextCompat
@@ -21,10 +22,12 @@ import kotlinx.android.synthetic.main.fragment_posko.*
 import kotlinx.android.synthetic.main.popup_map.*
 import org.osmdroid.tileprovider.tilesource.TileSourceFactory
 import org.osmdroid.util.GeoPoint
+import id.rackspira.seedisaster.ui.detailPosko.DetailPoskoActivity
+import kotlinx.android.synthetic.main.fragment_home.*
+import kotlinx.android.synthetic.main.fragment_info.*
 import org.osmdroid.views.overlay.ItemizedIconOverlay
 import org.osmdroid.views.overlay.ItemizedOverlayWithFocus
 import org.osmdroid.views.overlay.Marker
-import id.rackspira.seedisaster.ui.detailPosko.DetailPoskoActivity
 import org.osmdroid.views.overlay.OverlayItem
 import org.osmdroid.views.overlay.compass.CompassOverlay
 import org.osmdroid.views.overlay.compass.InternalCompassOrientationProvider
@@ -86,10 +89,111 @@ class PoskoFragment : Fragment(), PoskoView {
             imageviewPoskoKosong.visibility = View.GONE
             textviewBlmAda.visibility = View.GONE
             textviewBlmAda2.visibility = View.GONE
+            fabMaps.visibility = View.VISIBLE
         } else {
             imageviewPoskoKosong.visibility = View.VISIBLE
             textviewBlmAda.visibility = View.VISIBLE
             textviewBlmAda2.visibility = View.VISIBLE
+            fabMaps.visibility = View.GONE
         }
+        list.addAll(dataPosko)
+        setMap()
     }
+
+    fun setMap() {
+
+        val mapControler = mapViewPosko.controller
+        mapControler.setZoom(6.0)
+        var startPoint = GeoPoint(listBencana.latitude!!, listBencana.longitude!!)
+        mapControler.setCenter(startPoint)
+
+        val startMarker = Marker(mapViewPosko)
+        startMarker.position = startPoint
+        startMarker.setAnchor(Marker.ANCHOR_CENTER, Marker.ANCHOR_BOTTOM)
+        mapViewPosko.overlays.add(startMarker)
+
+        mapViewPosko.invalidate()
+
+        startMarker.icon = ContextCompat.getDrawable(context!!, R.drawable.ic_lokasi_detail)
+        startMarker.title = listBencana.kejadian
+        startMarker.snippet = listBencana.keterangan
+
+        //compas overlay
+        val mCompassOverlay = CompassOverlay(context, InternalCompassOrientationProvider(context), mapViewPosko)
+        mCompassOverlay.enableCompass()
+        mapViewPosko.overlays.add(mCompassOverlay)
+
+        addMapMarker()
+    }
+
+     fun addMapMarker() {
+        val items = ArrayList<OverlayItem>()
+
+        for (listtempat in list) {
+            items.add(
+                OverlayItem(
+                    listtempat.namaPosko,
+                    listtempat.telp,
+                    GeoPoint(listtempat.lat!!.toDouble(), listtempat.long!!.toDouble())
+                )
+            )
+        }
+
+        val mOverlay =
+            ItemizedOverlayWithFocus(context, items, object : ItemizedIconOverlay.OnItemGestureListener<OverlayItem> {
+                override fun onItemLongPress(index: Int, item: OverlayItem?): Boolean {
+                    return false
+                }
+
+                override fun onItemSingleTapUp(index: Int, item: OverlayItem?): Boolean {
+                    showDialog(item?.title, item?.snippet, item, index)
+                    return true
+                }
+
+            })
+
+        mOverlay.setFocusItemsOnTap(true)
+        mapViewPosko.overlays.add(mOverlay)
+    }
+
+    override fun onPause() {
+        super.onPause()
+        mapViewPosko.onPause()
+    }
+
+    override fun onResume() {
+        super.onResume()
+        mapViewPosko.onResume()
+    }
+
+    fun showDialog(title: String?, body: String?, item: OverlayItem?, index: Int) {
+        val dialog = Dialog(context!!)
+        val data = list[index]
+        dialog.window?.requestFeature(Window.FEATURE_NO_TITLE)
+        dialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+        dialog.setContentView(R.layout.popup_map)
+        dialog.setCancelable(true)
+
+        dialog.map_popup_header.text = title
+        dialog.map_popup_body.text = body
+
+        dialog.textview_detail.setOnClickListener {
+            val intent = Intent(context, DetailPoskoActivity::class.java)
+            intent.putExtra("posko", data)
+            context?.startActivity(intent)
+        }
+
+        dialog.textview_navigasi.setOnClickListener {
+            var gmnIntentUri =
+                Uri.parse("geo:" + item?.point?.latitude + "," + item?.point?.longitude + "?q=" + list[index].kab)
+            val mapIntent = Intent(Intent.ACTION_VIEW, gmnIntentUri)
+            mapIntent.setPackage("com.google.android.apps.maps")
+            context?.startActivity(mapIntent)
+        }
+
+        dialog.show()
+
+    }
+
 }
+

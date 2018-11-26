@@ -256,7 +256,6 @@ class DetailPoskoActivity : AppCompatActivity(), DetailPoskoView {
     private fun setUp() {
         namaUser.text = list.namaPenangungJawab
         nomorHpUser.text = list.telp
-        Picasso.get().load(list.urlPhoto).into(imagePosko)
     }
 
     override fun onSuccess(msg: String?) {

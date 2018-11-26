@@ -9,10 +9,11 @@ class BuatPoskoPresenter(private val view: BuatPoskoView) {
 
     fun tambahPosko(idBencana: String,uidUsr: String,
                     namaPosko: String, lat: String,
-                    long: String, telp: String, urlProfil: String) {
+                    long: String, telp: String, desa: String, kec: String,
+                    kab: String, prov: String, namapngjwb: String) {
         val ref = dataRef.child("Posko")
         val key = ref.push().key
-        val dataPosko = DataPosko(key,idBencana, uidUsr, namaPosko, lat, long, telp, urlProfil)
+        val dataPosko = DataPosko(key, idBencana, uidUsr, namaPosko, lat, namapngjwb, long, telp, desa, kec, kab, prov)
         ref.child(key!!).setValue(dataPosko)
             .addOnSuccessListener {
                 view.onSuccess("Berhasil membuat posko")
@@ -20,6 +21,10 @@ class BuatPoskoPresenter(private val view: BuatPoskoView) {
             .addOnFailureListener {
                 view.onFailed("Gagal mebuat posko")
             }
+    }
+
+    fun getUser() {
+
     }
 
 }

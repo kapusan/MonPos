@@ -27,7 +27,7 @@
             android:layout_height="50dp"
             android:maxLength="15"
             android:inputType="phone"
-            android:hint="+628XXXXXXXX"
+            android:hint="08XXXXXXXX"
             android:paddingStart="20dp"
             android:textColorHint="#CEF5E6"
             android:textColor="@color/white"

@@ -1,6 +1,7 @@
 package id.rackspira.seedisaster.ui.main.home
 
 
+import android.app.Activity
 import android.app.Dialog
 import android.content.Intent
 import android.os.Bundle
@@ -45,6 +46,7 @@ class HomeFragment : Fragment(), HomeView, View.OnClickListener {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         fabHome.setOnClickListener(this)
+        buttonRetryHome.setOnClickListener(this)
 
         presenter = HomePresenter(this)
         presenter.getListBencana("ALL", "15")
@@ -59,13 +61,14 @@ class HomeFragment : Fragment(), HomeView, View.OnClickListener {
     }
 
     override fun getListBencana(listBencana: List<ListBencana>) {
+        progressbarHome.visibility = View.GONE
         adapter.addListBencana(listBencana)
         list.addAll(listBencana)
         setMap()
     }
 
     override fun onError(msg: String?) {
-//        Toast.makeText(context, msg, Toast.LENGTH_LONG).show()
+        buttonRetryHome.visibility = View.VISIBLE
     }
 
     override fun onClick(v: View?) {
@@ -80,6 +83,9 @@ class HomeFragment : Fragment(), HomeView, View.OnClickListener {
                     mapView.visibility = View.GONE
                     isMap = false
                 }
+            }
+            R.id.buttonRetryHome -> {
+                activity?.recreate()
             }
         }
     }

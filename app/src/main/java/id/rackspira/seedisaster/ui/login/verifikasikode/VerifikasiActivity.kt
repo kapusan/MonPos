@@ -3,6 +3,7 @@ package id.rackspira.seedisaster.ui.login.verifikasikode
 import android.content.Intent
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
+import android.view.View
 import com.google.firebase.FirebaseException
 import com.google.firebase.FirebaseTooManyRequestsException
 import com.google.firebase.auth.*
@@ -20,6 +21,7 @@ class VerifikasiActivity : AppCompatActivity() {
     private var mResendToken: PhoneAuthProvider.ForceResendingToken? = null
     private var mVerificationId: String? = null
     private var telp: String? = null
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -42,8 +44,10 @@ class VerifikasiActivity : AppCompatActivity() {
 
             }
 
-            override fun onCodeSent(verificationId: String?,
-                                    token: PhoneAuthProvider.ForceResendingToken) {
+            override fun onCodeSent(
+                verificationId: String?,
+                token: PhoneAuthProvider.ForceResendingToken
+            ) {
 
                 mVerificationId = verificationId
                 mResendToken = token
@@ -55,9 +59,11 @@ class VerifikasiActivity : AppCompatActivity() {
             60,
             TimeUnit.SECONDS,
             this,
-            mCallbacks)
+            mCallbacks
+        )
 
-       buttonLogin.setOnClickListener {
+        buttonLogin.setOnClickListener {
+            progressbarVerifikasi.visibility = View.VISIBLE
             verifyPhoneNumberWithCode(mVerificationId!!, edittextKode.text.toString())
         }
 
@@ -89,7 +95,7 @@ class VerifikasiActivity : AppCompatActivity() {
     ) {
         PhoneAuthProvider.getInstance().verifyPhoneNumber(
             phoneNumber,
-            30,
+            60,
             TimeUnit.SECONDS,
             this,
             callback,

@@ -1,6 +1,7 @@
 package id.rackspira.seedisaster.ui.detailbencana.posko
 
 import id.rackspira.seedisaster.data.network.entity.DataPosko
+import id.rackspira.seedisaster.data.network.entity.DataUser
 
 interface PoskoView {
 

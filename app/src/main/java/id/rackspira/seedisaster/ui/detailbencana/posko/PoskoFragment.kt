@@ -164,6 +164,7 @@ class PoskoFragment : Fragment(), PoskoView {
     override fun onResume() {
         super.onResume()
         mapViewPosko.onResume()
+        presenter.getDataPosko(listBencana.kib!!)
     }
 
     fun showDialog(title: String?, body: String?, item: OverlayItem?, index: Int) {

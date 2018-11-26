@@ -33,4 +33,28 @@
             app:layout_constraintEnd_toEndOf="parent"
             android:layout_marginRight="10dp"/>
 
+    <Button
+            android:id="@+id/buttonRetryHome"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Retry"
+            android:visibility="gone"
+            android:textColor="#049701"
+            style="@style/Base.Widget.AppCompat.Button.Borderless"
+            android:drawableTop="@drawable/ic_autorenew_black_24dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"/>
+
+    <TextView
+            android:id="@+id/progressbarHome"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            android:text="Mohon tunggu sebentar..."/>
+
 </android.support.constraint.ConstraintLayout>

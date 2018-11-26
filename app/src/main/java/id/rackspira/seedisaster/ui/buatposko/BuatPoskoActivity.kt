@@ -14,6 +14,7 @@ import id.rackspira.seedisaster.R
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
 import com.google.firebase.auth.FirebaseAuth
+import id.rackspira.seedisaster.data.network.entity.DataUser
 import id.rackspira.seedisaster.data.network.entity.ListBencana
 import kotlinx.android.synthetic.main.activity_buat_posko.*
 
@@ -80,4 +81,8 @@ class BuatPoskoActivity : AppCompatActivity(), BuatPoskoView {
     }
 
     override fun onFailed(ms: String?) {}
+
+    override fun getDataUser(dataUser: DataUser) {
+
+    }
 }

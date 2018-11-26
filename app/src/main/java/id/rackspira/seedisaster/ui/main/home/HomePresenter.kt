@@ -26,4 +26,16 @@ class HomePresenter(private val view: HomeView) {
                 })
     }
 
+    @SuppressLint("CheckResult")
+    fun getJenisBencana() {
+        apiService.getJenisBencana()
+            .subscribeOn(Schedulers.io())
+            .observeOn(Schedulers.io())
+            .subscribe({list->
+                view.getListJenis(list)
+            }, { error ->
+                view.onError(error.localizedMessage)
+            })
+    }
+
 }

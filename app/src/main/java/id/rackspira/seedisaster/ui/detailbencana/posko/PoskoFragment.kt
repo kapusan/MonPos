@@ -84,6 +84,7 @@ class PoskoFragment : Fragment(), PoskoView {
     override fun onFailedUpdate(msg: String?) {}
 
     override fun getDataPosko(dataPosko: List<DataPosko>) {
+        progressBarFragmentPosko.visibility = View.GONE
         poskoAdapter.addListPosko(dataPosko)
         if (dataPosko.isNotEmpty()) {
             imageviewPoskoKosong.visibility = View.GONE
@@ -102,21 +103,24 @@ class PoskoFragment : Fragment(), PoskoView {
 
     fun setMap() {
 
-        val mapControler = mapViewPosko.controller
-        mapControler.setZoom(6.0)
-        var startPoint = GeoPoint(listBencana.latitude!!, listBencana.longitude!!)
-        mapControler.setCenter(startPoint)
+        if (listBencana.latitude != null && listBencana.longitude != null) {
+            val mapControler = mapViewPosko.controller
+            mapControler.setZoom(6.0)
+            var startPoint = GeoPoint(listBencana.latitude!!, listBencana.longitude!!)
+            mapControler.setCenter(startPoint)
 
-        val startMarker = Marker(mapViewPosko)
-        startMarker.position = startPoint
-        startMarker.setAnchor(Marker.ANCHOR_CENTER, Marker.ANCHOR_BOTTOM)
-        mapViewPosko.overlays.add(startMarker)
+            val startMarker = Marker(mapViewPosko)
+            startMarker.position = startPoint
+            startMarker.setAnchor(Marker.ANCHOR_CENTER, Marker.ANCHOR_BOTTOM)
+            mapViewPosko.overlays.add(startMarker)
 
-        mapViewPosko.invalidate()
+            mapViewPosko.invalidate()
 
-        startMarker.icon = ContextCompat.getDrawable(context!!, R.drawable.ic_lokasi_detail)
-        startMarker.title = listBencana.kejadian
-        startMarker.snippet = listBencana.keterangan
+            startMarker.icon = ContextCompat.getDrawable(context!!, R.drawable.ic_lokasi_detail)
+            startMarker.title = listBencana.kejadian
+            startMarker.snippet = listBencana.keterangan
+
+        }
 
         //compas overlay
         val mCompassOverlay = CompassOverlay(context, InternalCompassOrientationProvider(context), mapViewPosko)
@@ -185,7 +189,7 @@ class PoskoFragment : Fragment(), PoskoView {
         }
 
         dialog.textview_navigasi.setOnClickListener {
-            var gmnIntentUri =
+            val gmnIntentUri =
                 Uri.parse("geo:" + item?.point?.latitude + "," + item?.point?.longitude + "?q=" + list[index].kab)
             val mapIntent = Intent(Intent.ACTION_VIEW, gmnIntentUri)
             mapIntent.setPackage("com.google.android.apps.maps")

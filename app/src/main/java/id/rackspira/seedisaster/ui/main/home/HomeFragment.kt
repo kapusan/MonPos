@@ -1,7 +1,6 @@
 package id.rackspira.seedisaster.ui.main.home
 
 
-import android.app.Activity
 import android.app.Dialog
 import android.content.Intent
 import android.os.Bundle
@@ -15,7 +14,6 @@ import id.rackspira.seedisaster.R
 import id.rackspira.seedisaster.data.network.entity.ListBencana
 import kotlinx.android.synthetic.main.fragment_home.*
 import android.preference.PreferenceManager
-import android.widget.Toast
 import org.osmdroid.config.Configuration
 import org.osmdroid.tileprovider.tilesource.TileSourceFactory
 import org.osmdroid.util.GeoPoint
@@ -25,17 +23,21 @@ import org.osmdroid.views.overlay.compass.CompassOverlay
 import android.graphics.drawable.ColorDrawable
 import android.net.Uri
 import android.view.Window
+import android.widget.AdapterView
+import android.widget.ArrayAdapter
+import id.rackspira.seedisaster.data.network.entity.ListJenisBencana
 import kotlinx.android.synthetic.main.popup_map.*
 import id.rackspira.seedisaster.ui.detailbencana.DetailbencanaActivity
-import kotlinx.android.synthetic.main.fragment_posko.*
-
-
-class HomeFragment : Fragment(), HomeView, View.OnClickListener {
+class HomeFragment : Fragment(), HomeView, View.OnClickListener, AdapterView.OnItemSelectedListener {
 
     private lateinit var presenter: HomePresenter
     private lateinit var adapter: HomeAdapter
     private var isMap: Boolean = false
     private val list: MutableList<ListBencana> = mutableListOf()
+    private val listJnsBencana = arrayOf("Banjir", "Tanah Longsor",
+        "Banjir dan Tanah Longsor", "Gelombang Pasang", "Puting Beliung", "Kekeringan",
+        "Kebakaran Hutan & Lahan", "Gempa Bumi", "Tsunami", "Gempa Bumi & Tsunami", "Letusan Gunung Api", "Kebakaran")
+    private val listJenis: MutableList<ListJenisBencana> = ArrayList()
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val ctx = context
@@ -49,8 +51,7 @@ class HomeFragment : Fragment(), HomeView, View.OnClickListener {
         buttonRetryHome.setOnClickListener(this)
 
         presenter = HomePresenter(this)
-        presenter.getListBencana("ALL", "15")
-
+        presenter.getJenisBencana()
         adapter = HomeAdapter()
         recyclerHome.layoutManager = LinearLayoutManager(context)
         recyclerHome.adapter = adapter
@@ -58,6 +59,21 @@ class HomeFragment : Fragment(), HomeView, View.OnClickListener {
         mapView.setTileSource(TileSourceFactory.MAPNIK)
         mapView.setMultiTouchControls(true)
         mapView.setBuiltInZoomControls(true)
+
+        val aa = ArrayAdapter(context, android.R.layout.simple_spinner_item, listJnsBencana)
+        aa.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+        spinnerHome.adapter = aa
+        spinnerHome.onItemSelectedListener = this
+    }
+
+
+    override fun onNothingSelected(parent: AdapterView<*>?) {}
+
+    override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
+        if (listJenis.size > 0) {
+            presenter.getListBencana(listJenis[position].kode!!, "15")
+            textviewKosong.visibility = View.GONE
+        }
     }
 
     override fun getListBencana(listBencana: List<ListBencana>) {
@@ -65,10 +81,17 @@ class HomeFragment : Fragment(), HomeView, View.OnClickListener {
         adapter.addListBencana(listBencana)
         list.addAll(listBencana)
         setMap()
+
+        if (listBencana.isNotEmpty()) {
+            textviewKosong.visibility = View.GONE
+        } else {
+            textviewKosong.visibility = View.VISIBLE
+        }
+
     }
 
     override fun onError(msg: String?) {
-        buttonRetryHome.visibility = View.VISIBLE
+//        buttonRetryHome.visibility = View.VISIBLE
     }
 
     override fun onClick(v: View?) {
@@ -174,4 +197,8 @@ class HomeFragment : Fragment(), HomeView, View.OnClickListener {
 
     }
 
+    override fun getListJenis(listJenisBencana: List<ListJenisBencana>) {
+        listJenis.addAll(listJenisBencana)
+        presenter.getListBencana(listJenis[0].kode!!, "15")
+    }
 }

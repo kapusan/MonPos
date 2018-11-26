@@ -28,7 +28,6 @@ class InfoFragment : Fragment() {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return inflater.inflate(R.layout.fragment_info, container, false)
-
     }
 
     @SuppressLint("SetTextI18n")
@@ -57,25 +56,28 @@ class InfoFragment : Fragment() {
         val lat = list?.latitude
         val long = list?.longitude
 
-        val mapControler = maps.controller
-        mapControler.setZoom(15.0)
-        var startPoint = GeoPoint(lat!!, long!!)
-        mapControler.setCenter(startPoint)
+        if (lat != null && long != null) {
+            val mapControler = maps.controller
+            mapControler.setZoom(15.0)
+            val startPoint = GeoPoint(lat!!, long!!)
+            mapControler.setCenter(startPoint)
+
+            val startMarker = Marker(maps)
+            startMarker.position = startPoint
+            startMarker.setAnchor(Marker.ANCHOR_CENTER, Marker.ANCHOR_BOTTOM)
+            maps.overlays.add(startMarker)
+
+            maps.invalidate()
+
+            startMarker.icon = ContextCompat.getDrawable(context!!, R.drawable.ic_lokasi_detail)
+            startMarker.title = list?.kejadian
+        }
 
         //compas overlay
         val mCompassOverlay = CompassOverlay(context, InternalCompassOrientationProvider(context), maps)
         mCompassOverlay.enableCompass()
         maps.overlays.add(mCompassOverlay)
 
-        val startMarker = Marker(maps)
-        startMarker.position = startPoint
-        startMarker.setAnchor(Marker.ANCHOR_CENTER, Marker.ANCHOR_BOTTOM)
-        maps.overlays.add(startMarker)
-
-        maps.invalidate()
-
-        startMarker.icon = ContextCompat.getDrawable(context!!, R.drawable.ic_lokasi_detail)
-        startMarker.title = list?.kejadian
 
     }
 }

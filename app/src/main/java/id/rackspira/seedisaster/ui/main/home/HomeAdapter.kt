@@ -26,6 +26,7 @@ class HomeAdapter : RecyclerView.Adapter<HomeAdapter.ViewHolder>() {
     override fun onBindViewHolder(p0: ViewHolder, p1: Int) = p0.bind(list[p1])
 
     internal fun addListBencana(bencana: List<ListBencana>) {
+        this.list.clear()
         this.list.addAll(bencana)
         notifyDataSetChanged()
     }

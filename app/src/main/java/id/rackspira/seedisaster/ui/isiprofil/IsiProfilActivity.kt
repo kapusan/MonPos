@@ -1,13 +1,17 @@
 package id.rackspira.seedisaster.ui.isiprofil
 
+import android.app.DatePickerDialog
 import android.content.Intent
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
+import android.support.v7.app.AlertDialog
 import id.rackspira.seedisaster.R
 import kotlinx.android.synthetic.main.activity_isi_profil.*
 import com.google.firebase.storage.StorageReference
 import com.google.firebase.storage.FirebaseStorage
 import id.rackspira.seedisaster.ui.main.MainActivity
+import java.util.*
+import javax.xml.datatype.DatatypeConstants.MONTHS
 
 class IsiProfilActivity : AppCompatActivity(), IsiProfilView {
 
@@ -26,6 +30,20 @@ class IsiProfilActivity : AppCompatActivity(), IsiProfilView {
         val telp = intent.getStringExtra("no")
         if (telp.isNotEmpty()) {
             edtNoTelefon.setText(telp)
+        }
+
+        edtTglLahir.setOnClickListener {
+            val c = Calendar.getInstance()
+            val year = c.get(Calendar.YEAR)
+            val month = c.get(Calendar.MONTH)
+            val day = c.get(Calendar.DAY_OF_MONTH)
+
+
+            val dpd = DatePickerDialog(this ,DatePickerDialog.OnDateSetListener { view, year, monthOfYear, dayOfMonth ->
+                // Display Selected date in textbox
+                edtTglLahir.setText("" + dayOfMonth + "" + monthOfYear+1 +""+ year)
+            }, year, month, day)
+            dpd.show()
         }
 
         btnSimpan.setOnClickListener {

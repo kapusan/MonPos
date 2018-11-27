@@ -3,18 +3,15 @@ package id.rackspira.seedisaster.ui.login.verifikasikode
 import android.content.Intent
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import com.google.firebase.FirebaseException
 import com.google.firebase.FirebaseTooManyRequestsException
 import com.google.firebase.auth.*
 import id.rackspira.seedisaster.R
-import id.rackspira.seedisaster.ui.main.MainActivity
 import kotlinx.android.synthetic.main.activity_verifikasi.*
 import java.util.concurrent.TimeUnit
 import com.google.firebase.auth.FirebaseAuth
 import id.rackspira.seedisaster.ui.isiprofil.IsiProfilActivity
-import kotlinx.android.synthetic.main.activity_buat_posko.*
 
 
 class VerifikasiActivity : AppCompatActivity() {
@@ -43,7 +40,6 @@ class VerifikasiActivity : AppCompatActivity() {
                 if (e is FirebaseAuthInvalidCredentialsException) {
                 } else if (e is FirebaseTooManyRequestsException) {
                 }
-
             }
 
             override fun onCodeSent(

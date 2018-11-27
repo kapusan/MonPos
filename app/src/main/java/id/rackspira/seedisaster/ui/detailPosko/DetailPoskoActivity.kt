@@ -16,6 +16,7 @@ import com.squareup.picasso.Picasso
 import id.rackspira.seedisaster.R
 import id.rackspira.seedisaster.data.network.entity.DataJumlahPengungsi
 import id.rackspira.seedisaster.data.network.entity.DataPosko
+import id.rackspira.seedisaster.data.network.entity.DataUser
 import id.rackspira.seedisaster.data.network.entity.KebPosko
 import kotlinx.android.synthetic.main.activity_detail_posko.*
 
@@ -36,6 +37,7 @@ class DetailPoskoActivity : AppCompatActivity(), DetailPoskoView {
 
 
         list = intent.getParcelableExtra("posko")
+        setUp()
 
         val myStrings = arrayOf("Sandang", "Pangan", "Kesehatan", "Sanitasi", "Tempat Huni", "Relawan")
         val myStrings2 = arrayOf("Paket", "Buah", "Liter", "Rupiah", "Orang")
@@ -100,8 +102,6 @@ class DetailPoskoActivity : AppCompatActivity(), DetailPoskoView {
             }
             cancelButton.setOnClickListener { dialog.dismiss() }
             dialog.show()
-
-            setUp()
         }
 
         backDetailPosko.setOnClickListener {

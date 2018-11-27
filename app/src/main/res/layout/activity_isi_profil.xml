@@ -91,7 +91,7 @@
             android:id="@+id/edtJenisKel"
             android:layout_width="match_parent"
             android:layout_height="50dp"
-            android:maxLength="2"
+            android:maxLength="1"
             android:hint="Jenis kelamin (L/P)"
             android:paddingStart="20dp"
             android:inputType="text"

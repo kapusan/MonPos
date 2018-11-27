@@ -1,6 +1,7 @@
 package id.rackspira.seedisaster.ui.detailPosko
 
 import id.rackspira.seedisaster.data.network.entity.DataJumlahPengungsi
+import id.rackspira.seedisaster.data.network.entity.DataUser
 import id.rackspira.seedisaster.data.network.entity.KebPosko
 
 
@@ -19,5 +20,6 @@ interface DetailPoskoView {
     fun getUpdateDataKebutuhan(dataKebutuhan: List<KebPosko>)
 
     fun getJumlahPengungsu(dataJumlahPengungsi: DataJumlahPengungsi)
+
 
 }

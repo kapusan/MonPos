@@ -30,9 +30,9 @@ class IsiProfilActivity : AppCompatActivity(), IsiProfilView {
         presenter = IsiProfilPresenter(this)
 
         val telp = intent.getStringExtra("no")
-//        if (telp.isNotEmpty()) {
-//            edtNoTelefon.setText(telp)
-//        }
+        if (telp.isNotEmpty()) {
+            edtNoTelefon.setText(telp)
+        }
 
         edtTglLahir.setOnClickListener {
             val c = Calendar.getInstance()
@@ -43,7 +43,7 @@ class IsiProfilActivity : AppCompatActivity(), IsiProfilView {
 
             val dpd = DatePickerDialog(this ,DatePickerDialog.OnDateSetListener { view, year, monthOfYear, dayOfMonth ->
                 // Display Selected date in textbox
-                edtTglLahir.setText("" + dayOfMonth + "" + monthOfYear+1 +""+ year)
+                edtTglLahir.setText("" + dayOfMonth + "-" + (monthOfYear+1) +"-"+ year)
             }, year, month, day)
             dpd.show()
         }
@@ -55,7 +55,6 @@ class IsiProfilActivity : AppCompatActivity(), IsiProfilView {
             else if (edtNoTelefon.text.toString().isEmpty()) run { errorInfo.visibility = View.VISIBLE  }
             else{
                 presenter.createProfil(edtNama.text.toString(), edtJenisKel.text.toString(), edtNoTelefon.text.toString(),edtTglLahir.text.toString())
-
             }
         }
 
@@ -63,6 +62,7 @@ class IsiProfilActivity : AppCompatActivity(), IsiProfilView {
 
     override fun onSuccess(msg: String?) {
         startActivity(Intent(this, MainActivity::class.java))
+        finish()
     }
 
     override fun onFailed(ms: String?) {}

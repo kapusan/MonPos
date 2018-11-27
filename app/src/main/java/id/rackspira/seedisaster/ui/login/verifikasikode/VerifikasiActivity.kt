@@ -79,6 +79,7 @@ class VerifikasiActivity : AppCompatActivity() {
                 val intent = Intent(this, IsiProfilActivity::class.java)
                 intent.putExtra("no", telp)
                 startActivity(intent)
+                finish()
             } else {
                 if (task.exception is FirebaseAuthInvalidCredentialsException) {
 

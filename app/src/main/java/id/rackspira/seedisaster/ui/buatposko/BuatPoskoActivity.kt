@@ -36,7 +36,7 @@ class BuatPoskoActivity : AppCompatActivity(), BuatPoskoView {
         mAuth = FirebaseAuth.getInstance()
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(this)
 
-//        presenter.getUser()
+        presenter.getUser()
 
         val dataPosko = intent.getParcelableExtra<ListBencana>("data")
         Log.d("idbencana", dataPosko.kib)
@@ -71,22 +71,20 @@ class BuatPoskoActivity : AppCompatActivity(), BuatPoskoView {
                     .addOnSuccessListener { location: Location? ->
                         latitude = location?.latitude
                         longitude = location?.longitude
-
-                        if (latitude.toString().isEmpty()) run { Log.d("lokasi","lokasi") }
-                        else if (latitude.toString().isEmpty()) run { Log.d("lokasi","lokasi")}
-                        else if (edittextDesa.text.toString().isEmpty()) run { edittextDesa.error = "Data Kosong" }
-                        else if (edittextKec.text.toString().isEmpty()) run { edittextKec.error = "Data kosong" }
-                        else if (textviewKab.text.toString().isEmpty()) run { textviewKab.error = "Data kosong" }
-                        else if (edittextNamaPosko.text.toString().isEmpty()) run { edittextNamaPosko.error = "Data kosong" }
-                        else if (editTextProv.text.toString().isEmpty()) run { editTextProv.error = "Data kosong" }
-                        else{
-                            presenter.tambahPosko(
-                                dataPosko.kib.toString(), mAuth.currentUser!!.uid, edittextNamaPosko.text.toString(),
-                                latitude.toString(), longitude.toString(),telefon.toString(), edittextDesa.text.toString(), edittextKec.text.toString(), textviewKab.text.toString(), editTextProv.text.toString(), namaPenangungjawab.toString()
-                            )
-
-                        }
-
+                        presenter.tambahPosko(
+                            dataPosko.kib.toString(),
+                            mAuth.currentUser!!.uid,
+                            edittextNamaPosko.text.toString(),
+                            latitude.toString(),
+                            longitude.toString(),
+                            telefon.toString(),
+                            edittextDesa.text.toString(),
+                            edittextKec.text.toString(),
+                            textviewKab.text.toString(),
+                            editTextProv.text.toString(),
+                            namaPenangungjawab.toString()
+                        )
+                        finish()
                     }
             } else {
                 ActivityCompat.requestPermissions(this, permissions, 0)

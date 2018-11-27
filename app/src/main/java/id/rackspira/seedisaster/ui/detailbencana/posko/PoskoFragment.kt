@@ -97,7 +97,11 @@ class PoskoFragment : Fragment(), PoskoView {
             textviewBlmAda2.visibility = View.VISIBLE
             fabMaps.visibility = View.GONE
         }
-        list.addAll(dataPosko)
+        for (data in dataPosko) {
+            if (data.lat != null && data.long != null) {
+                list.add(data)
+            }
+        }
         setMap()
     }
 
@@ -130,7 +134,7 @@ class PoskoFragment : Fragment(), PoskoView {
         addMapMarker()
     }
 
-     fun addMapMarker() {
+    fun addMapMarker() {
         val items = ArrayList<OverlayItem>()
 
         for (listtempat in list) {

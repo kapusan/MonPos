@@ -1,16 +1,19 @@
 package id.rackspira.seedisaster.ui.detailPosko
 
 import android.util.Log
+import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
 import id.rackspira.seedisaster.data.network.entity.DataJumlahPengungsi
+import id.rackspira.seedisaster.data.network.entity.DataUser
 import id.rackspira.seedisaster.data.network.entity.KebPosko
 
 class DetailPoskoPresenter(private val view: DetailPoskoView) {
 
     private val dataRef = FirebaseDatabase.getInstance().reference
+    private val mAuth = FirebaseAuth.getInstance()
 
     fun tambahKebutuhan(
         idBencana: String, idPosko: String, namaKeb: String, jumlahKeb: String,
@@ -129,5 +132,6 @@ class DetailPoskoPresenter(private val view: DetailPoskoView) {
             }
         })
     }
+
 
 }

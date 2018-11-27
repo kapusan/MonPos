@@ -67,25 +67,34 @@ class BuatPoskoActivity : AppCompatActivity(), BuatPoskoView {
                     Manifest.permission.ACCESS_FINE_LOCATION
                 ) == PackageManager.PERMISSION_GRANTED
             ) {
-                fusedLocationClient.lastLocation
-                    .addOnSuccessListener { location: Location? ->
-                        latitude = location?.latitude
-                        longitude = location?.longitude
-                        presenter.tambahPosko(
-                            dataPosko.kib.toString(),
-                            mAuth.currentUser!!.uid,
-                            edittextNamaPosko.text.toString(),
-                            latitude.toString(),
-                            longitude.toString(),
-                            telefon.toString(),
-                            edittextDesa.text.toString(),
-                            edittextKec.text.toString(),
-                            textviewKab.text.toString(),
-                            editTextProv.text.toString(),
-                            namaPenangungjawab.toString()
-                        )
-                        finish()
-                    }
+                if (edittextNamaPosko.text!!.isEmpty() || edittextDesa.text!!.isEmpty() || edittextKec.text!!.isEmpty() || textviewKab.text!!.isEmpty() || editTextProv.text!!.isEmpty()) {
+                    Toast.makeText(this, "Inputan belum lengkap", Toast.LENGTH_LONG).show()
+                } else {
+                    fusedLocationClient.lastLocation
+                        .addOnSuccessListener { location: Location? ->
+                            latitude = location?.latitude
+                            longitude = location?.longitude
+                            if (latitude == null || longitude == null) {
+                                Toast.makeText(this, "Gagal mendapat lokasi mohon tunggu sebentar", Toast.LENGTH_LONG).show()
+                            } else {
+                                presenter.tambahPosko(
+                                    dataPosko.kib.toString(),
+                                    mAuth.currentUser!!.uid,
+                                    edittextNamaPosko.text.toString(),
+                                    latitude.toString(),
+                                    longitude.toString(),
+                                    telefon.toString(),
+                                    edittextDesa.text.toString(),
+                                    edittextKec.text.toString(),
+                                    textviewKab.text.toString(),
+                                    editTextProv.text.toString(),
+                                    namaPenangungjawab.toString()
+                                )
+                                finish()
+                            }
+
+                        }
+                }
             } else {
                 ActivityCompat.requestPermissions(this, permissions, 0)
             }

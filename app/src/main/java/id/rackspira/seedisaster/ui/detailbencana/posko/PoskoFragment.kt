@@ -98,7 +98,7 @@ class PoskoFragment : Fragment(), PoskoView {
             fabMaps.visibility = View.GONE
         }
         for (data in dataPosko) {
-            if (data.lat != null && data.long != null) {
+            if (!data.lat.equals("null") && !data.long.equals("null")) {
                 list.add(data)
             }
         }

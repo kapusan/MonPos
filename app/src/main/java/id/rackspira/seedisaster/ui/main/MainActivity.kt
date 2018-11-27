@@ -1,12 +1,18 @@
 package id.rackspira.seedisaster.ui.main
 
+import android.Manifest
+import android.content.pm.PackageManager
+import android.location.Location
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.support.design.widget.NavigationView
 import android.support.v4.app.Fragment
+import android.support.v4.content.ContextCompat
 import android.support.v7.app.ActionBarDrawerToggle
 import android.view.Gravity
 import android.view.MenuItem
+import com.google.android.gms.location.FusedLocationProviderClient
+import com.google.android.gms.location.LocationServices
 import id.rackspira.seedisaster.R
 import id.rackspira.seedisaster.ui.main.home.HomeFragment
 import id.rackspira.seedisaster.ui.main.infoglobal.GlobalFragment
@@ -23,11 +29,21 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
     private val petaFragment = PetaBencanaFragment()
     private val poskoSaya = PoskoSayaFragment()
     private val tentangApps = TentangFragment()
+    private lateinit var fusedLocationClient: FusedLocationProviderClient
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         setUp()
+        fusedLocationClient = LocationServices.getFusedLocationProviderClient(this)
+        if (ContextCompat.checkSelfPermission(
+                this,
+                Manifest.permission.ACCESS_FINE_LOCATION
+            ) == PackageManager.PERMISSION_GRANTED
+        ) {
+            fusedLocationClient.lastLocation
+        }
+
     }
 
     private fun setUp() {

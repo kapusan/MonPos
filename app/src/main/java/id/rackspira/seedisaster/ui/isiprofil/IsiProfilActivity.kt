@@ -5,11 +5,13 @@ import android.content.Intent
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.support.v7.app.AlertDialog
+import android.view.View
 import id.rackspira.seedisaster.R
 import kotlinx.android.synthetic.main.activity_isi_profil.*
 import com.google.firebase.storage.StorageReference
 import com.google.firebase.storage.FirebaseStorage
 import id.rackspira.seedisaster.ui.main.MainActivity
+import kotlinx.android.synthetic.main.activity_detail_posko.*
 import java.util.*
 import javax.xml.datatype.DatatypeConstants.MONTHS
 
@@ -28,9 +30,9 @@ class IsiProfilActivity : AppCompatActivity(), IsiProfilView {
         presenter = IsiProfilPresenter(this)
 
         val telp = intent.getStringExtra("no")
-        if (telp.isNotEmpty()) {
-            edtNoTelefon.setText(telp)
-        }
+//        if (telp.isNotEmpty()) {
+//            edtNoTelefon.setText(telp)
+//        }
 
         edtTglLahir.setOnClickListener {
             val c = Calendar.getInstance()
@@ -47,7 +49,14 @@ class IsiProfilActivity : AppCompatActivity(), IsiProfilView {
         }
 
         btnSimpan.setOnClickListener {
-            presenter.createProfil(edtNama.text.toString(), edtJenisKel.text.toString(), edtNoTelefon.text.toString(),edtTglLahir.text.toString())
+            if (edtNama.text.toString().isEmpty()) run { errorInfo.visibility = View.VISIBLE }
+            else if (edtJenisKel.text.toString().isEmpty()) run { errorInfo.visibility = View.VISIBLE  }
+            else if (edtTglLahir.text.toString().isEmpty()) run { errorInfo.visibility = View.VISIBLE  }
+            else if (edtNoTelefon.text.toString().isEmpty()) run { errorInfo.visibility = View.VISIBLE  }
+            else{
+                presenter.createProfil(edtNama.text.toString(), edtJenisKel.text.toString(), edtNoTelefon.text.toString(),edtTglLahir.text.toString())
+
+            }
         }
 
     }

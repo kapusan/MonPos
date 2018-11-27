@@ -25,6 +25,8 @@ class BuatPoskoActivity : AppCompatActivity(), BuatPoskoView {
     private lateinit var mAuth: FirebaseAuth
     private var latitude: Double? = null
     private var longitude: Double? = null
+    private var telefon: String? = null
+    private var namaPenangungjawab: String? = null
     private lateinit var fusedLocationClient: FusedLocationProviderClient
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -33,6 +35,8 @@ class BuatPoskoActivity : AppCompatActivity(), BuatPoskoView {
         presenter = BuatPoskoPresenter(this)
         mAuth = FirebaseAuth.getInstance()
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(this)
+
+//        presenter.getUser()
 
         val dataPosko = intent.getParcelableExtra<ListBencana>("data")
         Log.d("idbencana", dataPosko.kib)
@@ -51,6 +55,9 @@ class BuatPoskoActivity : AppCompatActivity(), BuatPoskoView {
                     longitude = location?.longitude
                 }
         }
+        backBuatPosko.setOnClickListener {
+            finish()
+        }
 
         buttonSimpan.setOnClickListener {
             if (!manager.isProviderEnabled(LocationManager.GPS_PROVIDER)) {
@@ -64,10 +71,22 @@ class BuatPoskoActivity : AppCompatActivity(), BuatPoskoView {
                     .addOnSuccessListener { location: Location? ->
                         latitude = location?.latitude
                         longitude = location?.longitude
-                        presenter.tambahPosko(
-                            dataPosko.kib.toString(), mAuth.currentUser!!.uid, edittextNamaPosko.text.toString(),
-                            latitude.toString(), longitude.toString(), "no telp", "887686", "", "", "", ""
-                        )
+
+                        if (latitude.toString().isEmpty()) run { Log.d("lokasi","lokasi") }
+                        else if (latitude.toString().isEmpty()) run { Log.d("lokasi","lokasi")}
+                        else if (edittextDesa.text.toString().isEmpty()) run { edittextDesa.error = "Data Kosong" }
+                        else if (edittextKec.text.toString().isEmpty()) run { edittextKec.error = "Data kosong" }
+                        else if (textviewKab.text.toString().isEmpty()) run { textviewKab.error = "Data kosong" }
+                        else if (edittextNamaPosko.text.toString().isEmpty()) run { edittextNamaPosko.error = "Data kosong" }
+                        else if (editTextProv.text.toString().isEmpty()) run { editTextProv.error = "Data kosong" }
+                        else{
+                            presenter.tambahPosko(
+                                dataPosko.kib.toString(), mAuth.currentUser!!.uid, edittextNamaPosko.text.toString(),
+                                latitude.toString(), longitude.toString(),telefon.toString(), edittextDesa.text.toString(), edittextKec.text.toString(), textviewKab.text.toString(), editTextProv.text.toString(), namaPenangungjawab.toString()
+                            )
+
+                        }
+
                     }
             } else {
                 ActivityCompat.requestPermissions(this, permissions, 0)
@@ -83,6 +102,10 @@ class BuatPoskoActivity : AppCompatActivity(), BuatPoskoView {
     override fun onFailed(ms: String?) {}
 
     override fun getDataUser(dataUser: DataUser) {
+        Log.d("telefonAnda", dataUser.noTp.toString())
+        telefon = dataUser.noTp.toString()
+        namaPenangungjawab = dataUser.nama.toString()
+
 
     }
 }

@@ -33,9 +33,6 @@ class InfoFragment : Fragment() {
     @SuppressLint("SetTextI18n")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        imageView3.setOnClickListener {
-            context?.startActivity(Intent(context, DetailPoskoActivity::class.java))
-        }
 
         list = arguments!!.getParcelable("posisi")
 

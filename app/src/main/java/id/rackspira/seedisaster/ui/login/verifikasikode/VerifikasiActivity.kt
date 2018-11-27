@@ -3,6 +3,7 @@ package id.rackspira.seedisaster.ui.login.verifikasikode
 import android.content.Intent
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import com.google.firebase.FirebaseException
 import com.google.firebase.FirebaseTooManyRequestsException
@@ -13,6 +14,7 @@ import kotlinx.android.synthetic.main.activity_verifikasi.*
 import java.util.concurrent.TimeUnit
 import com.google.firebase.auth.FirebaseAuth
 import id.rackspira.seedisaster.ui.isiprofil.IsiProfilActivity
+import kotlinx.android.synthetic.main.activity_buat_posko.*
 
 
 class VerifikasiActivity : AppCompatActivity() {
@@ -63,10 +65,12 @@ class VerifikasiActivity : AppCompatActivity() {
         )
 
         buttonLogin.setOnClickListener {
-            progressbarVerifikasi.visibility = View.VISIBLE
-            verifyPhoneNumberWithCode(mVerificationId!!, edittextKode.text.toString())
+            if (edittextKode.text.toString().isEmpty()) run {edittextKode.error = "Data Kosong" }
+            else {
+                progressbarVerifikasi.visibility = View.VISIBLE
+                verifyPhoneNumberWithCode(mVerificationId!!, edittextKode.text.toString())
+            }
         }
-
     }
 
     fun signInWithPhoneAuthCredential(credential: PhoneAuthCredential) {

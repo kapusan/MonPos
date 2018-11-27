@@ -19,86 +19,161 @@
             android:id="@+id/toolbarPoskoBaru"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:theme="@style/Base.ThemeOverlay.AppCompat.Dark.ActionBar"
-            app:title="Posko baru">
+            android:theme="@style/Base.ThemeOverlay.AppCompat.Dark.ActionBar">
+
+        <ImageView
+                android:id="@+id/backBuatPosko"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:src="@drawable/ic_arrow_back_black_24dp"/>
+
+        <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:text="Buat Posko"
+                android:paddingStart="15dp"
+                android:textColor="@color/white"
+                android:textSize="20dp"
+                android:textStyle="bold"
+                android:paddingLeft="10dp"/>
+
     </android.support.v7.widget.Toolbar>
 
     <android.support.design.widget.TextInputEditText
             android:id="@+id/edittextNamaPosko"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:background="@drawable/bg_line_grey"
-            android:layout_marginTop="24dp"
-            android:layout_marginLeft="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="45dp"
+            android:background="@drawable/bg_input_data2"
+            android:layout_marginLeft="8dp"
+            android:layout_marginTop="20dp"
             android:padding="10dp"
+            android:paddingStart="20dp"
+            android:paddingLeft="20dp"
             android:maxLines="1"
             android:textSize="16dp"
             android:inputType="text"
             android:hint="@string/nama_posko"
-            android:layout_marginStart="10dp"
+            android:layout_marginStart="28dp"
             android:layout_marginEnd="28dp"
             android:layout_marginRight="28dp"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@id/imageviewStatic1"
-            app:layout_constraintTop_toBottomOf="@id/imageViewStatic"/>
+            app:layout_constraintTop_toBottomOf="@+id/textViewinfo"
+            app:layout_constraintStart_toStartOf="parent"/>
 
-    <ImageView
-            android:id="@+id/imageviewStatic1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="28dp"
-            android:layout_marginLeft="28dp"
-            android:layout_marginRight="0dp"
-            android:layout_marginEnd="0dp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintBottom_toBottomOf="@id/edittextNamaPosko"
-            app:layout_constraintTop_toTopOf="@id/edittextNamaPosko"
-            android:src="@drawable/icoon_tenda_buat_posko"/>
 
-    <TextView
-            android:id="@+id/textviewLokasi"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:background="@drawable/bg_line_grey"
-            android:layout_marginTop="24dp"
-            android:layout_marginLeft="10dp"
-            android:layout_marginStart="10dp"
-            android:layout_marginEnd="28dp"
-            android:layout_marginRight="28dp"
-            tools:text="Karanganyar"
+    <android.support.design.widget.TextInputEditText
+            android:id="@+id/edittextDesa"
+            android:layout_width="match_parent"
+            android:layout_height="45dp"
+            android:background="@drawable/bg_input_data2"
+            android:hint="Desa"
             android:textSize="16sp"
             android:maxLines="1"
             android:padding="10dp"
+            android:paddingStart="20dp"
+            android:paddingLeft="20dp"
+            android:layout_marginTop="8dp"
+            app:layout_constraintTop_toBottomOf="@+id/edittextNamaPosko"
+            android:layout_marginEnd="28dp"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@id/imageviewStatic1"
-            app:layout_constraintTop_toBottomOf="@id/edittextNamaPosko"/>
-
-    <ImageView
-            android:id="@+id/imageviewStatic2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_marginRight="28dp"
             android:layout_marginStart="28dp"
             android:layout_marginLeft="28dp"
-            android:layout_marginRight="0dp"
-            android:layout_marginEnd="0dp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintBottom_toBottomOf="@id/textviewLokasi"
-            app:layout_constraintTop_toTopOf="@id/textviewLokasi"
-            android:src="@drawable/icon_location_buat_posko"/>
+            app:layout_constraintStart_toStartOf="parent"/>
 
-    <Button
-            android:id="@+id/buttonSimpan"
-            android:layout_width="80dp"
+    <android.support.design.widget.TextInputEditText
+            android:id="@+id/edittextKec"
+            android:layout_width="match_parent"
+            android:layout_height="45dp"
+            android:background="@drawable/bg_input_data2"
+            android:hint="Kecamatan"
+            android:textSize="16sp"
+            android:maxLines="1"
+            android:padding="10dp"
+            android:paddingStart="20dp"
+            android:paddingLeft="20dp"
+            android:layout_marginTop="8dp"
+            app:layout_constraintTop_toBottomOf="@+id/edittextDesa"
+            android:layout_marginEnd="28dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginRight="28dp"
+            android:layout_marginStart="28dp"
+            android:layout_marginLeft="28dp"
+            app:layout_constraintStart_toStartOf="parent"/>
+
+    <android.support.design.widget.TextInputEditText
+            android:id="@+id/textviewKab"
+            android:layout_width="match_parent"
+            android:layout_height="45dp"
+            android:background="@drawable/bg_input_data2"
+            android:hint="Kabupaten"
+            android:textSize="16sp"
+            android:maxLines="1"
+            android:padding="10dp"
+            android:paddingStart="20dp"
+            android:paddingLeft="20dp"
+            android:layout_marginTop="8dp"
+            app:layout_constraintTop_toBottomOf="@+id/edittextKec"
+            android:layout_marginEnd="28dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginRight="28dp"
+            android:layout_marginStart="28dp"
+            android:layout_marginLeft="28dp"
+            app:layout_constraintStart_toStartOf="parent"/>
+
+    <android.support.design.widget.TextInputEditText
+            android:id="@+id/editTextProv"
+            android:layout_width="match_parent"
+            android:layout_height="45dp"
+            android:background="@drawable/bg_input_data2"
+            android:hint="Provinsi"
+            android:textSize="16sp"
+            android:maxLines="1"
+            android:padding="10dp"
+            android:paddingStart="20dp"
+            android:paddingLeft="20dp"
+            android:layout_marginTop="8dp"
+            app:layout_constraintTop_toBottomOf="@+id/textviewKab"
+            android:layout_marginEnd="28dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginRight="28dp"
+            android:layout_marginStart="28dp"
+            android:layout_marginLeft="28dp"
+            app:layout_constraintStart_toStartOf="parent"/>
+
+    <TextView
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginRight="40dp"
-            android:layout_marginLeft="40dp"
-            android:layout_marginStart="40dp"
-            android:layout_marginEnd="40dp"
-            android:layout_marginBottom="50dp"
+            android:textSize="16sp"
+            android:textStyle="italic"
+            android:text="Nyalakan Lokasi Anda, karena lokasi anda sekarang adalah lokasi posko"
+            android:textColor="#EE0000"
+            android:layout_marginEnd="28dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginRight="28dp"
+            android:layout_marginStart="28dp"
+            app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginLeft="28dp"
+            app:layout_constraintTop_toBottomOf="@+id/imageViewStatic"
+            android:id="@+id/textViewinfo"
+            android:layout_marginTop="18dp"/>
+
+    <TextView
+            android:id="@+id/buttonSimpan"
+            android:layout_width="match_parent"
+            android:layout_height="45dp"
+            android:gravity="center"
+            android:layout_marginRight="8dp"
+            android:layout_marginStart="28dp"
+            android:layout_marginLeft="28dp"
+            android:layout_marginTop="1dp"
             android:text="@string/simpan"
             android:textColor="#34c2a1"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
-            android:background="@android:color/white"/>
+            android:background="@drawable/bg_input_data2"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/editTextProv"
+            android:layout_marginEnd="28dp"/>
 
 </android.support.constraint.ConstraintLayout>

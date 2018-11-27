@@ -7,14 +7,12 @@ import android.support.v4.app.Fragment
 import android.support.v7.app.ActionBarDrawerToggle
 import android.view.Gravity
 import android.view.MenuItem
-import com.google.firebase.database.DatabaseReference
-import com.google.firebase.database.FirebaseDatabase
 import id.rackspira.seedisaster.R
-import id.rackspira.seedisaster.data.network.entity.DataPosko
 import id.rackspira.seedisaster.ui.main.home.HomeFragment
 import id.rackspira.seedisaster.ui.main.infoglobal.GlobalFragment
 import id.rackspira.seedisaster.ui.main.petabencana.PetaBencanaFragment
 import id.rackspira.seedisaster.ui.main.posko.PoskoSayaFragment
+import id.rackspira.seedisaster.ui.tentang.TentangFragment
 import kotlinx.android.synthetic.main.activity_main.*
 
 
@@ -24,6 +22,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
     private val globalFragment = GlobalFragment()
     private val petaFragment = PetaBencanaFragment()
     private val poskoSaya = PoskoSayaFragment()
+    private val tentangApps = TentangFragment()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -56,6 +55,10 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
             }
             R.id.posko -> {
                 setFragment(poskoSaya)
+                drawerLayout.closeDrawer(Gravity.START)
+            }
+            R.id.tentang -> {
+                setFragment(tentangApps)
                 drawerLayout.closeDrawer(Gravity.START)
             }
         }

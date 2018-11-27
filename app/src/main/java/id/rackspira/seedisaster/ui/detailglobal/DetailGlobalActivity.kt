@@ -22,6 +22,7 @@ class DetailGlobalActivity : AppCompatActivity(), DetailGlobalView {
 
     override fun getDetail(field: Fields) {
         textviewDetailBencana.text = field.description
+        textviewJudul.text = field.name
     }
 
     override fun onError(msg: String) {

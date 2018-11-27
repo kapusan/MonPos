@@ -11,6 +11,7 @@ import android.util.Log
 import android.view.View
 import android.view.Window
 import android.widget.*
+import com.google.firebase.auth.FirebaseAuth
 import com.squareup.picasso.Picasso
 import id.rackspira.seedisaster.R
 import id.rackspira.seedisaster.data.network.entity.DataJumlahPengungsi
@@ -21,6 +22,7 @@ import kotlinx.android.synthetic.main.activity_detail_posko.*
 
 class DetailPoskoActivity : AppCompatActivity(), DetailPoskoView {
 
+    private val mAuth: FirebaseAuth = FirebaseAuth.getInstance()
     private lateinit var list: DataPosko
     private lateinit var kebutuhanAdapter: KebutuhanAdapter
     private lateinit var updateKebutuhanAdapter: UpdateKebutuhanAdapter
@@ -37,6 +39,16 @@ class DetailPoskoActivity : AppCompatActivity(), DetailPoskoView {
 
         val myStrings = arrayOf("Sandang", "Pangan", "Kesehatan", "Sanitasi", "Tempat Huni", "Relawan")
         val myStrings2 = arrayOf("Paket", "Buah", "Liter", "Rupiah", "Orang")
+
+        System.out.print(mAuth.uid.toString())
+        if (mAuth.uid.toString() != list.uidUsr.toString())
+        {
+            tambahPengungsi.visibility = View.GONE
+            tambahKebutuhan.visibility = View.GONE
+        }else{
+            tambahPengungsi.visibility = View.VISIBLE
+            tambahKebutuhan.visibility = View.VISIBLE
+        }
 
         tambahKebutuhan.setOnClickListener {
             val dialog = Dialog(this)
@@ -90,6 +102,10 @@ class DetailPoskoActivity : AppCompatActivity(), DetailPoskoView {
             dialog.show()
 
             setUp()
+        }
+
+        backDetailPosko.setOnClickListener {
+            finish()
         }
 
         tambahPengungsi.setOnClickListener{
@@ -181,6 +197,12 @@ class DetailPoskoActivity : AppCompatActivity(), DetailPoskoView {
             Log.d("anangkentot2",list.idBencana)
             Log.d("anangkentot2",list.idBencana)
 
+            if (mAuth.uid.toString() != list.uidUsr.toString()) {
+                clickUpdate.visibility = View.GONE
+            }else{
+                clickUpdate.visibility = View.VISIBLE
+            }
+
             clickUpdate.setOnClickListener {
                 presenter.getUpdateKebutuhan(
                     list.idBencana.toString(), list.idPosko.toString(), "Sandang"
@@ -234,6 +256,12 @@ class DetailPoskoActivity : AppCompatActivity(), DetailPoskoView {
 
             Log.d("anangkentot2",list.idBencana)
             Log.d("anangkentot2",list.idBencana)
+
+            if (mAuth.uid.toString() != list.uidUsr.toString()) {
+                clickUpdate.visibility = View.GONE
+            }else{
+                clickUpdate.visibility = View.VISIBLE
+            }
 
             clickUpdate.setOnClickListener {
                 presenter.getUpdateKebutuhan(
@@ -290,6 +318,12 @@ class DetailPoskoActivity : AppCompatActivity(), DetailPoskoView {
             Log.d("anangkentot2",list.idBencana)
             Log.d("anangkentot2",list.idBencana)
 
+            if (mAuth.uid.toString() != list.uidUsr.toString()) {
+                clickUpdate.visibility = View.GONE
+            }else{
+                clickUpdate.visibility = View.VISIBLE
+            }
+
             clickUpdate.setOnClickListener {
                 presenter.getUpdateKebutuhan(
                     list.idBencana.toString(), list.idPosko.toString(), "Kesehatan"
@@ -344,6 +378,12 @@ class DetailPoskoActivity : AppCompatActivity(), DetailPoskoView {
             Log.d("anangkentot2",list.idBencana)
             Log.d("anangkentot2",list.idBencana)
 
+            if (mAuth.uid.toString() != list.uidUsr.toString()) {
+                clickUpdate.visibility = View.GONE
+            }else{
+                clickUpdate.visibility = View.VISIBLE
+            }
+
             clickUpdate.setOnClickListener {
                 presenter.getUpdateKebutuhan(
                     list.idBencana.toString(), list.idPosko.toString(), "Sanitasi"
@@ -397,6 +437,12 @@ class DetailPoskoActivity : AppCompatActivity(), DetailPoskoView {
             Log.d("anangkentot2",list.idBencana)
             Log.d("anangkentot2",list.idBencana)
 
+            if (mAuth.uid.toString() != list.uidUsr.toString()) {
+                clickUpdate.visibility = View.GONE
+            }else{
+                clickUpdate.visibility = View.VISIBLE
+            }
+
             clickUpdate.setOnClickListener {
                 presenter.getUpdateKebutuhan(
                     list.idBencana.toString(), list.idPosko.toString(), "Tempat Huni"
@@ -449,6 +495,12 @@ class DetailPoskoActivity : AppCompatActivity(), DetailPoskoView {
 
             Log.d("anangkentot2",list.idBencana)
             Log.d("anangkentot2",list.idBencana)
+
+            if (mAuth.uid.toString() != list.uidUsr.toString()) {
+                clickUpdate.visibility = View.GONE
+            }else{
+                clickUpdate.visibility = View.VISIBLE
+            }
 
             clickUpdate.setOnClickListener {
                 presenter.getUpdateKebutuhan(

@@ -78,6 +78,7 @@ class HomeFragment : Fragment(), HomeView, View.OnClickListener, AdapterView.OnI
 
     override fun getListBencana(listBencana: List<ListBencana>) {
         progressbarHome.visibility = View.GONE
+        imageView6.visibility = View.GONE
         adapter.addListBencana(listBencana)
         list.addAll(listBencana)
         setMap()

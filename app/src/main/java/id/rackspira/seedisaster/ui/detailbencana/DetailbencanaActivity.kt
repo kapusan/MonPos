@@ -38,6 +38,9 @@ class DetailbencanaActivity : AppCompatActivity() {
                 viewPagerDetail.currentItem = p0!!.position
             }
         })
+        backDetailBencana.setOnClickListener {
+            finish()
+        }
     }
 
 }

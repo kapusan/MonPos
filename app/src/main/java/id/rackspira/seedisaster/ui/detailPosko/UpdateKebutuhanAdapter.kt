@@ -12,6 +12,7 @@ import id.rackspira.seedisaster.R
 import id.rackspira.seedisaster.data.network.entity.DataPosko
 import id.rackspira.seedisaster.data.network.entity.KebPosko
 import kotlinx.android.synthetic.main.list_update_kebutuhan.view.*
+import java.util.logging.Handler
 import java.util.regex.Pattern
 
 
@@ -45,21 +46,24 @@ class UpdateKebutuhanAdapter(private val kategori: String) : RecyclerView.Adapte
             val namaKeb = capitalize(position.namaKeb!!)
             itemView.textViewNamaBarang.text = namaKeb
 
+            itemView.editTextJumlahKebutuhan.setOnClickListener {
+                itemView.editTextJumlahKebutuhan.isEnabled = true
+            }
             itemView.editTextJumlahKebutuhan.addTextChangedListener(object : TextWatcher {
                 override fun beforeTextChanged(s: CharSequence, start: Int, count: Int, after: Int) {
 
                 }
 
                 override fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {
-                    if (s.isNotEmpty()) {
-                        itemView.editTextJumlahKebutuhan.postDelayed({
-                            pushUpdate(position, list2)
-                        }, 1000)
-                    }
+
                 }
 
                 override fun afterTextChanged(s: Editable) {
-
+                    if (s.isNotEmpty()) {
+                        android.os.Handler().postDelayed({
+                            pushUpdate(position, list2)
+                        },1800)
+                    }
                 }
             })
 
@@ -78,6 +82,7 @@ class UpdateKebutuhanAdapter(private val kategori: String) : RecyclerView.Adapte
                 .child(kategori).child(position.idKeb.toString())
             ref.setValue(data).addOnSuccessListener {
                 Log.d("UpdateKEbutuhan", "Sukses")
+                itemView.editTextJumlahKebutuhan.isEnabled = false
             }.addOnFailureListener {
                 Log.d("UpdateKEbutuhan", "Gagal")
             }

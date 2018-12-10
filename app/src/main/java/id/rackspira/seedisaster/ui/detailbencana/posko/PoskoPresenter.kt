@@ -40,7 +40,7 @@ class PoskoPresenter(private val view: PoskoView) {
         })
     }
 
-    fun updateDataPosko(idBencana: String, idPosko: String, dataPosko: DataPosko) {
+    fun updateDataPosko( idPosko: String, dataPosko: DataPosko) {
         val ref = dataRef.child("Posko").child(idPosko)
         ref.setValue(dataPosko).addOnSuccessListener {
             view.onSuccessUpdate("Berhasil update data")

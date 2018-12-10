@@ -18,11 +18,11 @@ class KebutuhanAdapter: RecyclerView.Adapter<KebutuhanAdapter.ViewHolder>(){
 
     override fun getItemCount() = list.size
 
-    override fun onBindViewHolder(p0: ViewHolder, p1: Int) = p0.bind(list[p1], idbencana = String())
+    override fun onBindViewHolder(p0: ViewHolder, p1: Int) = p0.bind(list[p1])
 
     internal fun addListPosko(
-        posko: List<KebPosko>,
-        idbencana: String?
+        posko: List<KebPosko>
+//        idbencana: String?
     ) {
 //        this.list.clear()
         this.list.addAll(posko)
@@ -31,7 +31,7 @@ class KebutuhanAdapter: RecyclerView.Adapter<KebutuhanAdapter.ViewHolder>(){
 
 
     class ViewHolder(view: View): RecyclerView.ViewHolder(view) {
-        fun bind(position: KebPosko, idbencana: String?) {
+        fun bind(position: KebPosko) {
             val namaKeb = capitalize(position.namaKeb!!)
 
             itemView.textViewKebNama.text = namaKeb

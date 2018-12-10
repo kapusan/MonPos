@@ -19,13 +19,19 @@ android {
         multiDexEnabled true
     }
 
+    lintOptions {
+        checkReleaseBuilds false
+        abortOnError false
+        ignoreWarnings true
+    }
+
     buildTypes {
         debug {
             buildConfigField("String", "BASE_URL", "\"http://bnpb.cloud/dibi/api/\"")
             buildConfigField("String", "BASE_URL_RELIEFWEB", "\"https://api.reliefweb.int/v1/\"")
         }
         release {
-            minifyEnabled true
+            minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
             buildConfigField("String", "BASE_URL", "\"http://bnpb.cloud/dibi/api/\"")
             buildConfigField("String", "BASE_URL_RELIEFWEB", "\"https://api.reliefweb.int/v1/\"")

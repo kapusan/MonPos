@@ -41,9 +41,9 @@ class IsiProfilActivity : AppCompatActivity(), IsiProfilView {
             val day = c.get(Calendar.DAY_OF_MONTH)
 
 
-            val dpd = DatePickerDialog(this ,DatePickerDialog.OnDateSetListener { view, year, monthOfYear, dayOfMonth ->
+            val dpd = DatePickerDialog(this ,DatePickerDialog.OnDateSetListener { _, tahun, monthOfYear, dayOfMonth ->
                 // Display Selected date in textbox
-                edtTglLahir.setText("" + dayOfMonth + "-" + (monthOfYear+1) +"-"+ year)
+                edtTglLahir.setText("" + dayOfMonth + "-" + (monthOfYear+1) +"-"+ tahun)
             }, year, month, day)
             dpd.show()
         }

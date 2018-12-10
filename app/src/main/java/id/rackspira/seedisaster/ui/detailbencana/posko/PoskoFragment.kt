@@ -1,18 +1,23 @@
 package id.rackspira.seedisaster.ui.detailbencana.posko
 
 import android.app.Dialog
+import android.content.Context.LOCATION_SERVICE
 import android.content.Intent
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
+import android.location.LocationManager
 import android.net.Uri
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v4.content.ContextCompat
+import android.support.v4.content.ContextCompat.getSystemService
+import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.LinearLayoutManager
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.Window
+import android.widget.Toast
 
 import id.rackspira.seedisaster.R
 import id.rackspira.seedisaster.data.network.entity.DataPosko
@@ -49,11 +54,18 @@ class PoskoFragment : Fragment(), PoskoView {
         mapViewPosko.setTileSource(TileSourceFactory.MAPNIK)
         mapViewPosko.setMultiTouchControls(true)
         mapViewPosko.setBuiltInZoomControls(true)
+
+        val manager = context!!.getSystemService(LOCATION_SERVICE) as LocationManager
+
         listBencana = arguments!!.getParcelable("posisi") as ListBencana
         fabTambahPosko.setOnClickListener {
-            val intent = Intent(context, BuatPoskoActivity::class.java)
-            intent.putExtra("data", listBencana)
-            context!!.startActivity(intent)
+            if (!manager.isProviderEnabled(LocationManager.GPS_PROVIDER)) {
+                Toast.makeText(context, "Mohon Hidupkan Lokasi Anda", Toast.LENGTH_LONG).show()
+            } else {
+                val intent = Intent(context, BuatPoskoActivity::class.java)
+                intent.putExtra("data", listBencana)
+                context!!.startActivity(intent)
+            }
         }
 
         fabMaps.setOnClickListener {

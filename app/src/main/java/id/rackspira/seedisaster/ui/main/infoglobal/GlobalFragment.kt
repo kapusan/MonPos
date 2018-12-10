@@ -37,6 +37,5 @@ class GlobalFragment : Fragment(), InfoGlobalView {
     }
 
     override fun onError(msg: String?) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 }

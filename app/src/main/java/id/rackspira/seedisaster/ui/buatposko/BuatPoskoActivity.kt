@@ -10,9 +10,8 @@ import android.support.v4.app.ActivityCompat
 import android.support.v4.content.ContextCompat
 import android.util.Log
 import android.widget.Toast
+import com.google.android.gms.location.*
 import id.rackspira.seedisaster.R
-import com.google.android.gms.location.FusedLocationProviderClient
-import com.google.android.gms.location.LocationServices
 import com.google.firebase.auth.FirebaseAuth
 import id.rackspira.seedisaster.data.network.entity.DataUser
 import id.rackspira.seedisaster.data.network.entity.ListBencana
@@ -28,6 +27,9 @@ class BuatPoskoActivity : AppCompatActivity(), BuatPoskoView {
     private var telefon: String? = null
     private var namaPenangungjawab: String? = null
     private lateinit var fusedLocationClient: FusedLocationProviderClient
+    private lateinit var locationCallback: LocationCallback
+    private val locationRequest = LocationRequest()
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -35,6 +37,16 @@ class BuatPoskoActivity : AppCompatActivity(), BuatPoskoView {
         presenter = BuatPoskoPresenter(this)
         mAuth = FirebaseAuth.getInstance()
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(this)
+
+        locationCallback = object : LocationCallback() {
+            override fun onLocationResult(locationResult: LocationResult?) {
+                locationResult ?: return
+                for (location in locationResult.locations) {
+                    latitude = location.latitude
+                    longitude = location.longitude
+                }
+            }
+        }
 
         presenter.getUser()
 
@@ -44,17 +56,18 @@ class BuatPoskoActivity : AppCompatActivity(), BuatPoskoView {
         val permissions = arrayOf(android.Manifest.permission.ACCESS_FINE_LOCATION)
         ActivityCompat.requestPermissions(this, permissions, 0)
 
-        if (ContextCompat.checkSelfPermission(
-                this,
-                Manifest.permission.ACCESS_FINE_LOCATION
-            ) == PackageManager.PERMISSION_GRANTED
-        ) {
-            fusedLocationClient.lastLocation
-                .addOnSuccessListener { location: Location? ->
-                    latitude = location?.latitude
-                    longitude = location?.longitude
-                }
-        }
+//        if (ContextCompat.checkSelfPermission(
+//                this,
+//                Manifest.permission.ACCESS_FINE_LOCATION
+//            ) == PackageManager.PERMISSION_GRANTED
+//        ) {
+//            fusedLocationClient.lastLocation
+//                .addOnSuccessListener { location: Location? ->
+//                    latitude = location?.latitude
+//                    longitude = location?.longitude
+//                }
+//        }
+
         backBuatPosko.setOnClickListener {
             finish()
         }
@@ -70,36 +83,24 @@ class BuatPoskoActivity : AppCompatActivity(), BuatPoskoView {
                 if (edittextNamaPosko.text!!.isEmpty() || edittextDesa.text!!.isEmpty() || edittextKec.text!!.isEmpty() || textviewKab.text!!.isEmpty() || editTextProv.text!!.isEmpty()) {
                     Toast.makeText(this, "Inputan belum lengkap", Toast.LENGTH_LONG).show()
                 } else {
-                    fusedLocationClient.lastLocation
-                        .addOnSuccessListener { location: Location? ->
-                            latitude = location?.latitude
-                            longitude = location?.longitude
-                            if (latitude == null || longitude == null) {
-                                Toast.makeText(this, "Gagal mendapat lokasi mohon tunggu sebentar", Toast.LENGTH_LONG).show()
-                            } else {
-                                presenter.tambahPosko(
-                                    dataPosko.kib.toString(),
-                                    mAuth.currentUser!!.uid,
-                                    edittextNamaPosko.text.toString(),
-                                    latitude.toString(),
-                                    longitude.toString(),
-                                    telefon.toString(),
-                                    edittextDesa.text.toString(),
-                                    edittextKec.text.toString(),
-                                    textviewKab.text.toString(),
-                                    editTextProv.text.toString(),
-                                    namaPenangungjawab.toString()
-                                )
-                                finish()
-                            }
-
-                        }
+                    presenter.tambahPosko(
+                        dataPosko.kib.toString(),
+                        mAuth.currentUser!!.uid,
+                        edittextNamaPosko.text.toString(),
+                        latitude.toString(),
+                        longitude.toString(),
+                        telefon.toString(),
+                        edittextDesa.text.toString(),
+                        edittextKec.text.toString(),
+                        textviewKab.text.toString(),
+                        editTextProv.text.toString(),
+                        namaPenangungjawab.toString()
+                    )
+                    finish()
                 }
-            } else {
-                ActivityCompat.requestPermissions(this, permissions, 0)
+
             }
         }
-
     }
 
     override fun onSuccess(msg: String?) {
@@ -113,6 +114,26 @@ class BuatPoskoActivity : AppCompatActivity(), BuatPoskoView {
         telefon = dataUser.noTp.toString()
         namaPenangungjawab = dataUser.nama.toString()
 
-
     }
+
+    override fun onResume() {
+        super.onResume()
+        startLocationUpdates()
+    }
+
+    private fun startLocationUpdates() {
+        if (ContextCompat.checkSelfPermission(
+                this,
+                Manifest.permission.ACCESS_FINE_LOCATION
+            ) == PackageManager.PERMISSION_GRANTED
+        ) {
+            fusedLocationClient.requestLocationUpdates(
+                locationRequest,
+                locationCallback,
+                null /* Looper */
+            )
+
+        }
+    }
+
 }

@@ -12,11 +12,9 @@ import android.view.View
 import android.view.Window
 import android.widget.*
 import com.google.firebase.auth.FirebaseAuth
-import com.squareup.picasso.Picasso
 import id.rackspira.seedisaster.R
 import id.rackspira.seedisaster.data.network.entity.DataJumlahPengungsi
 import id.rackspira.seedisaster.data.network.entity.DataPosko
-import id.rackspira.seedisaster.data.network.entity.DataUser
 import id.rackspira.seedisaster.data.network.entity.KebPosko
 import kotlinx.android.synthetic.main.activity_detail_posko.*
 
@@ -53,15 +51,15 @@ class DetailPoskoActivity : AppCompatActivity(), DetailPoskoView {
         }
 
         tambahKebutuhan.setOnClickListener {
-            val dialog = Dialog(this)
-            dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
-            dialog.window!!.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
-            dialog.setContentView(R.layout.popup_tambah_kebutuhan)
-            val cancelButton = dialog.findViewById(R.id.textViewBatal) as TextView
-            val saveButton = dialog.findViewById(R.id.textViewTambah) as TextView
-            val namaKebutuhan = dialog.findViewById(R.id.editTextNamaKebutuhan) as EditText
-            val jumlahKebutuhan = dialog.findViewById(R.id.editTextJumlah) as EditText
-            val spinner = dialog.findViewById(R.id.spinnerKategori) as Spinner
+            val dialogTKebutuhan = Dialog(this)
+            dialogTKebutuhan.requestWindowFeature(Window.FEATURE_NO_TITLE)
+            dialogTKebutuhan.window!!.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+            dialogTKebutuhan.setContentView(R.layout.popup_tambah_kebutuhan)
+            val cancelButton = dialogTKebutuhan.findViewById(R.id.textViewBatal) as TextView
+            val saveButton = dialogTKebutuhan.findViewById(R.id.textViewTambah) as TextView
+            val namaKebutuhan = dialogTKebutuhan.findViewById(R.id.editTextNamaKebutuhan) as EditText
+            val jumlahKebutuhan = dialogTKebutuhan.findViewById(R.id.editTextJumlah) as EditText
+            val spinner = dialogTKebutuhan.findViewById(R.id.spinnerKategori) as Spinner
             val arrayAdapter = ArrayAdapter(this, android.R.layout.simple_spinner_item, myStrings)
             spinner.adapter = arrayAdapter
 
@@ -72,7 +70,7 @@ class DetailPoskoActivity : AppCompatActivity(), DetailPoskoView {
                 override fun onNothingSelected(parent: AdapterView<*>) {
                 }
             }
-            val spinner2 = dialog.findViewById(R.id.spinnerPaket) as Spinner
+            val spinner2 = dialogTKebutuhan.findViewById(R.id.spinnerPaket) as Spinner
             val arrayAdapter2 = ArrayAdapter(this, android.R.layout.simple_spinner_item, myStrings2)
             spinner2.adapter = arrayAdapter2
 
@@ -90,18 +88,20 @@ class DetailPoskoActivity : AppCompatActivity(), DetailPoskoView {
                 Log.d("SPINNER2", dataSpinner2)
                 Log.d("anangnama", namaKebutuhan.text.toString())
 
-                if (namaKebutuhan.getText().toString().isEmpty()) run { namaKebutuhan.error = "Nama kebutuhan kosong" }
-                else if (jumlahKebutuhan.getText().toString().isEmpty()) run { jumlahKebutuhan.error = "Jumlah kosong" }
-                else{
-                    presenter.tambahKebutuhan(
-                        list.idBencana.toString(), list.idPosko.toString(), namaKebutuhan.text.toString(),
-                        jumlahKebutuhan.text.toString(), dataSpinner2, dataSpinner1 )
-                    dialog.dismiss()
+                when {
+                    namaKebutuhan.text.toString().isEmpty() -> run { namaKebutuhan.error = "Nama kebutuhan kosong" }
+                    jumlahKebutuhan.text.toString().isEmpty() -> run { jumlahKebutuhan.error = "Jumlah kosong" }
+                    else -> {
+                        presenter.tambahKebutuhan(
+                            list.idBencana.toString(), list.idPosko.toString(), namaKebutuhan.text.toString(),
+                            jumlahKebutuhan.text.toString(), dataSpinner2, dataSpinner1 )
+                        dialogTKebutuhan.dismiss()
+                    }
                 }
 
             }
-            cancelButton.setOnClickListener { dialog.dismiss() }
-            dialog.show()
+            cancelButton.setOnClickListener { dialogTKebutuhan.dismiss() }
+            dialogTKebutuhan.show()
         }
 
         backDetailPosko.setOnClickListener {
@@ -109,19 +109,19 @@ class DetailPoskoActivity : AppCompatActivity(), DetailPoskoView {
         }
 
         tambahPengungsi.setOnClickListener{
-            val dialog = Dialog(this)
-            dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
-            dialog.window!!.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
-            dialog.setContentView(R.layout.popup_update_jumlah_pengungsi)
+            val dialogPengungsi = Dialog(this)
+            dialogPengungsi.requestWindowFeature(Window.FEATURE_NO_TITLE)
+            dialogPengungsi.window!!.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+            dialogPengungsi.setContentView(R.layout.popup_update_jumlah_pengungsi)
 
-            val clickBatal = dialog.findViewById(R.id.textViewBatal) as TextView
-            val clickTambah = dialog.findViewById(R.id.textViewTambah) as TextView
-            val clickUpdate = dialog.findViewById(R.id.textViewUpdate) as TextView
-            val editTextLakilaki = dialog.findViewById(R.id.editTextLakilaki) as EditText
-            val editTextPerempuan = dialog.findViewById(R.id.editTextPerempuan) as EditText
-            val editTextAnakanak = dialog.findViewById(R.id.editTextAnakanak) as EditText
-            val editTextBalita = dialog.findViewById(R.id.editTextBalita) as EditText
-            val editTextLansia = dialog.findViewById(R.id.editTextLansia) as EditText
+            val clickBatal = dialogPengungsi.findViewById(R.id.textViewBatal) as TextView
+            val clickTambah = dialogPengungsi.findViewById(R.id.textViewTambah) as TextView
+            val clickUpdate = dialogPengungsi.findViewById(R.id.textViewUpdate) as TextView
+            val editTextLakilaki = dialogPengungsi.findViewById(R.id.editTextLakilaki) as EditText
+            val editTextPerempuan = dialogPengungsi.findViewById(R.id.editTextPerempuan) as EditText
+            val editTextAnakanak = dialogPengungsi.findViewById(R.id.editTextAnakanak) as EditText
+            val editTextBalita = dialogPengungsi.findViewById(R.id.editTextBalita) as EditText
+            val editTextLansia = dialogPengungsi.findViewById(R.id.editTextLansia) as EditText
 
             editTextLakilaki.setText(textViewJumlahL.text.toString())
             editTextPerempuan.setText(textViewJumlahP.text.toString())
@@ -139,40 +139,44 @@ class DetailPoskoActivity : AppCompatActivity(), DetailPoskoView {
             }
 
             clickTambah.setOnClickListener {
-                if (editTextLakilaki.text.toString().isEmpty()) run { editTextLakilaki.error = "Jumlah kosong" }
-                else if (editTextPerempuan.text.toString().isEmpty()) run { editTextPerempuan.error = "Jumlah Kosong" }
-                else if (editTextAnakanak.text.toString().isEmpty()) run { editTextPerempuan.error = "Jumlah kosong" }
-                else if (editTextBalita.text.toString().isEmpty()) run { editTextPerempuan.error = "Jumlah kosong" }
-                else if (editTextLansia.text.toString().isEmpty()) run { editTextPerempuan.error = "Jumlah kosong" }
-                else{
-                    presenter.tambahJumlahPengungsi(
-                        list.idPosko.toString(), editTextLakilaki.text.toString(), editTextPerempuan.text.toString(), editTextBalita.text.toString(), editTextAnakanak.text.toString(),editTextLansia.text.toString()
-                    )
-                    presenter.getJumlhPeng(
-                        list.idPosko.toString())
-                    dialog.dismiss()
+                when {
+                    editTextLakilaki.text.toString().isEmpty() -> run { editTextLakilaki.error = "Jumlah kosong" }
+                    editTextPerempuan.text.toString().isEmpty() -> run { editTextPerempuan.error = "Jumlah Kosong" }
+                    editTextAnakanak.text.toString().isEmpty() -> run { editTextPerempuan.error = "Jumlah kosong" }
+                    editTextBalita.text.toString().isEmpty() -> run { editTextPerempuan.error = "Jumlah kosong" }
+                    editTextLansia.text.toString().isEmpty() -> run { editTextPerempuan.error = "Jumlah kosong" }
+                    else -> {
+                        presenter.tambahJumlahPengungsi(
+                            list.idPosko.toString(), editTextLakilaki.text.toString(), editTextPerempuan.text.toString(), editTextBalita.text.toString(), editTextAnakanak.text.toString(),editTextLansia.text.toString()
+                        )
+                        presenter.getJumlhPeng(
+                            list.idPosko.toString())
+                        dialogPengungsi.dismiss()
+                    }
                 }
             }
 
             clickUpdate.setOnClickListener {
-                if (editTextLakilaki.text.toString().isEmpty()) run { editTextLakilaki.error = "Jumlah kosong" }
-                else if (editTextPerempuan.text.toString().isEmpty()) run { editTextPerempuan.error = "Jumlah Kosong" }
-                else if (editTextAnakanak.text.toString().isEmpty()) run { editTextPerempuan.error = "Jumlah kosong" }
-                else if (editTextBalita.text.toString().isEmpty()) run { editTextPerempuan.error = "Jumlah kosong" }
-                else if (editTextLansia.text.toString().isEmpty()) run { editTextPerempuan.error = "Jumlah kosong" }
-                else{
-                    presenter.updateJumlahPengungsi(
-                        idJumalhPengungsi, list.idPosko.toString(), editTextLakilaki.text.toString(), editTextPerempuan.text.toString(), editTextBalita.text.toString(), editTextAnakanak.text.toString(),editTextLansia.text.toString()
-                    )
-                    presenter.getJumlhPeng(
-                        list.idPosko.toString())
-                    dialog.dismiss()
+                when {
+                    editTextLakilaki.text.toString().isEmpty() -> run { editTextLakilaki.error = "Jumlah kosong" }
+                    editTextPerempuan.text.toString().isEmpty() -> run { editTextPerempuan.error = "Jumlah Kosong" }
+                    editTextAnakanak.text.toString().isEmpty() -> run { editTextPerempuan.error = "Jumlah kosong" }
+                    editTextBalita.text.toString().isEmpty() -> run { editTextPerempuan.error = "Jumlah kosong" }
+                    editTextLansia.text.toString().isEmpty() -> run { editTextPerempuan.error = "Jumlah kosong" }
+                    else -> {
+                        presenter.updateJumlahPengungsi(
+                            idJumalhPengungsi, list.idPosko.toString(), editTextLakilaki.text.toString(), editTextPerempuan.text.toString(), editTextBalita.text.toString(), editTextAnakanak.text.toString(),editTextLansia.text.toString()
+                        )
+                        presenter.getJumlhPeng(
+                            list.idPosko.toString())
+                        dialogPengungsi.dismiss()
+                    }
                 }
             }
             clickBatal.setOnClickListener {
-                dialog.dismiss()
+                dialogPengungsi.dismiss()
             }
-            dialog.show()
+            dialogPengungsi.show()
         }
 
         imageViewSandang.setOnClickListener {
@@ -180,15 +184,15 @@ class DetailPoskoActivity : AppCompatActivity(), DetailPoskoView {
             presenter.getDataKebutuhan(
                 list.idBencana.toString(), list.idPosko.toString(), "Sandang"
             )
-            val dialog = Dialog(this)
-            dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
-            dialog.window!!.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
-            dialog.setContentView(R.layout.popup_kebutuhan_kategori)
+            val dialogSandang = Dialog(this)
+            dialogSandang.requestWindowFeature(Window.FEATURE_NO_TITLE)
+            dialogSandang.window!!.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+            dialogSandang.setContentView(R.layout.popup_kebutuhan_kategori)
 
-            val clickKembali = dialog.findViewById(R.id.textViewKembali) as TextView
-            val clickUpdate = dialog.findViewById(R.id.textViewUpdate) as TextView
-            val namaKebutuhan = dialog.findViewById(R.id.namaKebutuhan) as TextView
-            val listKebutuhan = dialog.findViewById(R.id.recyclerViewKebutuhan) as RecyclerView
+            val clickKembali = dialogSandang.findViewById(R.id.textViewKembali) as TextView
+            val clickUpdate = dialogSandang.findViewById(R.id.textViewUpdate) as TextView
+            val namaKebutuhan = dialogSandang.findViewById(R.id.namaKebutuhan) as TextView
+            val listKebutuhan = dialogSandang.findViewById(R.id.recyclerViewKebutuhan) as RecyclerView
             kebutuhanAdapter = KebutuhanAdapter()
             listKebutuhan.layoutManager = LinearLayoutManager(this)
             listKebutuhan.adapter = kebutuhanAdapter
@@ -207,15 +211,15 @@ class DetailPoskoActivity : AppCompatActivity(), DetailPoskoView {
                 presenter.getUpdateKebutuhan(
                     list.idBencana.toString(), list.idPosko.toString(), "Sandang"
                 )
-                dialog.dismiss()
-                val dialog = Dialog(this)
-                dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
-                dialog.window!!.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
-                dialog.setContentView(R.layout.popup_update_kebutuhan)
+                dialogSandang.dismiss()
+                val dialogUpdateSanitasi = Dialog(this)
+                dialogUpdateSanitasi.requestWindowFeature(Window.FEATURE_NO_TITLE)
+                dialogUpdateSanitasi.window!!.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+                dialogUpdateSanitasi.setContentView(R.layout.popup_update_kebutuhan)
 
-                val clickBatal = dialog.findViewById(R.id.textViewBatal) as TextView
-                val clickTambah = dialog.findViewById(R.id.textViewTambah) as TextView
-                val listUpdateKebutuhan = dialog.findViewById(R.id.recycleUpdateKebutuhan) as RecyclerView
+                val clickBatal = dialogUpdateSanitasi.findViewById(R.id.textViewBatal) as TextView
+                val clickTambah = dialogUpdateSanitasi.findViewById(R.id.textViewTambah) as TextView
+                val listUpdateKebutuhan = dialogUpdateSanitasi.findViewById(R.id.recycleUpdateKebutuhan) as RecyclerView
                 updateKebutuhanAdapter = UpdateKebutuhanAdapter("Sandang")
                 listUpdateKebutuhan.layoutManager = LinearLayoutManager(this)
                 listUpdateKebutuhan.adapter = updateKebutuhanAdapter
@@ -225,30 +229,30 @@ class DetailPoskoActivity : AppCompatActivity(), DetailPoskoView {
                 Log.d("anangkentot2",list.idBencana)
 
                 clickTambah.setOnClickListener {
-                    dialog.dismiss()
+                    dialogUpdateSanitasi.dismiss()
 
                 }
-                clickBatal.setOnClickListener { dialog.dismiss() }
-                dialog.show()
+                clickBatal.setOnClickListener { dialogUpdateSanitasi.dismiss() }
+                dialogUpdateSanitasi.show()
 
             }
-            clickKembali.setOnClickListener { dialog.dismiss() }
-            dialog.show()
+            clickKembali.setOnClickListener { dialogSandang.dismiss() }
+            dialogSandang.show()
         }
 
         imageViewPangan.setOnClickListener {
             presenter.getDataKebutuhan(
                 list.idBencana.toString(), list.idPosko.toString(), "Pangan"
             )
-            val dialog = Dialog(this)
-            dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
-            dialog.window!!.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
-            dialog.setContentView(R.layout.popup_kebutuhan_kategori)
+            val dialogPangan = Dialog(this)
+            dialogPangan.requestWindowFeature(Window.FEATURE_NO_TITLE)
+            dialogPangan.window!!.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+            dialogPangan.setContentView(R.layout.popup_kebutuhan_kategori)
 
-            val clickKembali = dialog.findViewById(R.id.textViewKembali) as TextView
-            val clickUpdate = dialog.findViewById(R.id.textViewUpdate) as TextView
-            val namaKebutuhan = dialog.findViewById(R.id.namaKebutuhan) as TextView
-            val listKebutuhan = dialog.findViewById(R.id.recyclerViewKebutuhan) as RecyclerView
+            val clickKembali = dialogPangan.findViewById(R.id.textViewKembali) as TextView
+            val clickUpdate = dialogPangan.findViewById(R.id.textViewUpdate) as TextView
+            val namaKebutuhan = dialogPangan.findViewById(R.id.namaKebutuhan) as TextView
+            val listKebutuhan = dialogPangan.findViewById(R.id.recyclerViewKebutuhan) as RecyclerView
             kebutuhanAdapter = KebutuhanAdapter()
             listKebutuhan.layoutManager = LinearLayoutManager(this)
             listKebutuhan.adapter = kebutuhanAdapter
@@ -267,15 +271,15 @@ class DetailPoskoActivity : AppCompatActivity(), DetailPoskoView {
                 presenter.getUpdateKebutuhan(
                     list.idBencana.toString(), list.idPosko.toString(), "Pangan"
                 )
-                dialog.dismiss()
-                val dialog = Dialog(this)
-                dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
-                dialog.window!!.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
-                dialog.setContentView(R.layout.popup_update_kebutuhan)
+                dialogPangan.dismiss()
+                val dialogUpdateangan = Dialog(this)
+                dialogUpdateangan.requestWindowFeature(Window.FEATURE_NO_TITLE)
+                dialogUpdateangan.window!!.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+                dialogUpdateangan.setContentView(R.layout.popup_update_kebutuhan)
 
-                val clickBatal = dialog.findViewById(R.id.textViewBatal) as TextView
-                val clickTambah = dialog.findViewById(R.id.textViewTambah) as TextView
-                val listUpdateKebutuhan = dialog.findViewById(R.id.recycleUpdateKebutuhan) as RecyclerView
+                val clickBatal = dialogUpdateangan.findViewById(R.id.textViewBatal) as TextView
+                val clickTambah = dialogUpdateangan.findViewById(R.id.textViewTambah) as TextView
+                val listUpdateKebutuhan = dialogUpdateangan.findViewById(R.id.recycleUpdateKebutuhan) as RecyclerView
                 updateKebutuhanAdapter = UpdateKebutuhanAdapter("Pangan")
                 listUpdateKebutuhan.layoutManager = LinearLayoutManager(this)
                 listUpdateKebutuhan.adapter = updateKebutuhanAdapter
@@ -285,15 +289,15 @@ class DetailPoskoActivity : AppCompatActivity(), DetailPoskoView {
                 Log.d("anangkentot2",list.idBencana)
 
                 clickTambah.setOnClickListener {
-                    dialog.dismiss()
+                    dialogUpdateangan.dismiss()
 
                 }
-                clickBatal.setOnClickListener { dialog.dismiss() }
-                dialog.show()
+                clickBatal.setOnClickListener { dialogUpdateangan.dismiss() }
+                dialogUpdateangan.show()
 
             }
-            clickKembali.setOnClickListener { dialog.dismiss() }
-            dialog.show()
+            clickKembali.setOnClickListener { dialogPangan.dismiss() }
+            dialogPangan.show()
 
         }
 
@@ -301,15 +305,15 @@ class DetailPoskoActivity : AppCompatActivity(), DetailPoskoView {
             presenter.getDataKebutuhan(
                 list.idBencana.toString(), list.idPosko.toString(), "Kesehatan"
             )
-            val dialog = Dialog(this)
-            dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
-            dialog.window!!.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
-            dialog.setContentView(R.layout.popup_kebutuhan_kategori)
+            val dialogKesehatan = Dialog(this)
+            dialogKesehatan.requestWindowFeature(Window.FEATURE_NO_TITLE)
+            dialogKesehatan.window!!.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+            dialogKesehatan.setContentView(R.layout.popup_kebutuhan_kategori)
 
-            val clickKembali = dialog.findViewById(R.id.textViewKembali) as TextView
-            val clickUpdate = dialog.findViewById(R.id.textViewUpdate) as TextView
-            val namaKebutuhan = dialog.findViewById(R.id.namaKebutuhan) as TextView
-            val listKebutuhan = dialog.findViewById(R.id.recyclerViewKebutuhan) as RecyclerView
+            val clickKembali = dialogKesehatan.findViewById(R.id.textViewKembali) as TextView
+            val clickUpdate = dialogKesehatan.findViewById(R.id.textViewUpdate) as TextView
+            val namaKebutuhan = dialogKesehatan.findViewById(R.id.namaKebutuhan) as TextView
+            val listKebutuhan = dialogKesehatan.findViewById(R.id.recyclerViewKebutuhan) as RecyclerView
             kebutuhanAdapter = KebutuhanAdapter()
             listKebutuhan.layoutManager = LinearLayoutManager(this)
             listKebutuhan.adapter = kebutuhanAdapter
@@ -328,15 +332,15 @@ class DetailPoskoActivity : AppCompatActivity(), DetailPoskoView {
                 presenter.getUpdateKebutuhan(
                     list.idBencana.toString(), list.idPosko.toString(), "Kesehatan"
                 )
-                dialog.dismiss()
-                val dialog = Dialog(this)
-                dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
-                dialog.window!!.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
-                dialog.setContentView(R.layout.popup_update_kebutuhan)
+                dialogKesehatan.dismiss()
+                val dialogUpdateKesehatan = Dialog(this)
+                dialogUpdateKesehatan.requestWindowFeature(Window.FEATURE_NO_TITLE)
+                dialogUpdateKesehatan.window!!.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+                dialogUpdateKesehatan.setContentView(R.layout.popup_update_kebutuhan)
 
-                val clickBatal = dialog.findViewById(R.id.textViewBatal) as TextView
-                val clickTambah = dialog.findViewById(R.id.textViewTambah) as TextView
-                val listUpdateKebutuhan = dialog.findViewById(R.id.recycleUpdateKebutuhan) as RecyclerView
+                val clickBatal = dialogUpdateKesehatan.findViewById(R.id.textViewBatal) as TextView
+                val clickTambah = dialogUpdateKesehatan.findViewById(R.id.textViewTambah) as TextView
+                val listUpdateKebutuhan = dialogUpdateKesehatan.findViewById(R.id.recycleUpdateKebutuhan) as RecyclerView
                 updateKebutuhanAdapter = UpdateKebutuhanAdapter("Kesehatan")
                 listUpdateKebutuhan.layoutManager = LinearLayoutManager(this)
                 listUpdateKebutuhan.adapter = updateKebutuhanAdapter
@@ -346,30 +350,30 @@ class DetailPoskoActivity : AppCompatActivity(), DetailPoskoView {
                 Log.d("anangkentot2",list.idBencana)
 
                 clickTambah.setOnClickListener {
-                    dialog.dismiss()
+                    dialogUpdateKesehatan.dismiss()
 
                 }
-                clickBatal.setOnClickListener { dialog.dismiss() }
-                dialog.show()
+                clickBatal.setOnClickListener { dialogUpdateKesehatan.dismiss() }
+                dialogUpdateKesehatan.show()
 
             }
-            clickKembali.setOnClickListener { dialog.dismiss() }
-            dialog.show()
+            clickKembali.setOnClickListener { dialogKesehatan.dismiss() }
+            dialogKesehatan.show()
         }
 
         imageViewSanitasi.setOnClickListener {
             presenter.getDataKebutuhan(
                 list.idBencana.toString(), list.idPosko.toString(), "Sanitasi"
             )
-            val dialog = Dialog(this)
-            dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
-            dialog.window!!.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
-            dialog.setContentView(R.layout.popup_kebutuhan_kategori)
+            val dialogSanitasi = Dialog(this)
+            dialogSanitasi.requestWindowFeature(Window.FEATURE_NO_TITLE)
+            dialogSanitasi.window!!.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+            dialogSanitasi.setContentView(R.layout.popup_kebutuhan_kategori)
 
-            val clickKembali = dialog.findViewById(R.id.textViewKembali) as TextView
-            val clickUpdate = dialog.findViewById(R.id.textViewUpdate) as TextView
-            val namaKebutuhan = dialog.findViewById(R.id.namaKebutuhan) as TextView
-            val listKebutuhan = dialog.findViewById(R.id.recyclerViewKebutuhan) as RecyclerView
+            val clickKembali = dialogSanitasi.findViewById(R.id.textViewKembali) as TextView
+            val clickUpdate = dialogSanitasi.findViewById(R.id.textViewUpdate) as TextView
+            val namaKebutuhan = dialogSanitasi.findViewById(R.id.namaKebutuhan) as TextView
+            val listKebutuhan = dialogSanitasi.findViewById(R.id.recyclerViewKebutuhan) as RecyclerView
             kebutuhanAdapter = KebutuhanAdapter()
             listKebutuhan.layoutManager = LinearLayoutManager(this)
             listKebutuhan.adapter = kebutuhanAdapter
@@ -388,15 +392,15 @@ class DetailPoskoActivity : AppCompatActivity(), DetailPoskoView {
                 presenter.getUpdateKebutuhan(
                     list.idBencana.toString(), list.idPosko.toString(), "Sanitasi"
                 )
-                dialog.dismiss()
-                val dialog = Dialog(this)
-                dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
-                dialog.window!!.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
-                dialog.setContentView(R.layout.popup_update_kebutuhan)
+                dialogSanitasi.dismiss()
+                val dialogUpdateSanitasi = Dialog(this)
+                dialogUpdateSanitasi.requestWindowFeature(Window.FEATURE_NO_TITLE)
+                dialogUpdateSanitasi.window!!.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+                dialogUpdateSanitasi.setContentView(R.layout.popup_update_kebutuhan)
 
-                val clickBatal = dialog.findViewById(R.id.textViewBatal) as TextView
-                val clickTambah = dialog.findViewById(R.id.textViewTambah) as TextView
-                val listUpdateKebutuhan = dialog.findViewById(R.id.recycleUpdateKebutuhan) as RecyclerView
+                val clickBatal = dialogUpdateSanitasi.findViewById(R.id.textViewBatal) as TextView
+                val clickTambah = dialogUpdateSanitasi.findViewById(R.id.textViewTambah) as TextView
+                val listUpdateKebutuhan = dialogUpdateSanitasi.findViewById(R.id.recycleUpdateKebutuhan) as RecyclerView
                 updateKebutuhanAdapter = UpdateKebutuhanAdapter("Sanitasi")
                 listUpdateKebutuhan.layoutManager = LinearLayoutManager(this)
                 listUpdateKebutuhan.adapter = updateKebutuhanAdapter
@@ -406,29 +410,29 @@ class DetailPoskoActivity : AppCompatActivity(), DetailPoskoView {
                 Log.d("anangkentot2",list.idBencana)
 
                 clickTambah.setOnClickListener {
-                    dialog.dismiss()
+                    dialogUpdateSanitasi.dismiss()
 
                 }
-                clickBatal.setOnClickListener { dialog.dismiss() }
-                dialog.show()
+                clickBatal.setOnClickListener { dialogUpdateSanitasi.dismiss() }
+                dialogUpdateSanitasi.show()
             }
-            clickKembali.setOnClickListener { dialog.dismiss() }
-            dialog.show()
+            clickKembali.setOnClickListener { dialogSanitasi.dismiss() }
+            dialogSanitasi.show()
         }
 
         imageViewTempatHuni.setOnClickListener {
             presenter.getDataKebutuhan(
                 list.idBencana.toString(), list.idPosko.toString(), "Tempat Huni"
             )
-            val dialog = Dialog(this)
-            dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
-            dialog.window!!.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
-            dialog.setContentView(R.layout.popup_kebutuhan_kategori)
+            val dialogTematHuni = Dialog(this)
+            dialogTematHuni.requestWindowFeature(Window.FEATURE_NO_TITLE)
+            dialogTematHuni.window!!.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+            dialogTematHuni.setContentView(R.layout.popup_kebutuhan_kategori)
 
-            val clickKembali = dialog.findViewById(R.id.textViewKembali) as TextView
-            val clickUpdate = dialog.findViewById(R.id.textViewUpdate) as TextView
-            val namaKebutuhan = dialog.findViewById(R.id.namaKebutuhan) as TextView
-            val listKebutuhan = dialog.findViewById(R.id.recyclerViewKebutuhan) as RecyclerView
+            val clickKembali = dialogTematHuni.findViewById(R.id.textViewKembali) as TextView
+            val clickUpdate = dialogTematHuni.findViewById(R.id.textViewUpdate) as TextView
+            val namaKebutuhan = dialogTematHuni.findViewById(R.id.namaKebutuhan) as TextView
+            val listKebutuhan = dialogTematHuni.findViewById(R.id.recyclerViewKebutuhan) as RecyclerView
             kebutuhanAdapter = KebutuhanAdapter()
             listKebutuhan.layoutManager = LinearLayoutManager(this)
             listKebutuhan.adapter = kebutuhanAdapter
@@ -447,15 +451,15 @@ class DetailPoskoActivity : AppCompatActivity(), DetailPoskoView {
                 presenter.getUpdateKebutuhan(
                     list.idBencana.toString(), list.idPosko.toString(), "Tempat Huni"
                 )
-                dialog.dismiss()
-                val dialog = Dialog(this)
-                dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
-                dialog.window!!.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
-                dialog.setContentView(R.layout.popup_update_kebutuhan)
+                dialogTematHuni.dismiss()
+                val dialogUpdateTempatHuni = Dialog(this)
+                dialogUpdateTempatHuni.requestWindowFeature(Window.FEATURE_NO_TITLE)
+                dialogUpdateTempatHuni.window!!.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+                dialogUpdateTempatHuni.setContentView(R.layout.popup_update_kebutuhan)
 
-                val clickBatal = dialog.findViewById(R.id.textViewBatal) as TextView
-                val clickTambah = dialog.findViewById(R.id.textViewTambah) as TextView
-                val listUpdateKebutuhan = dialog.findViewById(R.id.recycleUpdateKebutuhan) as RecyclerView
+                val clickBatal = dialogUpdateTempatHuni.findViewById(R.id.textViewBatal) as TextView
+                val clickTambah = dialogUpdateTempatHuni.findViewById(R.id.textViewTambah) as TextView
+                val listUpdateKebutuhan = dialogUpdateTempatHuni.findViewById(R.id.recycleUpdateKebutuhan) as RecyclerView
                 updateKebutuhanAdapter = UpdateKebutuhanAdapter("Tempat Huni")
                 listUpdateKebutuhan.layoutManager = LinearLayoutManager(this)
                 listUpdateKebutuhan.adapter = updateKebutuhanAdapter
@@ -465,29 +469,29 @@ class DetailPoskoActivity : AppCompatActivity(), DetailPoskoView {
                 Log.d("anangkentot2",list.idBencana)
 
                 clickTambah.setOnClickListener {
-                    dialog.dismiss()
+                    dialogUpdateTempatHuni.dismiss()
 
                 }
-                clickBatal.setOnClickListener { dialog.dismiss() }
-                dialog.show()
+                clickBatal.setOnClickListener { dialogUpdateTempatHuni.dismiss() }
+                dialogUpdateTempatHuni.show()
             }
-            clickKembali.setOnClickListener { dialog.dismiss() }
-            dialog.show()
+            clickKembali.setOnClickListener { dialogTematHuni.dismiss() }
+            dialogTematHuni.show()
         }
 
         imageViewRelawan.setOnClickListener {
             presenter.getDataKebutuhan(
                 list.idBencana.toString(), list.idPosko.toString(), "Relawan"
             )
-            val dialog = Dialog(this)
-            dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
-            dialog.window!!.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
-            dialog.setContentView(R.layout.popup_kebutuhan_kategori)
+            val dialogRelawan = Dialog(this)
+            dialogRelawan.requestWindowFeature(Window.FEATURE_NO_TITLE)
+            dialogRelawan.window!!.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+            dialogRelawan.setContentView(R.layout.popup_kebutuhan_kategori)
 
-            val clickKembali = dialog.findViewById(R.id.textViewKembali) as TextView
-            val clickUpdate = dialog.findViewById(R.id.textViewUpdate) as TextView
-            val namaKebutuhan = dialog.findViewById(R.id.namaKebutuhan) as TextView
-            val listKebutuhan = dialog.findViewById(R.id.recyclerViewKebutuhan) as RecyclerView
+            val clickKembali = dialogRelawan.findViewById(R.id.textViewKembali) as TextView
+            val clickUpdate = dialogRelawan.findViewById(R.id.textViewUpdate) as TextView
+            val namaKebutuhan = dialogRelawan.findViewById(R.id.namaKebutuhan) as TextView
+            val listKebutuhan = dialogRelawan.findViewById(R.id.recyclerViewKebutuhan) as RecyclerView
             kebutuhanAdapter = KebutuhanAdapter()
             listKebutuhan.layoutManager = LinearLayoutManager(this)
             listKebutuhan.adapter = kebutuhanAdapter
@@ -506,15 +510,15 @@ class DetailPoskoActivity : AppCompatActivity(), DetailPoskoView {
                 presenter.getUpdateKebutuhan(
                     list.idBencana.toString(), list.idPosko.toString(), "Relawan"
                 )
-                dialog.dismiss()
-                val dialog = Dialog(this)
-                dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
-                dialog.window!!.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
-                dialog.setContentView(R.layout.popup_update_kebutuhan)
+                dialogRelawan.dismiss()
+                val dialogUpdateRelawan = Dialog(this)
+                dialogUpdateRelawan.requestWindowFeature(Window.FEATURE_NO_TITLE)
+                dialogUpdateRelawan.window!!.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+                dialogUpdateRelawan.setContentView(R.layout.popup_update_kebutuhan)
 
-                val clickBatal = dialog.findViewById(R.id.textViewBatal) as TextView
-                val clickTambah = dialog.findViewById(R.id.textViewTambah) as TextView
-                val listUpdateKebutuhan = dialog.findViewById(R.id.recycleUpdateKebutuhan) as RecyclerView
+                val clickBatal = dialogUpdateRelawan.findViewById(R.id.textViewBatal) as TextView
+                val clickTambah = dialogUpdateRelawan.findViewById(R.id.textViewTambah) as TextView
+                val listUpdateKebutuhan = dialogUpdateRelawan.findViewById(R.id.recycleUpdateKebutuhan) as RecyclerView
                 updateKebutuhanAdapter = UpdateKebutuhanAdapter("Relawan")
                 listUpdateKebutuhan.layoutManager = LinearLayoutManager(this)
                 listUpdateKebutuhan.adapter = updateKebutuhanAdapter
@@ -524,14 +528,14 @@ class DetailPoskoActivity : AppCompatActivity(), DetailPoskoView {
                 Log.d("anangkentot2",list.idBencana)
 
                 clickTambah.setOnClickListener {
-                    dialog.dismiss()
+                    dialogUpdateRelawan.dismiss()
 
                 }
-                clickBatal.setOnClickListener { dialog.dismiss() }
-                dialog.show()
+                clickBatal.setOnClickListener { dialogUpdateRelawan.dismiss() }
+                dialogUpdateRelawan.show()
             }
-            clickKembali.setOnClickListener { dialog.dismiss() }
-            dialog.show()
+            clickKembali.setOnClickListener { dialogRelawan.dismiss() }
+            dialogRelawan.show()
         }
 
         Log.d("idPosko", list.idPosko.toString())
@@ -556,16 +560,14 @@ class DetailPoskoActivity : AppCompatActivity(), DetailPoskoView {
     }
 
     override fun onSuccessUpdate(msg: String?) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 
     override fun onFailedUpdate(msg: String?) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 
     override fun getDataKebutuhan(dataKebutuhan: List<KebPosko>) {
         Log.d("anangngentot", dataKebutuhan.size.toString())
-        kebutuhanAdapter.addListPosko(dataKebutuhan, list.idBencana)
+        kebutuhanAdapter.addListPosko(dataKebutuhan)
 
     }
 

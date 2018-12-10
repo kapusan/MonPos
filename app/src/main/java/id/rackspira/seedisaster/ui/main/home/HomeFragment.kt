@@ -60,7 +60,7 @@ class HomeFragment : Fragment(), HomeView, View.OnClickListener, AdapterView.OnI
         mapView.setMultiTouchControls(true)
         mapView.setBuiltInZoomControls(true)
 
-        val aa = ArrayAdapter(context, android.R.layout.simple_spinner_item, listJnsBencana)
+        val aa = ArrayAdapter(context!!, android.R.layout.simple_spinner_item, listJnsBencana)
         aa.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
         spinnerHome.adapter = aa
         spinnerHome.onItemSelectedListener = this

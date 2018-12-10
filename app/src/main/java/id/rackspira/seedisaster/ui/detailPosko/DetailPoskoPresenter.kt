@@ -124,7 +124,6 @@ class DetailPoskoPresenter(private val view: DetailPoskoView) {
             override fun onCancelled(p0: DatabaseError) {}
 
             override fun onDataChange(p0: DataSnapshot) {
-                val list = mutableListOf<DataJumlahPengungsi>()
                 for (snapshot in p0.children) {
                     val dataPosko = snapshot.getValue(DataJumlahPengungsi::class.java)!!
                     view.getJumlahPengungsu(dataPosko)

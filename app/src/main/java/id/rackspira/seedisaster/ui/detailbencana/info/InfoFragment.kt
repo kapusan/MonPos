@@ -56,7 +56,7 @@ class InfoFragment : Fragment() {
         if (lat != null && long != null) {
             val mapControler = maps.controller
             mapControler.setZoom(15.0)
-            val startPoint = GeoPoint(lat!!, long!!)
+            val startPoint = GeoPoint(lat, long)
             mapControler.setCenter(startPoint)
 
             val startMarker = Marker(maps)

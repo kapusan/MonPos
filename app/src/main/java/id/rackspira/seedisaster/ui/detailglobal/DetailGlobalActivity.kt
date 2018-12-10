@@ -18,6 +18,9 @@ class DetailGlobalActivity : AppCompatActivity(), DetailGlobalView {
         val id = intent.getStringExtra("id")
         presenter.getDetailGlobal(id)
 
+        back.setOnClickListener {
+            finish()
+        }
     }
 
     override fun getDetail(field: Fields) {
@@ -26,6 +29,5 @@ class DetailGlobalActivity : AppCompatActivity(), DetailGlobalView {
     }
 
     override fun onError(msg: String) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 }
